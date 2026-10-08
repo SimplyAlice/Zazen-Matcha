@@ -1,0 +1,20 @@
+# Local configuration
+config.php
+.env
+.env.*
+
+# XAMPP / local server files
+xampp/
+*.log
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/
+
+# Temporary files
+*.tmp
+*.temp
