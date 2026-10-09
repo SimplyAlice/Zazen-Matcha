@@ -484,6 +484,11 @@ require_once dirname(__DIR__) . '/includes/header.php';
                         <a href="<?php echo e($shopUrl); ?>" class="btn btn-primary confirmation-action-btn">
                             Continue Shopping
                         </a>
+                        <?php if (is_customer_logged_in()): ?>
+                            <a href="<?php echo e(site_url('customer/account.php')); ?>" class="btn btn-outline confirmation-action-btn">
+                                View Order History
+                            </a>
+                        <?php endif; ?>
                         <a href="<?php echo e($homeUrl); ?>" class="btn btn-secondary confirmation-action-btn">
                             Back to Home
                         </a>

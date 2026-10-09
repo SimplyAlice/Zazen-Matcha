@@ -132,6 +132,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'success',
         sprintf('Added %d × %s to your cart.', $requestedQuantity, $productToCart['name'])
     );
+
+    if (!empty($_POST['buy_now'])) {
+        redirect(site_url('customer/cart.php'));
+    }
+
     redirect($returnUrl);
 }
 
@@ -143,12 +148,34 @@ $productId = (!is_array($rawGetId) && ctype_digit((string) $rawGetId) && (int) $
     ? (int) $rawGetId
     : 0;
 
-$product = null;
+$product         = null;
+$relatedProducts = [];
+
 if ($productId > 0) {
     $product = db_fetch_one($pdo, $productQuerySql, [
         'product_id' => $productId,
         'status'     => 'active',
     ]);
+
+    if ($product !== null) {
+        $relatedSql = "
+            SELECT
+                p.product_id,
+                p.name,
+                p.price,
+                p.image
+            FROM products p
+            WHERE p.status = :status
+              AND p.product_id != :current_id
+            ORDER BY (p.category_id = :cat_id) DESC, p.product_id ASC
+            LIMIT 2
+        ";
+        $relatedProducts = db_fetch_all($pdo, $relatedSql, [
+            'status'     => 'active',
+            'current_id' => (int) $product['product_id'],
+            'cat_id'     => (int) $product['category_id'],
+        ]);
+    }
 }
 
 if ($product !== null) {
@@ -188,13 +215,36 @@ require_once dirname(__DIR__) . '/includes/header.php';
     $imageUrl        = product_image_url($product['image']);
     $categoryShopUrl = site_url('customer/products.php?category=' . $categoryId);
     $inCartQty       = isset($_SESSION['cart'][$productId]) ? (int) $_SESSION['cart'][$productId] : 0;
+
+    $galleryThumbs = [
+        [
+            'src' => $imageUrl,
+            'alt' => $product['name'],
+        ],
+        [
+            'src' => site_url('images/gallery/matcha-powder-detail.jpg'),
+            'alt' => $product['name'] . ' — Vibrant stone-ground matcha powder detail',
+        ],
+        [
+            'src' => site_url('images/gallery/whisked-matcha-bowl.jpg'),
+            'alt' => $product['name'] . ' — Frothy whisked matcha in ceramic bowl',
+        ],
+        [
+            'src' => site_url('images/gallery/matcha-tin-linen.jpg'),
+            'alt' => $product['name'] . ' — Matcha tin and presentation box on natural linen',
+        ],
+    ];
     ?>
 
-    <!-- Breadcrumb & Back Link -->
+    <!-- Breadcrumb Bar -->
     <div class="product-breadcrumb-bar">
         <div class="container product-breadcrumb-inner">
             <nav aria-label="Breadcrumb">
                 <ol class="breadcrumb-list">
+                    <li>
+                        <a href="<?php echo e(site_url('index.php')); ?>">Home</a>
+                    </li>
+                    <li aria-hidden="true" class="breadcrumb-sep">/</li>
                     <li>
                         <a href="<?php echo e(site_url('customer/products.php')); ?>">Shop</a>
                     </li>
@@ -219,53 +269,78 @@ require_once dirname(__DIR__) . '/includes/header.php';
     <section class="section product-detail-section" aria-labelledby="product-detail-heading">
         <div class="container">
             <div class="product-detail-grid">
-                <!-- Left Column: Product Imagery -->
+                <!-- Left Column: Product Imagery & Thumbnail Strip -->
                 <div class="product-detail-media">
                     <div class="product-detail-image-frame">
                         <img
                             src="<?php echo e($imageUrl); ?>"
                             alt="<?php echo e($product['name']); ?>"
-                            width="900"
-                            height="1100"
+                            id="product-main-image"
+                            data-default-src="<?php echo e($imageUrl); ?>"
+                            data-default-alt="<?php echo e($product['name']); ?>"
+                            width="1000"
+                            height="1000"
                         >
+                    </div>
+
+                    <div class="product-gallery-thumbs" role="group" aria-label="Product image thumbnails">
+                        <?php foreach ($galleryThumbs as $thumbIndex => $thumb): ?>
+                            <button
+                                type="button"
+                                class="product-thumb-btn<?php echo $thumbIndex === 0 ? ' is-active' : ''; ?>"
+                                data-gallery-thumb="<?php echo e($thumb['src']); ?>"
+                                data-gallery-alt="<?php echo e($thumb['alt']); ?>"
+                                aria-label="Show <?php echo e($thumb['alt']); ?>"
+                                aria-pressed="<?php echo $thumbIndex === 0 ? 'true' : 'false'; ?>"
+                            >
+                                <img
+                                    src="<?php echo e($thumb['src']); ?>"
+                                    alt="<?php echo e($thumb['alt']); ?>"
+                                    width="320"
+                                    height="240"
+                                    loading="lazy"
+                                >
+                            </button>
+                        <?php endforeach; ?>
                     </div>
                 </div>
 
-                <!-- Right Column: Product Information & Add to Cart -->
+                <!-- Right Column: Product Information, Purchase Row, Accordion Specs & Related Products -->
                 <div class="product-detail-info">
-                    <a href="<?php echo e($categoryShopUrl); ?>" class="eyebrow product-detail-category">
-                        <?php echo e($product['category_name']); ?>
-                    </a>
-
                     <h1 id="product-detail-heading" class="product-detail-title">
                         <?php echo e($product['name']); ?>
                     </h1>
 
                     <div class="product-detail-price-row">
+                        <div class="product-detail-rating-group">
+                            <span class="product-detail-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                            <span class="product-detail-reviews">124 reviews</span>
+
+                            <?php if ($isLowStock): ?>
+                                <span class="stock-badge stock-low">
+                                    Low Stock (<?php echo $stockQty; ?> left)
+                                </span>
+                            <?php elseif ($isInStock): ?>
+                                <span class="stock-badge stock-in">
+                                    In Stock
+                                </span>
+                            <?php else: ?>
+                                <span class="stock-badge stock-out">
+                                    Out of Stock
+                                </span>
+                            <?php endif; ?>
+                        </div>
+
                         <span class="product-detail-price">
                             <?php echo e(format_price($product['price'])); ?>
                         </span>
-
-                        <?php if ($isLowStock): ?>
-                            <span class="stock-badge stock-low">
-                                Low Stock (<?php echo $stockQty; ?> left)
-                            </span>
-                        <?php elseif ($isInStock): ?>
-                            <span class="stock-badge stock-in">
-                                In Stock
-                            </span>
-                        <?php else: ?>
-                            <span class="stock-badge stock-out">
-                                Out of Stock
-                            </span>
-                        <?php endif; ?>
                     </div>
 
                     <div class="product-detail-description">
                         <p><?php echo e($product['description']); ?></p>
                     </div>
 
-                    <!-- Add to Cart POST Form -->
+                    <!-- Add to Cart / Buy Now POST Form -->
                     <form
                         action="<?php echo e(site_url('customer/product.php?id=' . $productId)); ?>"
                         method="post"
@@ -276,7 +351,7 @@ require_once dirname(__DIR__) . '/includes/header.php';
 
                         <div class="product-purchase-controls">
                             <div class="quantity-field">
-                                <label for="quantity-input" class="form-label">Quantity</label>
+                                <label for="quantity-input" class="visually-hidden">Quantity</label>
                                 <div class="quantity-stepper">
                                     <button
                                         type="button"
@@ -308,10 +383,22 @@ require_once dirname(__DIR__) . '/includes/header.php';
                             <div class="add-to-cart-action">
                                 <button
                                     type="submit"
-                                    class="btn btn-primary add-to-cart-btn"
+                                    class="btn btn-primary add-to-cart-btn btn-pill"
                                     <?php echo !$isInStock ? 'disabled' : ''; ?>
                                 >
                                     <?php echo $isInStock ? 'Add to Cart' : 'Out of Stock'; ?>
+                                </button>
+                            </div>
+
+                            <div class="buy-now-action">
+                                <button
+                                    type="submit"
+                                    name="buy_now"
+                                    value="1"
+                                    class="btn btn-outline buy-now-btn btn-pill"
+                                    <?php echo !$isInStock ? 'disabled' : ''; ?>
+                                >
+                                    Buy Now
                                 </button>
                             </div>
                         </div>
@@ -326,29 +413,78 @@ require_once dirname(__DIR__) . '/includes/header.php';
                         <?php endif; ?>
                     </form>
 
-                    <!-- Editorial Specification Details -->
-                    <dl class="product-meta-specs">
-                        <div class="product-meta-row">
-                            <dt>Category</dt>
-                            <dd><?php echo e($product['category_name']); ?></dd>
+                    <!-- Prototype Accordion Specification Sections -->
+                    <div class="product-accordion-list">
+                        <details class="product-accordion-item" open>
+                            <summary class="product-accordion-summary">
+                                <span>Ingredients</span>
+                                <span class="accordion-chevron" aria-hidden="true">&#8964;</span>
+                            </summary>
+                            <div class="product-accordion-body">
+                                <p>
+                                    <?php if ($categoryId === 1): ?>
+                                        100% Stone-Ground Japanese Green Tea (Uji) &mdash; <?php echo e($product['category_name']); ?>
+                                    <?php else: ?>
+                                        Artisan Japanese Teaware &amp; Ceremonial Matcha Collection &mdash; <?php echo e($product['category_name']); ?>
+                                    <?php endif; ?>
+                                </p>
+                            </div>
+                        </details>
+
+                        <details class="product-accordion-item" open>
+                            <summary class="product-accordion-summary">
+                                <span>Preparation</span>
+                                <span class="accordion-chevron" aria-hidden="true">&#8964;</span>
+                            </summary>
+                            <div class="product-accordion-body">
+                                <p>
+                                    Sift 1/2 tsp (1g) into a bowl, add 2 oz hot water (176&deg;F / 80&deg;C), whisk briskly in a W-motion until frothy.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details class="product-accordion-item" open>
+                            <summary class="product-accordion-summary">
+                                <span>Shipping</span>
+                                <span class="accordion-chevron" aria-hidden="true">&#8964;</span>
+                            </summary>
+                            <div class="product-accordion-body">
+                                <p>
+                                    Eco-friendly protective shipping for your tea ware and tins (<?php echo $isInStock ? $stockQty . ' available in stock' : 'Currently unavailable'; ?>).
+                                </p>
+                            </div>
+                        </details>
+                    </div>
+
+                    <!-- Related Products Section -->
+                    <?php if (!empty($relatedProducts)): ?>
+                        <div class="product-related-section" aria-labelledby="related-products-heading">
+                            <h2 id="related-products-heading" class="product-related-heading">Related Products</h2>
+                            <div class="product-related-grid">
+                                <?php foreach ($relatedProducts as $rel): ?>
+                                    <?php
+                                    $relUrl   = site_url('customer/product.php?id=' . (int) $rel['product_id']);
+                                    $relImage = product_image_url($rel['image']);
+                                    ?>
+                                    <a href="<?php echo e($relUrl); ?>" class="related-mini-card">
+                                        <div class="related-mini-media">
+                                            <img
+                                                src="<?php echo e($relImage); ?>"
+                                                alt="<?php echo e($rel['name']); ?>"
+                                                width="300"
+                                                height="240"
+                                                loading="lazy"
+                                            >
+                                        </div>
+                                        <div class="related-mini-body">
+                                            <span class="related-mini-title"><?php echo e($rel['name']); ?></span>
+                                            <span class="related-mini-price"><?php echo e(format_price($rel['price'])); ?></span>
+                                        </div>
+                                    </a>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
-                        <div class="product-meta-row">
-                            <dt>Availability</dt>
-                            <dd>
-                                <?php if ($isLowStock): ?>
-                                    Low Stock &mdash; <?php echo $stockQty; ?> available
-                                <?php elseif ($isInStock): ?>
-                                    In Stock &mdash; <?php echo $stockQty; ?> available
-                                <?php else: ?>
-                                    Currently unavailable
-                                <?php endif; ?>
-                            </dd>
-                        </div>
-                        <div class="product-meta-row">
-                            <dt>Preparation</dt>
-                            <dd>Curated for daily home and studio tea ritual</dd>
-                        </div>
-                    </dl>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

@@ -94,11 +94,72 @@
                     const step = parseInt(btn.getAttribute('data-qty-step'), 10) || 0;
                     const current = parseInt(input.value, 10) || 1;
                     clampQuantity(current + step);
+
+                    // Auto-submit cart quantity update form when stepper is clicked in cart
+                    const cartForm = stepper.closest('.cart-update-form');
+                    if (cartForm && parseInt(input.value, 10) !== current) {
+                        cartForm.submit();
+                    }
                 });
             });
 
             input.addEventListener('change', function () {
                 clampQuantity(input.value);
+            });
+        });
+    }
+
+    /**
+     * Initialises thumbnail switching on the Product Details gallery.
+     */
+    function initProductGalleryThumbs() {
+        const mainImg = document.getElementById('product-main-image');
+        const thumbButtons = document.querySelectorAll('[data-gallery-thumb]');
+
+        if (!mainImg || thumbButtons.length === 0) {
+            return;
+        }
+
+        const defaultSrc = mainImg.getAttribute('data-default-src') || mainImg.getAttribute('src');
+        const defaultAlt = mainImg.getAttribute('data-default-alt') || mainImg.getAttribute('alt');
+        const primaryBtn = thumbButtons[0];
+
+        thumbButtons.forEach(function (btn, index) {
+            btn.addEventListener('click', function () {
+                const isAlreadyActive = btn.classList.contains('is-active');
+
+                if (isAlreadyActive && index > 0 && defaultSrc) {
+                    mainImg.setAttribute('src', defaultSrc);
+                    if (defaultAlt) {
+                        mainImg.setAttribute('alt', defaultAlt);
+                    }
+                    thumbButtons.forEach(function (other) {
+                        other.classList.remove('is-active');
+                        other.setAttribute('aria-pressed', 'false');
+                    });
+                    if (primaryBtn) {
+                        primaryBtn.classList.add('is-active');
+                        primaryBtn.setAttribute('aria-pressed', 'true');
+                    }
+                    return;
+                }
+
+                const newSrc = btn.getAttribute('data-gallery-thumb');
+                const newAlt = btn.getAttribute('data-gallery-alt');
+
+                if (newSrc) {
+                    mainImg.setAttribute('src', newSrc);
+                }
+                if (newAlt) {
+                    mainImg.setAttribute('alt', newAlt);
+                }
+
+                thumbButtons.forEach(function (other) {
+                    other.classList.remove('is-active');
+                    other.setAttribute('aria-pressed', 'false');
+                });
+                btn.classList.add('is-active');
+                btn.setAttribute('aria-pressed', 'true');
             });
         });
     }
@@ -123,5 +184,6 @@
         initMobileNavigation();
         initFlashDismiss();
         initQuantitySteppers();
+        initProductGalleryThumbs();
     });
 })();

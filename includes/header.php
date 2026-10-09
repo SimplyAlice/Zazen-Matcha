@@ -45,7 +45,6 @@ $flashMessage = get_flash_message();
             <!-- Brand / Logo -->
             <a href="<?php echo e(site_url('index.php')); ?>" class="brand-logo" aria-label="Zazen Matcha & Tea Co. Home">
                 <span class="brand-name">Zazen Matcha</span>
-                <span class="brand-subtitle">Tea Co.</span>
             </a>
 
             <!-- Mobile Menu Toggle -->
@@ -97,28 +96,56 @@ $flashMessage = get_flash_message();
                     </ul>
                 </nav>
 
-                <div class="header-actions" aria-label="Customer account and cart">
-                    <a href="<?php echo e(site_url('customer/cart.php')); ?>"
-                       class="action-link cart-link <?php echo $currentPage === 'cart.php' ? 'is-active' : ''; ?>"
-                       aria-label="Shopping cart (<?php echo (int) $cartItemCount; ?> items)">
-                        <span>Cart</span>
-                        <span class="cart-badge" id="header-cart-count"><?php echo (int) $cartItemCount; ?></span>
+                <div class="header-actions" aria-label="Search, customer account, and shopping cart">
+                    <a href="<?php echo e(site_url('customer/products.php#shop-search-input')); ?>"
+                       class="header-icon-link"
+                       aria-label="Search products"
+                       title="Search products">
+                        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="11" cy="11" r="7"></circle>
+                            <line x1="20" y1="20" x2="16.35" y2="16.35"></line>
+                        </svg>
                     </a>
 
                     <?php if ($isCustomerLoggedIn): ?>
                         <a href="<?php echo e(site_url('customer/account.php')); ?>"
-                           class="action-link <?php echo in_array($currentPage, ['account.php', 'orders.php'], true) ? 'is-active' : ''; ?>">
-                            Account
+                           class="header-icon-link <?php echo in_array($currentPage, ['account.php', 'orders.php'], true) ? 'is-active' : ''; ?>"
+                           aria-label="My Account"
+                           title="My Account">
+                            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <span class="header-action-label">Account</span>
                         </a>
                         <a href="<?php echo e(site_url('customer/logout.php')); ?>" class="action-link action-link-muted">
                             Log Out
                         </a>
                     <?php else: ?>
                         <a href="<?php echo e(site_url('customer/login.php')); ?>"
-                           class="action-link <?php echo in_array($currentPage, ['login.php', 'register.php'], true) ? 'is-active' : ''; ?>">
-                            Account / Sign In
+                           class="header-icon-link <?php echo in_array($currentPage, ['login.php', 'register.php'], true) ? 'is-active' : ''; ?>"
+                           aria-label="Account / Sign In"
+                           title="Account / Sign In">
+                            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <span class="visually-hidden">Account / Sign In</span>
                         </a>
                     <?php endif; ?>
+
+                    <a href="<?php echo e(site_url('customer/cart.php')); ?>"
+                       class="header-icon-link cart-link <?php echo $currentPage === 'cart.php' ? 'is-active' : ''; ?>"
+                       aria-label="Shopping cart (<?php echo (int) $cartItemCount; ?> items)"
+                       title="Shopping Cart">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="9" cy="21" r="1.5"></circle>
+                            <circle cx="19" cy="21" r="1.5"></circle>
+                            <path d="M2.5 3h2.8l2.4 11.5a2 2 0 0 0 2 1.5h9.8a2 2 0 0 0 1.9-1.4L23 6H6.2"></path>
+                        </svg>
+                        <span class="visually-hidden">Cart</span>
+                        <span class="cart-badge" id="header-cart-count"><?php echo (int) $cartItemCount; ?></span>
+                    </a>
                 </div>
             </div>
         </div>

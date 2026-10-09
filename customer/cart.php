@@ -229,11 +229,13 @@ foreach ($cleanCart as $pid => $sessionQty) {
     ];
 }
 
-$cartNotices = array_values(array_unique($cartNotices));
-$isCartEmpty = empty($cartItems);
-$canCheckout = (!$isCartEmpty && !$hasCartIssues);
+$cartNotices       = array_values(array_unique($cartNotices));
+$isCartEmpty       = empty($cartItems);
+$canCheckout       = (!$isCartEmpty && !$hasCartIssues);
+$estimatedShipping = ($cartSubtotal <= 0.0 || $cartSubtotal >= 500.00) ? 0.00 : 60.00;
+$estimatedTotal    = $cartSubtotal + $estimatedShipping;
 
-$pageTitle = 'Your Cart';
+$pageTitle = 'Your Shopping Cart';
 
 require_once dirname(__DIR__) . '/includes/header.php';
 ?>
@@ -243,15 +245,13 @@ require_once dirname(__DIR__) . '/includes/header.php';
     <div class="container">
         <div class="cart-hero-inner">
             <div>
-                <span class="eyebrow">Zazen Matcha &amp; Tea Co. &mdash; Selection</span>
-                <h1 id="cart-heading" class="cart-title">Your Cart</h1>
-                <p class="cart-subtitle">
-                    Review your selected matcha powders, vessels, and ritual sets before proceeding to checkout.
-                </p>
+                <h1 id="cart-heading" class="cart-title">Your Shopping Cart</h1>
+                <nav class="cart-breadcrumb" aria-label="Breadcrumb">
+                    <a href="<?php echo e(site_url('customer/products.php')); ?>">Products</a>
+                    <span class="cart-breadcrumb-sep" aria-hidden="true">&gt;</span>
+                    <span aria-current="page">Your Shopping Cart</span>
+                </nav>
             </div>
-            <a href="<?php echo e(site_url('customer/products.php')); ?>" class="editorial-link cart-continue-top">
-                &larr; Continue Shopping
-            </a>
         </div>
     </div>
 </section>
@@ -286,13 +286,155 @@ require_once dirname(__DIR__) . '/includes/header.php';
             </div>
         <?php else: ?>
             <div class="cart-layout">
-                <!-- Left Column: Cart Items List -->
+                <!-- Left Column: Tabular Cart Items List -->
                 <div class="cart-items-column">
-                    <div class="cart-items-header">
-                        <span class="cart-items-count">
-                            <?php echo count($cartItems); ?>
-                            <?php echo count($cartItems) === 1 ? 'Product' : 'Products'; ?> in Cart
-                        </span>
+                    <div class="cart-table-head" aria-hidden="true">
+                        <span class="cart-col-product">Product</span>
+                        <span class="cart-col-price">Price</span>
+                        <span class="cart-col-qty">Quantity</span>
+                        <span class="cart-col-total">Total</span>
+                    </div>
+
+                    <div class="cart-item-list">
+                        <?php foreach ($cartItems as $rowIndex => $item): ?>
+                            <?php
+                            $itemNumber     = $rowIndex + 1;
+                            $itemId         = (int) $item['product_id'];
+                            $itemUrl        = site_url('customer/product.php?id=' . $itemId);
+                            $itemImageUrl   = product_image_url($item['image']);
+                            $itemStock      = (int) $item['stock_quantity'];
+                            $itemQty        = (int) $item['quantity'];
+                            $isOutOfStock   = $item['is_out_of_stock'];
+                            $exceedsStock   = $item['exceeds_stock'];
+                            $itemSublabel   = ((int) $item['category_id'] === 1)
+                                ? 'Sourced from Uji'
+                                : $item['category_name'];
+                            ?>
+                            <article class="cart-item <?php echo ($isOutOfStock || $exceedsStock) ? 'cart-item-invalid' : ''; ?>">
+                                <!-- 1. Product Info Cell -->
+                                <div class="cart-cell-product">
+                                    <span class="cart-item-index"><?php echo $itemNumber; ?>.</span>
+
+                                    <a href="<?php echo e($itemUrl); ?>" class="cart-item-media" aria-label="View <?php echo e($item['name']); ?>">
+                                        <img
+                                            src="<?php echo e($itemImageUrl); ?>"
+                                            alt="<?php echo e($item['name']); ?>"
+                                            width="160"
+                                            height="160"
+                                            loading="lazy"
+                                        >
+                                    </a>
+
+                                    <div class="cart-item-info">
+                                        <h2 class="cart-item-title">
+                                            <a href="<?php echo e($itemUrl); ?>">
+                                                <?php echo e($item['name']); ?>
+                                            </a>
+                                        </h2>
+                                        <p class="cart-item-subtitle"><?php echo e($itemSublabel); ?></p>
+
+                                        <!-- Stock Status / Warning Feedback -->
+                                        <div class="cart-item-status">
+                                            <?php if ($isOutOfStock): ?>
+                                                <p class="cart-stock-warning">
+                                                    Out of Stock &mdash; Unavailable for purchase.
+                                                </p>
+                                            <?php elseif ($exceedsStock): ?>
+                                                <p class="cart-stock-warning">
+                                                    Only <strong><?php echo $itemStock; ?></strong> in stock (you have <?php echo $itemQty; ?>).
+                                                </p>
+                                            <?php elseif ($itemStock <= 10): ?>
+                                                <span class="stock-badge stock-low">Low Stock (<?php echo $itemStock; ?> left)</span>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 2. Unit Price Cell -->
+                                <div class="cart-cell-price">
+                                    <span class="cart-item-unit-price">
+                                        <?php echo e(format_price($item['price'])); ?>
+                                    </span>
+                                </div>
+
+                                <!-- 3. Quantity Stepper Cell (POST Update Form) -->
+                                <div class="cart-cell-qty">
+                                    <?php if (!$isOutOfStock): ?>
+                                        <form action="<?php echo e($cartPageUrl); ?>" method="post" class="cart-update-form">
+                                            <input type="hidden" name="csrf_token" value="<?php echo e(csrf_token()); ?>">
+                                            <input type="hidden" name="action" value="update">
+                                            <input type="hidden" name="product_id" value="<?php echo $itemId; ?>">
+
+                                            <label for="cart-qty-<?php echo $itemId; ?>" class="visually-hidden">
+                                                Quantity for <?php echo e($item['name']); ?>
+                                            </label>
+                                            <div class="quantity-stepper cart-qty-stepper">
+                                                <button
+                                                    type="button"
+                                                    class="qty-step-btn"
+                                                    data-qty-step="-1"
+                                                    aria-label="Decrease quantity for <?php echo e($item['name']); ?>"
+                                                >&minus;</button>
+                                                <input
+                                                    type="number"
+                                                    id="cart-qty-<?php echo $itemId; ?>"
+                                                    name="quantity"
+                                                    class="quantity-input"
+                                                    value="<?php echo $itemQty; ?>"
+                                                    min="1"
+                                                    max="<?php echo $itemStock; ?>"
+                                                    required
+                                                >
+                                                <button
+                                                    type="button"
+                                                    class="qty-step-btn"
+                                                    data-qty-step="1"
+                                                    aria-label="Increase quantity for <?php echo e($item['name']); ?>"
+                                                >&#43;</button>
+                                            </div>
+
+                                            <button type="submit" class="cart-update-btn">
+                                                Update
+                                            </button>
+                                        </form>
+                                    <?php else: ?>
+                                        <span class="stock-badge stock-out">Out of Stock</span>
+                                    <?php endif; ?>
+                                </div>
+
+                                <!-- 4. Line Total + Remove Action Cell -->
+                                <div class="cart-cell-total">
+                                    <div class="cart-item-line-total">
+                                        <?php if ($isOutOfStock): ?>
+                                            <span class="stock-badge stock-out">Unavailable</span>
+                                        <?php else: ?>
+                                            <span class="line-total-amount"><?php echo e(format_price($item['line_total'])); ?></span>
+                                        <?php endif; ?>
+                                    </div>
+
+                                    <form action="<?php echo e($cartPageUrl); ?>" method="post" class="cart-remove-form">
+                                        <input type="hidden" name="csrf_token" value="<?php echo e(csrf_token()); ?>">
+                                        <input type="hidden" name="action" value="remove">
+                                        <input type="hidden" name="product_id" value="<?php echo $itemId; ?>">
+                                        <button
+                                            type="submit"
+                                            class="cart-remove-btn"
+                                            aria-label="Remove <?php echo e($item['name']); ?> from cart"
+                                        >
+                                            <span>Remove</span>
+                                            <span class="cart-remove-icon" aria-hidden="true">&times;</span>
+                                        </button>
+                                    </form>
+                                </div>
+                            </article>
+                        <?php endforeach; ?>
+                    </div>
+
+                    <!-- Bottom Bar: Continue Shopping & Clear Cart -->
+                    <div class="cart-footer-bar">
+                        <a href="<?php echo e(site_url('customer/products.php')); ?>" class="cart-continue-link">
+                            Continue Shopping
+                        </a>
 
                         <!-- Clear Cart POST Form -->
                         <form action="<?php echo e($cartPageUrl); ?>" method="post" class="clear-cart-form" data-clear-cart-form>
@@ -303,128 +445,6 @@ require_once dirname(__DIR__) . '/includes/header.php';
                             </button>
                         </form>
                     </div>
-
-                    <div class="cart-item-list">
-                        <?php foreach ($cartItems as $item): ?>
-                            <?php
-                            $itemId         = (int) $item['product_id'];
-                            $itemUrl        = site_url('customer/product.php?id=' . $itemId);
-                            $itemImageUrl   = product_image_url($item['image']);
-                            $itemStock      = (int) $item['stock_quantity'];
-                            $itemQty        = (int) $item['quantity'];
-                            $isOutOfStock   = $item['is_out_of_stock'];
-                            $exceedsStock   = $item['exceeds_stock'];
-                            ?>
-                            <article class="cart-item <?php echo ($isOutOfStock || $exceedsStock) ? 'cart-item-invalid' : ''; ?>">
-                                <a href="<?php echo e($itemUrl); ?>" class="cart-item-media" aria-label="View <?php echo e($item['name']); ?>">
-                                    <img
-                                        src="<?php echo e($itemImageUrl); ?>"
-                                        alt="<?php echo e($item['name']); ?>"
-                                        width="900"
-                                        height="1100"
-                                        loading="lazy"
-                                    >
-                                </a>
-
-                                <div class="cart-item-details">
-                                    <div class="cart-item-top">
-                                        <div>
-                                            <span class="product-card-category"><?php echo e($item['category_name']); ?></span>
-                                            <h2 class="cart-item-title">
-                                                <a href="<?php echo e($itemUrl); ?>">
-                                                    <?php echo e($item['name']); ?>
-                                                </a>
-                                            </h2>
-                                            <p class="cart-item-unit-price">
-                                                <?php echo e(format_price($item['price'])); ?> each
-                                            </p>
-                                        </div>
-
-                                        <div class="cart-item-line-total">
-                                            <?php if ($isOutOfStock): ?>
-                                                <span class="stock-badge stock-out">Unavailable</span>
-                                            <?php else: ?>
-                                                <span class="line-total-amount"><?php echo e(format_price($item['line_total'])); ?></span>
-                                            <?php endif; ?>
-                                        </div>
-                                    </div>
-
-                                    <!-- Stock Status / Warning Feedback -->
-                                    <div class="cart-item-status">
-                                        <?php if ($isOutOfStock): ?>
-                                            <p class="cart-stock-warning">
-                                                Out of Stock &mdash; This item is currently unavailable and cannot be purchased.
-                                            </p>
-                                        <?php elseif ($exceedsStock): ?>
-                                            <p class="cart-stock-warning">
-                                                Stock Limit Reached &mdash; Only <strong><?php echo $itemStock; ?></strong> available in stock (you have <?php echo $itemQty; ?> in cart). Please update quantity to <?php echo $itemStock; ?> or fewer.
-                                            </p>
-                                        <?php elseif ($itemStock <= 10): ?>
-                                            <span class="stock-badge stock-low">Low Stock (<?php echo $itemStock; ?> available)</span>
-                                        <?php else: ?>
-                                            <span class="stock-badge stock-in">In Stock</span>
-                                        <?php endif; ?>
-                                    </div>
-
-                                    <!-- Item Actions: Update Quantity (POST) & Remove (POST) -->
-                                    <div class="cart-item-actions">
-                                        <?php if (!$isOutOfStock): ?>
-                                            <form action="<?php echo e($cartPageUrl); ?>" method="post" class="cart-update-form">
-                                                <input type="hidden" name="csrf_token" value="<?php echo e(csrf_token()); ?>">
-                                                <input type="hidden" name="action" value="update">
-                                                <input type="hidden" name="product_id" value="<?php echo $itemId; ?>">
-
-                                                <label for="cart-qty-<?php echo $itemId; ?>" class="visually-hidden">
-                                                    Quantity for <?php echo e($item['name']); ?>
-                                                </label>
-                                                <div class="quantity-stepper cart-qty-stepper">
-                                                    <button
-                                                        type="button"
-                                                        class="qty-step-btn"
-                                                        data-qty-step="-1"
-                                                        aria-label="Decrease quantity for <?php echo e($item['name']); ?>"
-                                                    >&minus;</button>
-                                                    <input
-                                                        type="number"
-                                                        id="cart-qty-<?php echo $itemId; ?>"
-                                                        name="quantity"
-                                                        class="quantity-input"
-                                                        value="<?php echo $itemQty; ?>"
-                                                        min="1"
-                                                        max="<?php echo $itemStock; ?>"
-                                                        required
-                                                    >
-                                                    <button
-                                                        type="button"
-                                                        class="qty-step-btn"
-                                                        data-qty-step="1"
-                                                        aria-label="Increase quantity for <?php echo e($item['name']); ?>"
-                                                    >&#43;</button>
-                                                </div>
-
-                                                <button type="submit" class="btn btn-outline cart-update-btn">
-                                                    Update
-                                                </button>
-                                            </form>
-                                        <?php endif; ?>
-
-                                        <form action="<?php echo e($cartPageUrl); ?>" method="post" class="cart-remove-form">
-                                            <input type="hidden" name="csrf_token" value="<?php echo e(csrf_token()); ?>">
-                                            <input type="hidden" name="action" value="remove">
-                                            <input type="hidden" name="product_id" value="<?php echo $itemId; ?>">
-                                            <button
-                                                type="submit"
-                                                class="cart-remove-btn"
-                                                aria-label="Remove <?php echo e($item['name']); ?> from cart"
-                                            >
-                                                Remove
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </article>
-                        <?php endforeach; ?>
-                    </div>
                 </div>
 
                 <!-- Right Column: Order Summary -->
@@ -434,22 +454,39 @@ require_once dirname(__DIR__) . '/includes/header.php';
 
                         <dl class="cart-summary-rows">
                             <div class="cart-summary-row">
-                                <dt>Subtotal</dt>
+                                <dt>Subtotal:</dt>
                                 <dd><?php echo e(format_price($cartSubtotal)); ?></dd>
                             </div>
-                            <div class="cart-summary-row cart-summary-row-muted">
-                                <dt>Shipping</dt>
-                                <dd>Calculated at next step</dd>
+                            <div class="cart-summary-row cart-summary-shipping-row">
+                                <dt>
+                                    Estimated Shipping:
+                                    <span class="cart-shipping-subnote">(or free if qualifying)</span>
+                                </dt>
+                                <dd>
+                                    <?php echo $estimatedShipping <= 0.0 ? 'Free' : e(format_price($estimatedShipping)); ?>
+                                </dd>
                             </div>
                             <div class="cart-summary-row cart-summary-total">
-                                <dt>Total</dt>
-                                <dd><?php echo e(format_price($cartSubtotal)); ?></dd>
+                                <dt>Total:</dt>
+                                <dd><?php echo e(format_price($estimatedTotal)); ?></dd>
                             </div>
                         </dl>
 
-                        <p class="cart-summary-note">
-                            Shipping and checkout details will be calculated at the next step.
-                        </p>
+                        <!-- Prototype Promo Code Row (Preview Only) -->
+                        <div class="cart-promo-row" aria-label="Promotional code preview">
+                            <label for="cart-promo-input" class="visually-hidden">Promo code (prototype preview)</label>
+                            <input
+                                type="text"
+                                id="cart-promo-input"
+                                class="cart-promo-input"
+                                placeholder="Promo code (prototype preview)"
+                                disabled
+                                aria-disabled="true"
+                            >
+                            <button type="button" class="btn cart-promo-btn" disabled aria-disabled="true">
+                                Apply
+                            </button>
+                        </div>
 
                         <div class="cart-summary-actions">
                             <?php if ($canCheckout): ?>
@@ -464,10 +501,31 @@ require_once dirname(__DIR__) . '/includes/header.php';
                                     Please resolve the stock or availability warnings in your cart before proceeding to checkout.
                                 </p>
                             <?php endif; ?>
+                        </div>
 
-                            <a href="<?php echo e(site_url('customer/products.php')); ?>" class="btn btn-outline cart-continue-btn">
-                                Continue Shopping
-                            </a>
+                        <!-- Prototype Trust Badges Row -->
+                        <div class="cart-trust-badges" aria-label="Secure checkout and shipping assurances">
+                            <span class="cart-trust-icon" title="Secure Checkout">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                    <polyline points="9 12 11 14 15 10"></polyline>
+                                </svg>
+                            </span>
+                            <span class="cart-trust-icon" title="Carefully Packaged">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                </svg>
+                            </span>
+                            <span class="cart-trust-icon" title="Fast Dispatch">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <rect x="1" y="3" width="15" height="13"></rect>
+                                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                                    <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                                    <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                                </svg>
+                            </span>
                         </div>
                     </div>
                 </aside>
