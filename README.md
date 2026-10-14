@@ -1,80 +1,97 @@
-# Zazen Matcha & Tea Co.
+<h1 align="center"><img src="docs/readme-assets/hero-banner.jpg" alt="Zazen Matcha & Tea Co. — Mindful Matcha. Every Day. A student-built tea house for ITECA3-34, Deliverable 2." /></h1>
 
-> A considered online tea shop, built as a full-stack web development project.
+<p align="center"><img src="docs/readme-assets/matcha-ritual.gif" width="480" alt="Matcha being whisked in a ceramic bowl in a slow loop." /></p>
 
-![Matcha being prepared in a ceramic bowl](images/hero-matcha.jpg)
+<p align="center"><sub>A slow loop, composed from six photographed moments in the matcha ritual.</sub></p>
 
-**Zazen Matcha & Tea Co.** is an academic e-commerce application for exploring Japanese matcha, loose-leaf tea, teaware, and gift sets. The project brings together a customer storefront, account and checkout flows, and a separate store administration area, using native web technologies rather than a content-management system or application framework.
+<p align="center">
+  <a href="https://zazen-matcha.alwaysdata.net/"><strong>ENTER THE LIVE STOREFRONT ↗</strong></a>
+  <br />
+  <sub>ITECA3-34 · WEB DEVELOPMENT &amp; E-COMMERCE · DELIVERABLE 02</sub>
+</p>
 
-**Live website:** [zazen-matcha.alwaysdata.net](https://zazen-matcha.alwaysdata.net/)
+<p align="center"><img src="docs/readme-assets/botanical-divider.svg" width="460" alt="" /></p>
 
----
+## The project
 
-## The experience
+Zazen Matcha & Tea Co. is a student-built e-commerce experience for Japanese matcha, loose-leaf tea, teaware, and gift sets. A calm, editorial storefront meets the practical engineering beneath it: a PHP application, relational data, customer accounts, order flows, and a separate store console.
 
-The visual direction draws on the quiet, tactile character of a tea ritual: matcha greens, warm neutral surfaces, editorial typography, and generous imagery. The storefront combines product discovery with practical shopping and brewing information.
+The visual language takes its cue from the tea ritual: forest green, warm ivory, botanical details, and unhurried photography. The project was developed for **Deliverable 2** of **ITECA3-34: Web Development and e-Commerce Technologies** at **Eduvos**.
 
-![Customer storefront prototype](docs/prototypes/customer/01-home-page-prototype.jpg)
+<p align="center"><img src="docs/readme-assets/customer-journey.svg" alt="The customer journey: discover the catalogue, learn about tea, place an order, and steward the store." /></p>
 
-*Customer storefront design prototype.*
+## A window into the store
 
-## Features
+These are browser captures of the live application, not design mockups.
 
-### Customer storefront
+### 01 · The storefront
 
-- Browse the product catalogue by category, search by keyword, and move through paginated results.
-- View product details, image galleries, stock availability, preparation guidance, and related products.
-- Add items to a session-based shopping cart; cart and checkout re-check current prices and stock.
-- Submit an order through a validated checkout flow. Order creation and stock updates are handled in a database transaction.
-- Create an account, sign in, update account details, and review order history.
-- Send a studio inquiry or subscribe to the newsletter.
+![Live Zazen Matcha storefront homepage, captured in a desktop browser](docs/readme-assets/storefront-desktop.png)
 
-### Administration
+*The opening frame: editorial photography, a considered product story, and a direct path into the shop.*
 
-- Review store metrics and recent orders from the dashboard.
-- Create and update products and categories, including product pricing, stock, and status.
-- Browse customer records and inspect order details and purchase snapshots.
-- Check database connectivity from the diagnostics page.
+### 02 · The collection
 
-> Checkout payment options are simulated card processing and bank-transfer instructions. The project does not integrate a live payment gateway.
+![Live product catalogue showing category filters, search, and teaware products](docs/readme-assets/storefront-shop.png)
 
-## Technology
+*A real catalogue view, with category selection, sorting, search, and product photography.*
 
-- **Server:** PHP 8+, using native PHP includes and controllers
-- **Database:** MariaDB or MySQL, accessed through PDO
-- **Frontend:** Semantic HTML, custom CSS, and vanilla JavaScript
-- **Local web server:** Apache (XAMPP is the documented Windows development setup)
+### 03 · A smaller screen
 
-## Project layout
+<p align="center"><img src="docs/readme-assets/storefront-mobile.png" width="320" alt="Live storefront homepage captured at a 390-pixel-wide mobile viewport" /></p>
+
+<p align="center"><sub>The same storefront at a 390 px mobile viewport.</sub></p>
+
+<p align="center"><img src="docs/readme-assets/botanical-divider.svg" width="460" alt="" /></p>
+
+## Built for the ritual
+
+- **Discover** — browse by category, search the catalogue, paginate results, and explore product galleries, stock availability, and preparation guidance.
+- **Shop** — manage a session-based cart; checkout revalidates current prices and stock and commits orders and inventory updates in a database transaction.
+- **Connect** — register, sign in, manage account details, review order history, send a studio inquiry, and subscribe to the newsletter.
+- **Steward** — use the administration console to review store metrics and orders, maintain products and categories, browse customers, and inspect order details.
+
+> **Payment note:** checkout offers simulated card processing and bank-transfer instructions. There is no live payment-gateway integration.
+
+## The materials
+
+<p align="center"><img src="docs/readme-assets/stack-plate.svg" alt="Technology stack: PHP 8, PDO, MariaDB or MySQL, HTML5, CSS3, and vanilla JavaScript." /></p>
+
+The application uses native PHP pages and shared includes, PDO for database access, semantic HTML, custom CSS, and vanilla JavaScript. Apache serves the application locally; the database schema targets MariaDB/MySQL.
+
+## In the repository
 
 ```text
-admin/       Store administration pages
-customer/    Storefront, account, cart, and checkout pages
-database/    SQL schema and seed data
-includes/    Shared PHP helpers, authentication, and database connection
+admin/       Store operations and administration
+customer/    Catalogue, product, cart, account, and checkout pages
+includes/    Shared PHP helpers, authentication, and database access
+database/    Schema and seed data
 css/         Storefront and administration styles
-js/          Frontend interactions
-images/      Product, category, and brand imagery
-index.php    Storefront entry point
+js/          Frontend interactions and the chawan ritual sequence
+images/      Store and brand photography
+docs/        Assignment materials, diagrams, prototypes, and README artwork
 ```
 
 ## Run locally
 
-### Requirements
+**Requirements:** PHP 8 or newer with `pdo_mysql`, MariaDB 10.4+ or MySQL 8.0+, and Apache. XAMPP is suitable for local development.
 
-- PHP 8 or newer with the PDO MySQL extension enabled
-- MariaDB 10.4+ or MySQL 8.0+
-- Apache; XAMPP is suitable for local development
+1. Place or clone the project in the Apache document root, for example `C:\xampp\htdocs\ZAZEN-MATCHA`.
+2. Start Apache and MySQL/MariaDB.
+3. Create the database with the character set and collation used by the schema:
 
-### Setup
+   ```sql
+   CREATE DATABASE zazen_matcha
+     CHARACTER SET utf8mb4
+     COLLATE utf8mb4_unicode_ci;
+   ```
 
-1. Place or clone the repository into the Apache document root. For XAMPP, that is commonly `C:\xampp\htdocs\ZAZEN-MATCHA`.
-2. Start Apache and MySQL/MariaDB from the XAMPP Control Panel.
-3. Create a database named `zazen_matcha` using `utf8mb4` with the `utf8mb4_unicode_ci` collation.
-4. Import [`database/zazen_matcha.sql`](database/zazen_matcha.sql) using phpMyAdmin or the MySQL command-line client.
-5. The connection defaults are defined in [`includes/db.php`](includes/db.php). If your local database needs different settings, use a root `config.php` override; it is excluded by `.gitignore`. Keep local credentials private and do not commit that file.
-6. Open `http://localhost/ZAZEN-MATCHA/` in your browser.
+4. Import [`database/zazen_matcha.sql`](database/zazen_matcha.sql) with phpMyAdmin or a MySQL-compatible client.
+5. The PDO connection is configured in [`includes/db.php`](includes/db.php). For machine-specific settings, use the optional root `config.php` override; it is ignored by Git. Keep local credentials private.
+6. Visit `http://localhost/ZAZEN-MATCHA/`.
 
-## Academic context
+<p align="center"><img src="docs/readme-assets/botanical-divider.svg" width="460" alt="" /></p>
 
-This project was developed for **Deliverable 2** of **ITECA3-34: Web Development and e-Commerce Technologies** at **Eduvos Higher Education** in South Africa. It demonstrates the design and implementation of a database-driven e-commerce application using foundational web technologies.
+<p align="center"><img src="docs/readme-assets/closing-mark.svg" alt="Zazen Matcha & Tea Co. — Made with presence. ITECA3-34, Deliverable 2, Eduvos." /></p>
+
+<p align="center"><a href="https://zazen-matcha.alwaysdata.net/"><strong>Visit the live store</strong></a></p>

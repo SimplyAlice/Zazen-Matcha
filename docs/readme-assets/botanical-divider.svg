@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="74" viewBox="0 0 560 74" role="img" aria-labelledby="title desc">
+  <title id="title">Botanical section divider</title>
+  <desc id="desc">A fine matcha-green rule interrupted by a small hand-drawn tea sprig.</desc>
+  <g fill="none" stroke="#9ba979" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M26 37h210m84 0h214" stroke-width="1"/>
+    <path d="M273 56c5-16 10-28 18-39m-15 27c-14 0-21-6-24-15 13-2 22 3 24 15Zm6-11c-1-12 4-20 13-24 5 10 1 19-13 24Zm-1 24c-11 0-17-5-19-13 11-2 17 3 19 13Zm6-9c6-9 13-12 22-9-2 10-9 14-22 9Z" stroke-width="1.5"/>
+  </g>
+  <circle cx="280" cy="37" r="2" fill="#87966a"/>
+</svg>

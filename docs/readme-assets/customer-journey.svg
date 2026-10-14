@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="160" viewBox="0 0 1200 160" role="img" aria-labelledby="title desc">
+  <title id="title">From discovery to store operations</title>
+  <desc id="desc">A connected botanical line links product discovery, tea guidance, ordering, and store administration.</desc>
+  <rect x="1" y="1" width="1198" height="158" rx="14" fill="#f6f2e7" stroke="#d8d6c7"/>
+  <path d="M142 79h916" fill="none" stroke="#b7c19c" stroke-width="2"/>
+  <g fill="#f6f2e7" stroke="#789067" stroke-width="2">
+    <circle cx="150" cy="79" r="35"/>
+    <circle cx="450" cy="79" r="35"/>
+    <circle cx="750" cy="79" r="35"/>
+    <circle cx="1050" cy="79" r="35"/>
+  </g>
+  <g fill="none" stroke="#52694b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="146" cy="75" r="10"/>
+    <path d="m154 83 10 10m-24-18c4-8 11-11 19-9"/>
+    <path d="M431 86h38l-4-16h-30Zm7-21-4-8m29 8 4-8m-19 21v9m15-29c-1-8 3-14 9-17 4 7 1 12-9 17Z"/>
+    <path d="M732 67h5l5 29h26l6-21h-35m7 0 3 15h20m-21 12a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm20 0a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z"/>
+    <path d="M1038 62h24v34h-24Zm6 8h12m-12 7h12m-12 7h8m-8 7h12"/>
+  </g>
+</svg>

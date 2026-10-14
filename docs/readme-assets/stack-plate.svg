@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="500" viewBox="0 0 780 500" role="img" aria-labelledby="title desc">
+  <title id="title">Project technology stack</title>
+  <desc id="desc">PHP 8, PDO, MariaDB or MySQL, HTML5 and CSS3, and vanilla JavaScript.</desc>
+  <rect x="1" y="1" width="778" height="498" rx="16" fill="#1c3429" stroke="#526b4e"/>
+  <text x="30" y="43" fill="#c3ce9a" font-family="Arial,sans-serif" font-size="26" font-weight="700" letter-spacing="2">THE TOOLS BEHIND THE RITUAL</text>
+  <path d="M30 62h720" stroke="#789067" stroke-opacity=".65"/>
+  <g fill="#243f32" stroke="#526b4e">
+    <rect x="28" y="82" width="350" height="108" rx="12"/>
+    <rect x="402" y="82" width="350" height="108" rx="12"/>
+    <rect x="28" y="210" width="350" height="108" rx="12"/>
+    <rect x="402" y="210" width="350" height="108" rx="12"/>
+    <rect x="28" y="338" width="724" height="108" rx="12"/>
+  </g>
+  <g fill="#f4f0e4" font-family="Georgia,serif" text-anchor="middle">
+    <text x="203" y="149" font-size="43">PHP 8</text>
+    <text x="577" y="149" font-size="43">PDO</text>
+    <text x="203" y="277" font-size="36">MariaDB / MySQL</text>
+    <text x="577" y="277" font-size="37">HTML5 + CSS3</text>
+    <text x="390" y="405" font-size="39">Vanilla JavaScript</text>
+  </g>
+</svg>
