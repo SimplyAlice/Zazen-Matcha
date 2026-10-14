@@ -74,7 +74,7 @@ require_once __DIR__ . '/includes/header.php';
                 Experience the calming focus of high-grade, single-origin Japanese matcha sourced with intention and crafted for modern ritual.
             </p>
             <div class="hero-actions">
-                <a href="<?php echo e(site_url('customer/products.php')); ?>" class="btn btn-primary hero-btn-primary">
+                <a href="<?php echo e(site_url('customer/tea.php')); ?>" class="btn btn-primary hero-btn-primary">
                     Shop Matcha
                 </a>
                 <a href="<?php echo e(site_url('customer/about.php')); ?>" class="btn btn-outline-light hero-btn-secondary">
