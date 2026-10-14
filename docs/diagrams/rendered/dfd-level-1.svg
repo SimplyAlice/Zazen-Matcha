@@ -1,0 +1,354 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 960" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 20px; font-weight: bold; fill: #2d3a2e; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; fill: #556357; }
+      .ent-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; font-weight: bold; fill: #ffffff; }
+      .ent-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 10px; fill: #e2ede3; }
+      .proc-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: bold; fill: #2d3a2e; }
+      .proc-name { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11.5px; font-weight: bold; fill: #1a231b; }
+      .proc-desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 9.5px; fill: #4b5563; }
+      .store-id { font-family: "Cascadia Code", Consolas, monospace; font-size: 11px; font-weight: bold; fill: #1e3a8a; }
+      .store-name { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11.5px; font-weight: bold; fill: #1e293b; }
+      .store-type { font-family: sans-serif; font-size: 9px; fill: #64748b; }
+      .flow-lbl { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 9px; fill: #2d3748; }
+      .flow-lbl-tx { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 9px; font-weight: bold; fill: #14532d; }
+      .legend-lbl { font-family: sans-serif; font-size: 10px; fill: #334155; }
+      .flow-line { fill: none; }
+    </style>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#475569" />
+    </marker>
+    <marker id="arr-tx" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#15803d" />
+    </marker>
+    <marker id="arr-bl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#2563eb" />
+    </marker>
+    <filter id="drop" x="-4%" y="-4%" width="108%" height="108%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="2.5" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="960" fill="#ffffff" />
+  <rect x="15" y="15" width="1170" height="930" fill="none" stroke="#e0e6e1" stroke-width="1.5" rx="6" />
+
+  <!-- Title -->
+  <text x="35" y="45" class="title">Zazen Matcha &amp; Tea Co. — Level 1 Data Flow Diagram (DFD)</text>
+  <text x="35" y="65" class="subtitle">Detailed Functional Subprocess Decomposition (1.0 – 7.0), Data Stores (D1 – D8), and Data Flow Exchanges</text>
+
+  <!-- ============================================================ -->
+  <!-- 1. EXTERNAL ENTITIES (TOP)                                   -->
+  <!-- ============================================================ -->
+
+  <!-- Customer Entity (Top Left) -->
+  <g transform="translate(45, 90)" filter="url(#drop)">
+    <rect width="210" height="60" fill="#2d3a2e" rx="5" />
+    <circle cx="25" cy="22" r="7" fill="#ffffff" />
+    <path d="M 18 36 C 18 30 32 30 32 36 Z" fill="#ffffff" />
+    <text x="42" y="24" class="ent-title">Customer / Guest</text>
+    <text x="42" y="40" class="ent-sub">Web Browser Client (Storefront)</text>
+  </g>
+
+  <!-- Admin Entity (Top Right) -->
+  <g transform="translate(945, 90)" filter="url(#drop)">
+    <rect width="210" height="60" fill="#2d3a2e" rx="5" />
+    <rect x="18" y="15" width="14" height="15" rx="2" fill="#ffffff" />
+    <circle cx="25" cy="21" r="3" fill="#2d3a2e" />
+    <line x1="21" y1="26" x2="29" y2="26" stroke="#2d3a2e" stroke-width="1.5" />
+    <text x="42" y="24" class="ent-title">Store Administrator</text>
+    <text x="42" y="40" class="ent-sub">Web Browser Client (Admin Portal)</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- 2. DATA STORES (CENTER COLUMN & DISTRIBUTED)                 -->
+  <!-- Open-ended standard Gane & Sarson DFD representation         -->
+  <!-- ============================================================ -->
+
+  <!-- D1: customers -->
+  <g transform="translate(470, 100)" filter="url(#drop)">
+    <rect width="250" height="42" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.2" rx="3" />
+    <line x1="42" y1="0" x2="42" y2="42" stroke="#94a3b8" stroke-width="1.2" />
+    <text x="10" y="26" class="store-id">D1</text>
+    <text x="52" y="20" class="store-name">customers</text>
+    <text x="52" y="34" class="store-type">MariaDB InnoDB &#8226; Accounts &amp; Hashes</text>
+  </g>
+
+  <!-- D6: admins -->
+  <g transform="translate(740, 100)" filter="url(#drop)">
+    <rect width="180" height="42" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.2" rx="3" />
+    <line x1="42" y1="0" x2="42" y2="42" stroke="#94a3b8" stroke-width="1.2" />
+    <text x="10" y="26" class="store-id">D6</text>
+    <text x="52" y="20" class="store-name">admins</text>
+    <text x="52" y="34" class="store-type">MariaDB InnoDB &#8226; Admin Auth</text>
+  </g>
+
+  <!-- D3: categories -->
+  <g transform="translate(470, 240)" filter="url(#drop)">
+    <rect width="250" height="42" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.2" rx="3" />
+    <line x1="42" y1="0" x2="42" y2="42" stroke="#94a3b8" stroke-width="1.2" />
+    <text x="10" y="26" class="store-id">D3</text>
+    <text x="52" y="20" class="store-name">categories</text>
+    <text x="52" y="34" class="store-type">MariaDB InnoDB &#8226; Taxonomy Structure</text>
+  </g>
+
+  <!-- D2: products -->
+  <g transform="translate(470, 360)" filter="url(#drop)">
+    <rect width="250" height="42" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.2" rx="3" />
+    <line x1="42" y1="0" x2="42" y2="42" stroke="#94a3b8" stroke-width="1.2" />
+    <text x="10" y="26" class="store-id">D2</text>
+    <text x="52" y="20" class="store-name">products</text>
+    <text x="52" y="34" class="store-type">MariaDB InnoDB &#8226; Catalog &amp; Stock Levels</text>
+  </g>
+
+  <!-- D8: Session Cart State -->
+  <g transform="translate(470, 500)" filter="url(#drop)">
+    <rect width="250" height="42" fill="#fefce8" stroke="#ca8a04" stroke-width="1.2" rx="3" />
+    <line x1="42" y1="0" x2="42" y2="42" stroke="#ca8a04" stroke-width="1.2" />
+    <text x="10" y="26" class="store-id" fill="#854d0e">D8</text>
+    <text x="52" y="20" class="store-name">Session Cart State</text>
+    <text x="52" y="34" class="store-type">PHP RAM/File &#8226; $_SESSION['cart']</text>
+  </g>
+
+  <!-- D4: orders -->
+  <g transform="translate(470, 670)" filter="url(#drop)">
+    <rect width="250" height="42" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.2" rx="3" />
+    <line x1="42" y1="0" x2="42" y2="42" stroke="#94a3b8" stroke-width="1.2" />
+    <text x="10" y="26" class="store-id">D4</text>
+    <text x="52" y="20" class="store-name">orders</text>
+    <text x="52" y="34" class="store-type">MariaDB InnoDB &#8226; Order Headers &amp; Shipping</text>
+  </g>
+
+  <!-- D5: order_items -->
+  <g transform="translate(470, 750)" filter="url(#drop)">
+    <rect width="250" height="42" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.2" rx="3" />
+    <line x1="42" y1="0" x2="42" y2="42" stroke="#94a3b8" stroke-width="1.2" />
+    <text x="10" y="26" class="store-id">D5</text>
+    <text x="52" y="20" class="store-name">order_items</text>
+    <text x="52" y="34" class="store-type">MariaDB InnoDB &#8226; Historical Frozen Price</text>
+  </g>
+
+  <!-- D7: contact_messages -->
+  <g transform="translate(470, 850)" filter="url(#drop)">
+    <rect width="250" height="42" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.2" rx="3" />
+    <line x1="42" y1="0" x2="42" y2="42" stroke="#94a3b8" stroke-width="1.2" />
+    <text x="10" y="26" class="store-id">D7</text>
+    <text x="52" y="20" class="store-name">contact_messages</text>
+    <text x="52" y="34" class="store-type">MariaDB InnoDB &#8226; Studio Inquiries</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- 3. PROCESSES (LEFT & RIGHT COLUMNS + CENTER CORE)            -->
+  <!-- ============================================================ -->
+
+  <!-- Process 1.0: Authenticate & Manage Profiles -->
+  <g transform="translate(45, 190)" filter="url(#drop)">
+    <rect width="250" height="70" fill="#f4f8f4" stroke="#4a5d4e" stroke-width="1.5" rx="8" />
+    <rect x="0" y="0" width="250" height="22" fill="#e2ede3" rx="8" />
+    <text x="12" y="15" class="proc-num">PROCESS 1.0</text>
+    <text x="12" y="39" class="proc-name">Authenticate &amp; Manage Profiles</text>
+    <text x="12" y="55" class="proc-desc">Registration, login, sessions, customer &amp; admin auth</text>
+  </g>
+
+  <!-- Process 2.0: Browse & Search Catalog -->
+  <g transform="translate(45, 305)" filter="url(#drop)">
+    <rect width="250" height="70" fill="#f4f8f4" stroke="#4a5d4e" stroke-width="1.5" rx="8" />
+    <rect x="0" y="0" width="250" height="22" fill="#e2ede3" rx="8" />
+    <text x="12" y="15" class="proc-num">PROCESS 2.0</text>
+    <text x="12" y="39" class="proc-name">Browse &amp; Search Catalog</text>
+    <text x="12" y="55" class="proc-desc">Keyword search (?search=), category filters, product detail</text>
+  </g>
+
+  <!-- Process 3.0: Manage Session Shopping Bag -->
+  <g transform="translate(45, 420)" filter="url(#drop)">
+    <rect width="250" height="70" fill="#f4f8f4" stroke="#4a5d4e" stroke-width="1.5" rx="8" />
+    <rect x="0" y="0" width="250" height="22" fill="#e2ede3" rx="8" />
+    <text x="12" y="15" class="proc-num">PROCESS 3.0</text>
+    <text x="12" y="39" class="proc-name">Manage Session Shopping Bag</text>
+    <text x="12" y="55" class="proc-desc">Add/update/remove items, live stock checks, line subtotals</text>
+  </g>
+
+  <!-- Process 4.0: Order Checkout & Atomic Transaction (HIGHLIGHTED) -->
+  <g transform="translate(45, 545)" filter="url(#drop)">
+    <rect width="360" height="85" fill="#e8f4e8" stroke="#15803d" stroke-width="2" rx="8" />
+    <rect x="0" y="0" width="360" height="24" fill="#2d3a2e" rx="8" />
+    <text x="12" y="16" class="proc-num" fill="#a3c4a8">PROCESS 4.0 [CRITICAL ATOMIC CORE]</text>
+    <text x="12" y="44" class="proc-name" font-size="12.5" fill="#14532d">Execute Checkout &amp; Atomic Stock Allocation</text>
+    <text x="12" y="60" class="proc-desc">PDO Transaction: SELECT FOR UPDATE lock, stock decrement,</text>
+    <text x="12" y="74" class="proc-desc">orders &amp; order_items creation, cart flush (customer/checkout.php)</text>
+  </g>
+
+  <!-- Process 7.0: Customer Inquiries & Studio Care -->
+  <g transform="translate(45, 835)" filter="url(#drop)">
+    <rect width="250" height="70" fill="#f4f8f4" stroke="#4a5d4e" stroke-width="1.5" rx="8" />
+    <rect x="0" y="0" width="250" height="22" fill="#e2ede3" rx="8" />
+    <text x="12" y="15" class="proc-num">PROCESS 7.0</text>
+    <text x="12" y="39" class="proc-name">Receive Studio Contact Inquiries</text>
+    <text x="12" y="55" class="proc-desc">Inquiry validation, contact_messages store, alert notices</text>
+  </g>
+
+  <!-- Process 5.0: Product & Category Administration -->
+  <g transform="translate(905, 270)" filter="url(#drop)">
+    <rect width="250" height="70" fill="#f4f8f4" stroke="#4a5d4e" stroke-width="1.5" rx="8" />
+    <rect x="0" y="0" width="250" height="22" fill="#e2ede3" rx="8" />
+    <text x="12" y="15" class="proc-num">PROCESS 5.0</text>
+    <text x="12" y="39" class="proc-name">Manage Products &amp; Categories</text>
+    <text x="12" y="55" class="proc-desc">Catalog CRUD, image filenames, price &amp; inventory updates</text>
+  </g>
+
+  <!-- Process 6.0: Order Oversight & Business Analytics -->
+  <g transform="translate(905, 665)" filter="url(#drop)">
+    <rect width="250" height="70" fill="#f4f8f4" stroke="#4a5d4e" stroke-width="1.5" rx="8" />
+    <rect x="0" y="0" width="250" height="22" fill="#e2ede3" rx="8" />
+    <text x="12" y="15" class="proc-num">PROCESS 6.0</text>
+    <text x="12" y="39" class="proc-name">Review Orders &amp; Analytics</text>
+    <text x="12" y="55" class="proc-desc">KPI sales dashboard, order inspection &amp; line items</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- 4. DATA FLOW CONNECTORS & ANNOTATIONS                        -->
+  <!-- ============================================================ -->
+
+  <!-- Flow: Customer -> 1.0 -->
+  <path d="M 110 150 L 110 188" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)" fill="none" class="flow-line" />
+  <text x="116" y="172" class="flow-lbl">Auth &amp; Profile Input</text>
+
+  <!-- Flow: 1.0 <-> D1 -->
+  <path d="M 295 210 L 468 130" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)" fill="none" class="flow-line" />
+  <text x="325" y="160" class="flow-lbl">Write Customer Data</text>
+  <path d="M 468 135 L 295 220" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)" fill="none" class="flow-line" />
+  <text x="355" y="190" class="flow-lbl">Read Profile / Hash</text>
+
+  <!-- Flow: Admin -> 1.0 -->
+  <path d="M 945 125 L 300 200" stroke="#475569" stroke-width="1.2" stroke-dasharray="3,3" marker-end="url(#arr)" fill="none" class="flow-line" />
+  <text x="640" y="180" class="flow-lbl">Admin Credentials</text>
+
+  <!-- Flow: 1.0 <-> D6 -->
+  <path d="M 295 200 L 738 125" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)" fill="none" class="flow-line" />
+  <text x="510" y="165" class="flow-lbl">Verify Admin Credentials</text>
+
+  <!-- Flow: Customer -> 2.0 -->
+  <path d="M 70 150 L 70 303" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)" fill="none" class="flow-line" />
+  <text x="76" y="285" class="flow-lbl">Search &amp; Filter Queries</text>
+
+  <!-- Flow: D2 -> 2.0 & D3 -> 2.0 -->
+  <path d="M 470 380 L 297 345" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)" fill="none" class="flow-line" />
+  <text x="330" y="355" class="flow-lbl">Active Products &amp; Prices</text>
+  <path d="M 470 265 L 297 325" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)" fill="none" class="flow-line" />
+  <text x="330" y="290" class="flow-lbl">Taxonomy Metadata</text>
+
+  <!-- Flow: 2.0 -> Customer -->
+  <path d="M 50 305 L 50 152" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)" fill="none" class="flow-line" />
+  <text x="18" y="240" class="flow-lbl">Catalog Cards</text>
+
+  <!-- Flow: Customer -> 3.0 -->
+  <path d="M 90 150 L 90 418" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)" fill="none" class="flow-line" />
+  <text x="96" y="398" class="flow-lbl">Cart Item Adjustments</text>
+
+  <!-- Flow: 3.0 <-> D8 -->
+  <path d="M 295 445 L 468 510" stroke="#ca8a04" stroke-width="1.5" marker-end="url(#arr)" fill="none" class="flow-line" />
+  <text x="330" y="475" class="flow-lbl" fill="#854d0e">Read/Write Cart Array</text>
+  <path d="M 468 520 L 295 460" stroke="#ca8a04" stroke-width="1.5" marker-end="url(#arr)" fill="none" class="flow-line" />
+
+  <!-- Flow: D2 -> 3.0 (Stock Check) -->
+  <path d="M 470 395 L 297 435" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)" fill="none" class="flow-line" />
+  <text x="325" y="420" class="flow-lbl">Verify Live Stock Level</text>
+
+  <!-- Flow: Customer -> 4.0 -->
+  <path d="M 130 150 L 130 543" stroke="#15803d" stroke-width="1.8" marker-end="url(#arr-tx)" fill="none" class="flow-line" />
+  <text x="136" y="525" class="flow-lbl-tx">Shipping Address &amp; Simulated Tender</text>
+
+  <!-- Flow: D8 -> 4.0 -->
+  <path d="M 470 535 L 407 555" stroke="#15803d" stroke-width="1.8" marker-end="url(#arr-tx)" fill="none" class="flow-line" />
+  <text x="425" y="542" class="flow-lbl-tx">Active Bag Items</text>
+
+  <!-- Flow: 4.0 -> D2 (Row Lock & Decrement) -->
+  <path d="M 280 545 L 468 395" stroke="#15803d" stroke-width="2" marker-end="url(#arr-tx)" fill="none" class="flow-line" />
+  <rect x="290" y="488" width="165" height="18" fill="#e8f4e8" stroke="#86efac" rx="2" />
+  <text x="294" y="501" class="flow-lbl-tx">SELECT FOR UPDATE &amp; Deduct Stock</text>
+
+  <!-- Flow: 4.0 -> D1 (Customer check/insert) -->
+  <path d="M 405 570 L 450 570 L 450 144" stroke="#15803d" stroke-width="1.5" marker-end="url(#arr-tx)" fill="none" class="flow-line" />
+  <text x="442" y="270" class="flow-lbl-tx" transform="rotate(-90 442,270)">Read / Provision Customer Record</text>
+
+  <!-- Flow: 4.0 -> D4 (Order Header) -->
+  <path d="M 380 630 L 468 680" stroke="#15803d" stroke-width="1.8" marker-end="url(#arr-tx)" fill="none" class="flow-line" />
+  <text x="350" y="660" class="flow-lbl-tx">Insert orders Header</text>
+
+  <!-- Flow: 4.0 -> D5 (Order Items) -->
+  <path d="M 320 630 L 468 760" stroke="#15803d" stroke-width="1.8" marker-end="url(#arr-tx)" fill="none" class="flow-line" />
+  <text x="270" y="715" class="flow-lbl-tx">Insert order_items (Frozen Price)</text>
+
+  <!-- Flow: 4.0 -> D8 (Flush Cart) -->
+  <path d="M 407 590 L 470 538" stroke="#15803d" stroke-width="1.5" stroke-dasharray="3,3" marker-end="url(#arr-tx)" fill="none" class="flow-line" />
+  <text x="420" y="580" class="flow-lbl-tx">Unset / Clear Bag</text>
+
+  <!-- Flow: 4.0 -> Customer (Order Confirmation) -->
+  <path d="M 45 590 L 25 590 L 25 125 L 43 125" stroke="#15803d" stroke-width="1.8" marker-end="url(#arr-tx)" fill="none" class="flow-line" />
+  <text x="28" y="605" class="flow-lbl-tx">Order Receipt &amp; ID</text>
+
+  <!-- Flow: Admin -> 5.0 -->
+  <path d="M 1030 150 L 1030 268" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)" fill="none" class="flow-line" />
+  <text x="1036" y="210" class="flow-lbl">Catalog Management Mutators</text>
+
+  <!-- Flow: 5.0 -> D2 & D3 -->
+  <path d="M 905 320 L 722 375" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)" fill="none" class="flow-line" />
+  <text x="760" y="340" class="flow-lbl">Insert / Update Product Records</text>
+  <path d="M 905 295 L 722 265" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)" fill="none" class="flow-line" />
+  <text x="760" y="275" class="flow-lbl">Category Taxonomy Updates</text>
+
+  <!-- Flow: Admin -> 6.0 -->
+  <path d="M 1070 150 L 1070 663" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)" fill="none" class="flow-line" />
+  <text x="1076" y="420" class="flow-lbl">Request Sales Metrics &amp; Audit</text>
+
+  <!-- Flow: D4 & D5 & D1 -> 6.0 -->
+  <path d="M 722 690 L 903 690" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)" fill="none" class="flow-line" />
+  <text x="740" y="682" class="flow-lbl">Read Orders &amp; Totals</text>
+  <path d="M 722 765 L 903 725" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)" fill="none" class="flow-line" />
+  <text x="740" y="745" class="flow-lbl">Read Historical Line Items</text>
+
+  <!-- Flow: 6.0 -> Admin -->
+  <path d="M 1090 665 L 1090 152" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)" fill="none" class="flow-line" />
+  <text x="1096" y="480" class="flow-lbl">KPI Dashboard &amp; Line Audit</text>
+
+  <!-- Flow: Customer -> 7.0 -->
+  <path d="M 150 150 L 150 833" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)" fill="none" class="flow-line" />
+  <text x="156" y="810" class="flow-lbl">Submit Studio Message</text>
+
+  <!-- Flow: 7.0 -> D7 -->
+  <path d="M 295 870 L 468 870" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)" fill="none" class="flow-line" />
+  <text x="325" y="863" class="flow-lbl">Insert contact_messages Row</text>
+
+  <!-- Flow: D7 -> Admin -->
+  <path d="M 722 870 L 1110 870 L 1110 152" stroke="#475569" stroke-width="1.5" stroke-dasharray="3,3" marker-end="url(#arr)" fill="none" class="flow-line" />
+  <text x="820" y="862" class="flow-lbl">Review Customer Feedback Inquiries</text>
+
+  <!-- ============================================================ -->
+  <!-- 5. LEGEND & NOTATION FOOTER                                  -->
+  <!-- ============================================================ -->
+  <g transform="translate(45, 908)">
+    <rect width="1110" height="34" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" rx="4" />
+    
+    <!-- Legend Items -->
+    <rect x="20" y="10" width="16" height="14" fill="#2d3a2e" rx="2" />
+    <text x="42" y="21" class="legend-lbl">External Entity</text>
+
+    <rect x="150" y="10" width="18" height="14" fill="#f4f8f4" stroke="#4a5d4e" stroke-width="1.2" rx="3" />
+    <text x="175" y="21" class="legend-lbl">Functional Subprocess</text>
+
+    <rect x="320" y="10" width="24" height="14" fill="#e8f4e8" stroke="#15803d" stroke-width="1.5" rx="3" />
+    <text x="350" y="21" class="legend-lbl">Process 4.0: Atomic Transaction Core</text>
+
+    <rect x="580" y="10" width="22" height="14" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" rx="2" />
+    <line x1="587" y1="10" x2="587" y2="24" stroke="#94a3b8" stroke-width="1" />
+    <text x="610" y="21" class="legend-lbl">MariaDB InnoDB Store (D1-D7)</text>
+
+    <rect x="790" y="10" width="22" height="14" fill="#fefce8" stroke="#ca8a04" stroke-width="1" rx="2" />
+    <text x="820" y="21" class="legend-lbl">Session Memory Store (D8)</text>
+
+    <line x1="970" y1="17" x2="995" y2="17" stroke="#475569" stroke-width="1.5" marker-end="url(#arr)" />
+    <text x="1005" y="21" class="legend-lbl">Data Flow Direction</text>
+  </g>
+
+</svg>

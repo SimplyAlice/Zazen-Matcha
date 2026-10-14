@@ -262,13 +262,13 @@ $documentTitle = 'Admin Sign In — Zazen Matcha & Tea Co.';
                             Storefront Operations
                         </h2>
                         <p class="auth-editorial-intro">
-                            This console connects directly to the Zazen Matcha MySQL database for live catalogue, stock, and order administration.
+                            This console connects directly to the Zazen Matcha &amp; Tea Co. MySQL database for live catalogue, stock, and order administration.
                         </p>
 
                         <dl class="auth-benefit-list">
                             <div class="auth-benefit-item">
                                 <dt>Catalogue &amp; Stock Control</dt>
-                                <dd>Manage ceremonial and culinary matcha listings, pricing in ZAR, and available stock quantities.</dd>
+                                <dd>Manage ceremonial matcha, specialty teas, and teaware listings, pricing in ZAR, and available stock quantities.</dd>
                             </div>
                             <div class="auth-benefit-item">
                                 <dt>Order &amp; Fulfilment Tracking</dt>

@@ -18,7 +18,7 @@ $currentAdminPage = basename($_SERVER['PHP_SELF'] ?? 'dashboard.php');
 $adminDisplayName = get_logged_in_admin_name() ?? 'Administrator';
 
 $documentTitle = !empty($pageTitle)
-    ? e($pageTitle) . ' — Zazen Matcha Administration'
+    ? e($pageTitle) . ' — Zazen Matcha & Tea Co. Administration'
     : 'Administration — Zazen Matcha & Tea Co.';
 
 $flashMessage = get_flash_message();

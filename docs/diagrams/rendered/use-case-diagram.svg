@@ -1,0 +1,404 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1020" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 20px; font-weight: bold; fill: #2d3a2e; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; fill: #556357; }
+      .actor-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; font-weight: bold; fill: #2d3a2e; }
+      .actor-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 10px; fill: #556357; }
+      .boundary-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; font-weight: bold; fill: #2d3a2e; letter-spacing: 0.5px; }
+      .subgroup-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: bold; fill: #3f5241; }
+      .uc-id { font-family: "Cascadia Code", Consolas, monospace; font-size: 9.5px; font-weight: bold; fill: #1b4d24; }
+      .uc-name { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 10.5px; fill: #1a202c; }
+      .uc-prop-id { font-family: "Cascadia Code", Consolas, monospace; font-size: 9.5px; font-weight: bold; fill: #b45309; }
+      .uc-prop-name { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 10.5px; fill: #78350f; }
+      .inc-txt { font-family: sans-serif; font-size: 8.5px; fill: #2b6cb0; font-weight: 600; font-style: italic; }
+      .assoc-line { stroke: #4a5d4e; stroke-width: 1.2; fill: none; }
+      .assoc-admin { stroke: #2b6cb0; stroke-width: 1.2; fill: none; }
+      .include-line { stroke: #3182ce; stroke-width: 1.1; stroke-dasharray: 4,3; fill: none; }
+      .proposed-line { stroke: #d97706; stroke-width: 1.1; stroke-dasharray: 3,3; fill: none; }
+      .legend-txt { font-family: sans-serif; font-size: 9.5px; fill: #334155; }
+    </style>
+    <marker id="arrow-open" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5" fill="none" stroke="#3182ce" stroke-width="1.2" />
+    </marker>
+    <marker id="arrow-prop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5" fill="none" stroke="#d97706" stroke-width="1.2" />
+    </marker>
+    <marker id="generalize" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <polygon points="0 1, 10 6, 0 11" fill="#ffffff" stroke="#2d3a2e" stroke-width="1.5" />
+    </marker>
+    <filter id="shadow-light" x="-3%" y="-3%" width="106%" height="106%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.06" />
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1280" height="1020" fill="#ffffff" />
+  <rect x="15" y="15" width="1250" height="990" fill="none" stroke="#e0e6e1" stroke-width="1.5" rx="6" />
+
+  <!-- Title Header -->
+  <text x="35" y="45" class="title">Zazen Matcha &amp; Tea Co. — UML Use Case Diagram</text>
+  <text x="35" y="65" class="subtitle">Complete Behavioral Use Case Specifications across Guest Visitors, Registered Customers, and Store Administrators</text>
+
+  <!-- ============================================================ -->
+  <!-- 1. SYSTEM BOUNDARY (CENTER BOX)                              -->
+  <!-- ============================================================ -->
+  <rect x="230" y="85" width="810" height="880" fill="#fafbfa" stroke="#2d3a2e" stroke-width="1.8" rx="8" />
+  <rect x="230" y="85" width="810" height="28" fill="#e8eee9" rx="8" />
+  <text x="245" y="104" class="boundary-title">Zazen Matcha e-Commerce Platform Boundary</text>
+  <text x="940" y="103" font-family="sans-serif" font-size="9.5" fill="#556357">PHP 8.2 / MariaDB 10.4</text>
+
+  <!-- ============================================================ -->
+  <!-- 2. ACTORS (STICK FIGURES & TITLES)                           -->
+  <!-- ============================================================ -->
+
+  <!-- ACTOR 1: GUEST VISITOR (Top-Left) -->
+  <g transform="translate(60, 140)">
+    <!-- Stick Figure -->
+    <circle cx="50" cy="18" r="10" fill="#fcfdfc" stroke="#2d3a2e" stroke-width="1.8" />
+    <line x1="50" y1="28" x2="50" y2="52" stroke="#2d3a2e" stroke-width="1.8" />
+    <line x1="26" y1="38" x2="74" y2="38" stroke="#2d3a2e" stroke-width="1.8" />
+    <line x1="50" y1="52" x2="34" y2="76" stroke="#2d3a2e" stroke-width="1.8" />
+    <line x1="50" y1="52" x2="66" y2="76" stroke="#2d3a2e" stroke-width="1.8" />
+    <!-- Label -->
+    <text x="50" y="96" text-anchor="middle" class="actor-title">Guest Visitor</text>
+    <text x="50" y="110" text-anchor="middle" class="actor-sub">Unauthenticated Shopper</text>
+    <text x="50" y="122" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#718096">(Public Storefront)</text>
+  </g>
+
+  <!-- ACTOR GENERALIZATION: Registered Customer -> Guest Visitor -->
+  <path d="M 110 440 L 110 270" stroke="#2d3a2e" stroke-width="1.6" marker-end="url(#generalize)" />
+  <text x="116" y="355" font-family="sans-serif" font-size="9" font-style="italic" fill="#4a5568">inherits / generalizes</text>
+
+  <!-- ACTOR 2: REGISTERED CUSTOMER (Mid-Left) -->
+  <g transform="translate(60, 450)">
+    <!-- Stick Figure with account badge -->
+    <circle cx="50" cy="18" r="10" fill="#fcfdfc" stroke="#2d3a2e" stroke-width="1.8" />
+    <line x1="50" y1="28" x2="50" y2="52" stroke="#2d3a2e" stroke-width="1.8" />
+    <line x1="26" y1="38" x2="74" y2="38" stroke="#2d3a2e" stroke-width="1.8" />
+    <line x1="50" y1="52" x2="34" y2="76" stroke="#2d3a2e" stroke-width="1.8" />
+    <line x1="50" y1="52" x2="66" y2="76" stroke="#2d3a2e" stroke-width="1.8" />
+    <!-- Key/Card Icon badge -->
+    <rect x="62" y="10" width="10" height="6" rx="1" fill="#2d3a2e" />
+    <!-- Label -->
+    <text x="50" y="96" text-anchor="middle" class="actor-title">Registered Customer</text>
+    <text x="50" y="110" text-anchor="middle" class="actor-sub">Authenticated Account</text>
+    <text x="50" y="122" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#718096">(Saved Addresses &amp; History)</text>
+  </g>
+
+  <!-- ACTOR 3: STORE ADMINISTRATOR (Right Side) -->
+  <g transform="translate(1130, 260)">
+    <!-- Stick Figure with badge -->
+    <circle cx="50" cy="18" r="10" fill="#eff6ff" stroke="#1e3a8a" stroke-width="1.8" />
+    <line x1="50" y1="28" x2="50" y2="52" stroke="#1e3a8a" stroke-width="1.8" />
+    <line x1="26" y1="38" x2="74" y2="38" stroke="#1e3a8a" stroke-width="1.8" />
+    <line x1="50" y1="52" x2="34" y2="76" stroke="#1e3a8a" stroke-width="1.8" />
+    <line x1="50" y1="52" x2="66" y2="76" stroke="#1e3a8a" stroke-width="1.8" />
+    <!-- Admin Badge Icon -->
+    <rect x="62" y="8" width="12" height="14" rx="2" fill="#1e3a8a" />
+    <text x="68" y="18" font-family="sans-serif" font-size="8" fill="#ffffff" text-anchor="middle">A</text>
+    <!-- Label -->
+    <text x="50" y="96" text-anchor="middle" class="actor-title" fill="#1e3a8a">Administrator</text>
+    <text x="50" y="110" text-anchor="middle" class="actor-sub" fill="#1e40af">Store Manager</text>
+    <text x="50" y="122" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#64748b">(Back-office Portal)</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- 3. USE CASE OVALS & SUB-PACKAGES                             -->
+  <!-- ============================================================ -->
+
+  <!-- GROUP A: STOREFRONT & DISCOVERY (Top Left Inside Boundary) -->
+  <rect x="245" y="125" width="255" height="155" fill="#f0f5f1" stroke="#cbdcd0" stroke-width="1" rx="6" />
+  <text x="255" y="142" class="subgroup-title">Storefront &amp; Product Discovery</text>
+
+  <!-- UC-01 -->
+  <g transform="translate(255, 150)">
+    <rect width="235" height="25" rx="12.5" fill="#ffffff" stroke="#2d3a2e" stroke-width="1.2" filter="url(#shadow-light)" />
+    <text x="12" y="16"><tspan class="uc-id">UC-01:</tspan> <tspan class="uc-name">Browse Storefront &amp; Story</tspan></text>
+  </g>
+
+  <!-- UC-02 -->
+  <g transform="translate(255, 180)">
+    <rect width="235" height="25" rx="12.5" fill="#ffffff" stroke="#2d3a2e" stroke-width="1.2" filter="url(#shadow-light)" />
+    <text x="12" y="16"><tspan class="uc-id">UC-02:</tspan> <tspan class="uc-name">Browse &amp; Search Catalog</tspan></text>
+  </g>
+
+  <!-- UC-03 -->
+  <g transform="translate(255, 210)">
+    <rect width="235" height="25" rx="12.5" fill="#ffffff" stroke="#2d3a2e" stroke-width="1.2" filter="url(#shadow-light)" />
+    <text x="12" y="16"><tspan class="uc-id">UC-03:</tspan> <tspan class="uc-name">View Product Details &amp; Gallery</tspan></text>
+  </g>
+
+  <!-- UC-04 -->
+  <g transform="translate(255, 240)">
+    <rect width="235" height="25" rx="12.5" fill="#ffffff" stroke="#2d3a2e" stroke-width="1.2" filter="url(#shadow-light)" />
+    <text x="12" y="16"><tspan class="uc-id">UC-04:</tspan> <tspan class="uc-name">Manage Shopping Bag</tspan></text>
+  </g>
+
+  <!-- GROUP B: CHECKOUT & TRANSACTIONS (Mid Left Inside Boundary) -->
+  <rect x="245" y="295" width="255" height="185" fill="#f0f5f1" stroke="#cbdcd0" stroke-width="1" rx="6" />
+  <text x="255" y="312" class="subgroup-title">Checkout &amp; Order Acquisition</text>
+
+  <!-- UC-05 -->
+  <g transform="translate(255, 320)">
+    <rect width="235" height="25" rx="12.5" fill="#ffffff" stroke="#2d3a2e" stroke-width="1.2" filter="url(#shadow-light)" />
+    <text x="12" y="16"><tspan class="uc-id">UC-05:</tspan> <tspan class="uc-name">Execute Guest Checkout</tspan></text>
+  </g>
+
+  <!-- UC-06 -->
+  <g transform="translate(255, 355)">
+    <rect width="235" height="25" rx="12.5" fill="#ffffff" stroke="#2d3a2e" stroke-width="1.2" filter="url(#shadow-light)" />
+    <text x="12" y="16"><tspan class="uc-id">UC-06:</tspan> <tspan class="uc-name">Execute Registered Checkout</tspan></text>
+  </g>
+
+  <!-- UC-07 -->
+  <g transform="translate(255, 390)">
+    <rect width="235" height="25" rx="12.5" fill="#ffffff" stroke="#2d3a2e" stroke-width="1.2" filter="url(#shadow-light)" />
+    <text x="12" y="16"><tspan class="uc-id">UC-07:</tspan> <tspan class="uc-name">View Order Confirmation Receipt</tspan></text>
+  </g>
+
+  <!-- UC-13 -->
+  <g transform="translate(255, 435)">
+    <rect width="235" height="25" rx="12.5" fill="#ffffff" stroke="#2d3a2e" stroke-width="1.2" filter="url(#shadow-light)" />
+    <text x="12" y="16"><tspan class="uc-id">UC-13:</tspan> <tspan class="uc-name">Submit Studio Inquiry</tspan></text>
+  </g>
+
+  <!-- GROUP C: CUSTOMER ACCOUNT PROFILE (Bottom Left Inside Boundary) -->
+  <rect x="245" y="495" width="255" height="195" fill="#f0f5f1" stroke="#cbdcd0" stroke-width="1" rx="6" />
+  <text x="255" y="512" class="subgroup-title">Customer Account Lifecycle</text>
+
+  <!-- UC-08 -->
+  <g transform="translate(255, 520)">
+    <rect width="235" height="25" rx="12.5" fill="#ffffff" stroke="#2d3a2e" stroke-width="1.2" filter="url(#shadow-light)" />
+    <text x="12" y="16"><tspan class="uc-id">UC-08:</tspan> <tspan class="uc-name">Register Customer Account</tspan></text>
+  </g>
+
+  <!-- UC-09 -->
+  <g transform="translate(255, 555)">
+    <rect width="235" height="25" rx="12.5" fill="#ffffff" stroke="#2d3a2e" stroke-width="1.2" filter="url(#shadow-light)" />
+    <text x="12" y="16"><tspan class="uc-id">UC-09:</tspan> <tspan class="uc-name">Authenticate / Login</tspan></text>
+  </g>
+
+  <!-- UC-10 -->
+  <g transform="translate(255, 590)">
+    <rect width="235" height="25" rx="12.5" fill="#ffffff" stroke="#2d3a2e" stroke-width="1.2" filter="url(#shadow-light)" />
+    <text x="12" y="16"><tspan class="uc-id">UC-10:</tspan> <tspan class="uc-name">Manage Profile &amp; Address</tspan></text>
+  </g>
+
+  <!-- UC-11 -->
+  <g transform="translate(255, 625)">
+    <rect width="235" height="25" rx="12.5" fill="#ffffff" stroke="#2d3a2e" stroke-width="1.2" filter="url(#shadow-light)" />
+    <text x="12" y="16"><tspan class="uc-id">UC-11:</tspan> <tspan class="uc-name">Change Password</tspan></text>
+  </g>
+
+  <!-- UC-12 -->
+  <g transform="translate(255, 660)">
+    <rect width="235" height="25" rx="12.5" fill="#ffffff" stroke="#2d3a2e" stroke-width="1.2" filter="url(#shadow-light)" />
+    <text x="12" y="16"><tspan class="uc-id">UC-12:</tspan> <tspan class="uc-name">View Personal Order History</tspan></text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- SHARED INCLUDED USE CASES (CENTER COLUMN)                    -->
+  <!-- ============================================================ -->
+  <!-- UC_TX: Atomic Stock Deduction -->
+  <g transform="translate(530, 310)">
+    <rect width="230" height="42" rx="21" fill="#ebf8ff" stroke="#3182ce" stroke-width="1.4" filter="url(#shadow-light)" />
+    <text x="115" y="16" text-anchor="middle" class="inc-txt">«include»</text>
+    <text x="115" y="30" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="bold" fill="#2b6cb0">Atomic Stock &amp; Transaction</text>
+  </g>
+
+  <!-- UC_CSRF: CSRF Token Validation -->
+  <g transform="translate(530, 480)">
+    <rect width="230" height="42" rx="21" fill="#ebf8ff" stroke="#3182ce" stroke-width="1.4" filter="url(#shadow-light)" />
+    <text x="115" y="16" text-anchor="middle" class="inc-txt">«include»</text>
+    <text x="115" y="30" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="bold" fill="#2b6cb0">CSRF Token Verification</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- GROUP D: ADMINISTRATOR OPERATIONS (Right Side Inside Boundary) -->
+  <!-- ============================================================ -->
+  <rect x="780" y="125" width="245" height="455" fill="#f0f4f8" stroke="#cbd5e1" stroke-width="1" rx="6" />
+  <text x="790" y="142" class="subgroup-title" fill="#1e3a8a">Administrator Operations</text>
+
+  <!-- UC-14 -->
+  <g transform="translate(790, 155)">
+    <rect width="225" height="25" rx="12.5" fill="#ffffff" stroke="#1e3a8a" stroke-width="1.2" filter="url(#shadow-light)" />
+    <text x="12" y="16"><tspan class="uc-id" fill="#1e3a8a">UC-14:</tspan> <tspan class="uc-name">Administrator Login</tspan></text>
+  </g>
+
+  <!-- UC-15 -->
+  <g transform="translate(790, 195)">
+    <rect width="225" height="25" rx="12.5" fill="#ffffff" stroke="#1e3a8a" stroke-width="1.2" filter="url(#shadow-light)" />
+    <text x="12" y="16"><tspan class="uc-id" fill="#1e3a8a">UC-15:</tspan> <tspan class="uc-name">View KPI Analytics Dashboard</tspan></text>
+  </g>
+
+  <!-- UC-16 -->
+  <g transform="translate(790, 235)">
+    <rect width="225" height="25" rx="12.5" fill="#ffffff" stroke="#1e3a8a" stroke-width="1.2" filter="url(#shadow-light)" />
+    <text x="12" y="16"><tspan class="uc-id" fill="#1e3a8a">UC-16:</tspan> <tspan class="uc-name">Manage Products (CRUD)</tspan></text>
+  </g>
+
+  <!-- UC-17 -->
+  <g transform="translate(790, 275)">
+    <rect width="225" height="25" rx="12.5" fill="#ffffff" stroke="#1e3a8a" stroke-width="1.2" filter="url(#shadow-light)" />
+    <text x="12" y="16"><tspan class="uc-id" fill="#1e3a8a">UC-17:</tspan> <tspan class="uc-name">Manage Categories (CRUD)</tspan></text>
+  </g>
+
+  <!-- UC-18 -->
+  <g transform="translate(790, 315)">
+    <rect width="225" height="25" rx="12.5" fill="#ffffff" stroke="#1e3a8a" stroke-width="1.2" filter="url(#shadow-light)" />
+    <text x="12" y="16"><tspan class="uc-id" fill="#1e3a8a">UC-18:</tspan> <tspan class="uc-name">View Orders &amp; Line Items</tspan></text>
+  </g>
+
+  <!-- UC-19 -->
+  <g transform="translate(790, 355)">
+    <rect width="225" height="25" rx="12.5" fill="#ffffff" stroke="#1e3a8a" stroke-width="1.2" filter="url(#shadow-light)" />
+    <text x="12" y="16"><tspan class="uc-id" fill="#1e3a8a">UC-19:</tspan> <tspan class="uc-name">Oversee Customer Directory</tspan></text>
+  </g>
+
+  <!-- UC-20 -->
+  <g transform="translate(790, 395)">
+    <rect width="225" height="25" rx="12.5" fill="#ffffff" stroke="#1e3a8a" stroke-width="1.2" filter="url(#shadow-light)" />
+    <text x="12" y="16"><tspan class="uc-id" fill="#1e3a8a">UC-20:</tspan> <tspan class="uc-name">Inspect System Settings</tspan></text>
+  </g>
+
+  <!-- Admin Verification Note inside admin box -->
+  <rect x="790" y="440" width="225" height="125" fill="#ffffff" stroke="#93c5fd" stroke-width="0.8" rx="4" />
+  <text x="798" y="456" font-family="sans-serif" font-size="9" font-weight="bold" fill="#1e40af">ADMINISTRATIVE SCOPE NOTE:</text>
+  <text x="798" y="470" font-family="sans-serif" font-size="8.5" fill="#334155">• Isolated `admins` session auth</text>
+  <text x="798" y="484" font-family="sans-serif" font-size="8.5" fill="#334155">• Product mutations update `products`</text>
+  <text x="798" y="498" font-family="sans-serif" font-size="8.5" fill="#334155">• Category mutations update `categories`</text>
+  <text x="798" y="512" font-family="sans-serif" font-size="8.5" fill="#334155">• Order inspection is strictly read-only</text>
+  <text x="798" y="526" font-family="sans-serif" font-size="8.5" fill="#334155">• Order status mutation is proposed</text>
+  <text x="798" y="542" font-family="sans-serif" font-size="8" fill="#64748b">(Refer to UC-P1 enhancement)</text>
+
+  <!-- ============================================================ -->
+  <!-- GROUP E: PROPOSED / FUTURE ENHANCEMENTS (DISTINCT BOX)       -->
+  <!-- ============================================================ -->
+  <g transform="translate(245, 715)">
+    <rect width="780" height="135" fill="#fefce8" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5,4" rx="6" />
+    <text x="15" y="22" font-family="sans-serif" font-size="11" font-weight="bold" fill="#b45309">«Proposed / Future Enhancements» (Clearly Differentiated from Baseline)</text>
+    
+    <!-- UC-P1 -->
+    <g transform="translate(15, 35)">
+      <rect width="235" height="42" rx="21" fill="#fffbeb" stroke="#d97706" stroke-width="1.2" stroke-dasharray="4,2" />
+      <text x="117" y="18" text-anchor="middle"><tspan class="uc-prop-id">UC-P1:</tspan> <tspan class="uc-prop-name">Update Order Status</tspan></text>
+      <text x="117" y="32" text-anchor="middle" font-family="sans-serif" font-size="8.5" fill="#92400e">Fulfillment lifecycle mutation</text>
+    </g>
+
+    <!-- UC-P2 -->
+    <g transform="translate(270, 35)">
+      <rect width="235" height="42" rx="21" fill="#fffbeb" stroke="#d97706" stroke-width="1.2" stroke-dasharray="4,2" />
+      <text x="117" y="18" text-anchor="middle"><tspan class="uc-prop-id">UC-P2:</tspan> <tspan class="uc-prop-name">Online Payment Gateway</tspan></text>
+      <text x="117" y="32" text-anchor="middle" font-family="sans-serif" font-size="8.5" fill="#92400e">PayFast / Stripe PCI API</text>
+    </g>
+
+    <!-- UC-P3 -->
+    <g transform="translate(525, 35)">
+      <rect width="240" height="42" rx="21" fill="#fffbeb" stroke="#d97706" stroke-width="1.2" stroke-dasharray="4,2" />
+      <text x="120" y="18" text-anchor="middle"><tspan class="uc-prop-id">UC-P3:</tspan> <tspan class="uc-prop-name">Automated Email Receipts</tspan></text>
+      <text x="120" y="32" text-anchor="middle" font-family="sans-serif" font-size="8.5" fill="#92400e">Transactional SMTP Dispatch</text>
+    </g>
+
+    <!-- Context note below proposed -->
+    <text x="15" y="105" font-family="sans-serif" font-size="9.5" fill="#78350f">• Academic Rationale: The core repository intentionally uses simulated checkout and read-only order inspection.</text>
+    <text x="15" y="120" font-family="sans-serif" font-size="9.5" fill="#78350f">• Proposed use cases establish the architectural roadmap for Deliverable 3 production deployment.</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- 4. ASSOCIATION CONNECTORS                                    -->
+  <!-- ============================================================ -->
+
+  <!-- Guest Visitor Associations -->
+  <line x1="160" y1="160" x2="255" y2="162" class="assoc-line" />
+  <line x1="160" y1="170" x2="255" y2="192" class="assoc-line" />
+  <line x1="160" y1="180" x2="255" y2="222" class="assoc-line" />
+  <line x1="160" y1="190" x2="255" y2="252" class="assoc-line" />
+  <line x1="160" y1="200" x2="255" y2="332" class="assoc-line" />
+  <line x1="160" y1="210" x2="255" y2="447" class="assoc-line" />
+  <line x1="160" y1="220" x2="255" y2="532" class="assoc-line" />
+
+  <!-- Registered Customer Associations -->
+  <line x1="160" y1="480" x2="255" y2="367" class="assoc-line" />
+  <line x1="160" y1="490" x2="255" y2="402" class="assoc-line" />
+  <line x1="160" y1="500" x2="255" y2="567" class="assoc-line" />
+  <line x1="160" y1="510" x2="255" y2="602" class="assoc-line" />
+  <line x1="160" y1="520" x2="255" y2="637" class="assoc-line" />
+  <line x1="160" y1="530" x2="255" y2="672" class="assoc-line" />
+
+  <!-- Admin Associations -->
+  <line x1="1130" y1="290" x2="1015" y2="167" class="assoc-admin" />
+  <line x1="1130" y1="300" x2="1015" y2="207" class="assoc-admin" />
+  <line x1="1130" y1="310" x2="1015" y2="247" class="assoc-admin" />
+  <line x1="1130" y1="320" x2="1015" y2="287" class="assoc-admin" />
+  <line x1="1130" y1="330" x2="1015" y2="327" class="assoc-admin" />
+  <line x1="1130" y1="340" x2="1015" y2="367" class="assoc-admin" />
+  <line x1="1130" y1="350" x2="1015" y2="407" class="assoc-admin" />
+
+  <!-- Include Relationships -->
+  <!-- UC-05 -> UC_TX -->
+  <path d="M 490 332 L 530 330" class="include-line" marker-end="url(#arrow-open)" />
+  <!-- UC-06 -> UC_TX -->
+  <path d="M 490 365 L 535 345" class="include-line" marker-end="url(#arrow-open)" />
+  
+  <!-- UC-05 -> UC_CSRF -->
+  <path d="M 470 345 L 535 485" class="include-line" marker-end="url(#arrow-open)" />
+  <!-- UC-06 -> UC_CSRF -->
+  <path d="M 490 375 L 545 480" class="include-line" marker-end="url(#arrow-open)" />
+  <!-- UC-08 -> UC_CSRF -->
+  <path d="M 490 532 L 530 515" class="include-line" marker-end="url(#arrow-open)" />
+  <!-- UC-10 -> UC_CSRF -->
+  <path d="M 490 600 L 540 520" class="include-line" marker-end="url(#arrow-open)" />
+  <!-- UC-11 -> UC_CSRF -->
+  <path d="M 490 635 L 555 522" class="include-line" marker-end="url(#arrow-open)" />
+
+  <!-- Admin CRUD -> UC_CSRF -->
+  <path d="M 790 250 L 730 480" class="include-line" marker-end="url(#arrow-open)" />
+  <path d="M 790 290 L 740 495" class="include-line" marker-end="url(#arrow-open)" />
+
+  <!-- Proposed Links -->
+  <!-- Admin -> UC-P1 -->
+  <path d="M 1150 400 L 1150 770 L 495 770" class="proposed-line" marker-end="url(#arrow-prop)" />
+  <text x="1000" y="760" font-family="sans-serif" font-size="8.5" fill="#d97706">«proposed»</text>
+
+  <!-- UC-06 -> UC-P2 -->
+  <path d="M 370 380 L 370 715" class="proposed-line" marker-end="url(#arrow-prop)" />
+  <text x="375" y="440" font-family="sans-serif" font-size="8.5" fill="#d97706">«proposed»</text>
+
+  <!-- UC_TX -> UC-P3 -->
+  <path d="M 645 352 L 645 715" class="proposed-line" marker-end="url(#arrow-prop)" />
+  <text x="650" y="440" font-family="sans-serif" font-size="8.5" fill="#d97706">«proposed»</text>
+
+  <!-- ============================================================ -->
+  <!-- 5. LEGEND (BOTTOM)                                           -->
+  <!-- ============================================================ -->
+  <g transform="translate(230, 890)">
+    <rect width="810" height="65" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" rx="4" />
+    <text x="15" y="18" font-family="sans-serif" font-size="10" font-weight="bold" fill="#334155">UML Notation Legend:</text>
+    
+    <!-- Item 1: Implemented -->
+    <rect x="15" y="28" width="55" height="18" rx="9" fill="#ffffff" stroke="#2d3a2e" stroke-width="1.2" />
+    <text x="78" y="41" class="legend-txt">Implemented Use Case (Verified in Code)</text>
+
+    <!-- Item 2: Include -->
+    <rect x="310" y="28" width="55" height="18" rx="9" fill="#ebf8ff" stroke="#3182ce" stroke-width="1.2" />
+    <text x="373" y="41" class="legend-txt">«include» Behavioral Subroutine</text>
+
+    <!-- Item 3: Proposed -->
+    <rect x="560" y="28" width="55" height="18" rx="9" fill="#fffbeb" stroke="#d97706" stroke-width="1.2" stroke-dasharray="3,2" />
+    <text x="623" y="41" class="legend-txt">«proposed» Future Scope (Deliverable 3)</text>
+
+    <!-- Item 4: Generalization -->
+    <line x1="15" y1="56" x2="35" y2="56" stroke="#2d3a2e" stroke-width="1.5" marker-end="url(#generalize)" />
+    <text x="45" y="59" class="legend-txt">Actor Generalization (Inherits Capabilities)</text>
+
+    <!-- Item 5: Associations -->
+    <line x1="310" y1="56" x2="335" y2="56" stroke="#4a5d4e" stroke-width="1.5" />
+    <text x="345" y="59" class="legend-txt">Actor-to-Use Case Association</text>
+
+    <!-- Item 6: Dependency -->
+    <line x1="560" y1="56" x2="585" y2="56" stroke="#3182ce" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow-open)" />
+    <text x="595" y="59" class="legend-txt">«include» Dependency Vector</text>
+  </g>
+
+</svg>

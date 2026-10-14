@@ -124,6 +124,92 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         redirect($cartPageUrl);
     }
 
+    // Action D: Add Item to Cart
+    if ($action === 'add') {
+        $rawQty = $_POST['quantity'] ?? 1;
+        $requestedQty = (!is_array($rawQty) && filter_var($rawQty, FILTER_VALIDATE_INT) !== false)
+            ? (int) $rawQty
+            : 1;
+
+        if ($requestedQty < 1) {
+            set_flash_message('error', 'Please enter a valid quantity of at least 1.');
+            redirect($cartPageUrl);
+        }
+
+        // Re-query the product from MySQL (never trust client-side price or stock)
+        $productSql = "
+            SELECT product_id, name, price, stock_quantity, status
+            FROM products
+            WHERE product_id = :product_id
+              AND status = :status
+            LIMIT 1
+        ";
+        $productRow = db_fetch_one($pdo, $productSql, [
+            'product_id' => $postProductId,
+            'status'     => 'active',
+        ]);
+
+        if ($productRow === null) {
+            set_flash_message('error', 'This product is no longer available.');
+            redirect($cartPageUrl);
+        }
+
+        $availableStock = (int) $productRow['stock_quantity'];
+
+        if ($availableStock <= 0) {
+            set_flash_message('error', 'Sorry, "' . $productRow['name'] . '" is currently out of stock.');
+            redirect($cartPageUrl);
+        }
+
+        $existingCartQty = isset($_SESSION['cart'][$postProductId])
+            ? (int) $_SESSION['cart'][$postProductId]
+            : 0;
+
+        $newCartQty = $existingCartQty + $requestedQty;
+
+        if ($requestedQty > $availableStock || $newCartQty > $availableStock) {
+            if ($existingCartQty > 0) {
+                set_flash_message(
+                    'error',
+                    sprintf(
+                        'Cannot add %d more of "%s". Only %d available in stock and you already have %d in your cart.',
+                        $requestedQty,
+                        $productRow['name'],
+                        $availableStock,
+                        $existingCartQty
+                    )
+                );
+            } else {
+                set_flash_message(
+                    'error',
+                    sprintf('Cannot add %d of "%s". Only %d available in stock.', $requestedQty, $productRow['name'], $availableStock)
+                );
+            }
+            redirect($cartPageUrl);
+        }
+
+        $_SESSION['cart'][$postProductId] = $newCartQty;
+
+        set_flash_message(
+            'success',
+            sprintf('Added %d × %s to your cart.', $requestedQty, $productRow['name'])
+        );
+
+        $destUrl = $cartPageUrl;
+        if (!empty($_POST['return_url']) && !is_array($_POST['return_url'])) {
+            $candidateReturn = trim((string) $_POST['return_url']);
+            $parsed = parse_url($candidateReturn);
+            $candidatePath = $parsed['path'] ?? $candidateReturn;
+            if (strpos($candidatePath, BASE_URL) === 0 || (BASE_URL === '' && strpos($candidatePath, '/') === 0)) {
+                $destUrl = $candidateReturn;
+            } elseif (strpos($candidateReturn, 'customer/') === 0 || strpos($candidateReturn, 'index.php') === 0) {
+                $destUrl = site_url($candidateReturn);
+            }
+        }
+
+        redirect($destUrl);
+    }
+
     set_flash_message('error', 'Unrecognised cart action.');
     redirect($cartPageUrl);
 }
@@ -276,11 +362,14 @@ require_once dirname(__DIR__) . '/includes/header.php';
                 <span class="eyebrow">Empty Selection</span>
                 <h2 class="empty-state-title">Your cart is quiet.</h2>
                 <p class="empty-state-text">
-                    You have not added any matcha powders, ceramic vessels, or gift sets to your cart yet.
+                    You have not added any matcha powders, specialty teas, freshly prepared drinks, or ceramic vessels to your cart yet.
                 </p>
                 <div class="empty-state-actions">
                     <a href="<?php echo e(site_url('customer/products.php')); ?>" class="btn btn-primary">
-                        Continue Shopping
+                        Shop Packaged Teas
+                    </a>
+                    <a href="<?php echo e(site_url('customer/drinks.php')); ?>" class="btn btn-outline" style="margin-left: 0.75rem;">
+                        Order Fresh Drinks
                     </a>
                 </div>
             </div>
@@ -432,9 +521,15 @@ require_once dirname(__DIR__) . '/includes/header.php';
 
                     <!-- Bottom Bar: Continue Shopping & Clear Cart -->
                     <div class="cart-footer-bar">
-                        <a href="<?php echo e(site_url('customer/products.php')); ?>" class="cart-continue-link">
-                            Continue Shopping
-                        </a>
+                        <div class="cart-continue-group">
+                            <a href="<?php echo e(site_url('customer/products.php')); ?>" class="cart-continue-link">
+                                &larr; Continue Shopping
+                            </a>
+                            <span class="cart-link-sep" style="margin: 0 0.5rem; color: var(--color-border);">&bull;</span>
+                            <a href="<?php echo e(site_url('customer/drinks.php')); ?>" class="cart-continue-link">
+                                Order Fresh Drinks &rarr;
+                            </a>
+                        </div>
 
                         <!-- Clear Cart POST Form -->
                         <form action="<?php echo e($cartPageUrl); ?>" method="post" class="clear-cart-form" data-clear-cart-form>
@@ -472,14 +567,14 @@ require_once dirname(__DIR__) . '/includes/header.php';
                             </div>
                         </dl>
 
-                        <!-- Prototype Promo Code Row (Preview Only) -->
-                        <div class="cart-promo-row" aria-label="Promotional code preview">
-                            <label for="cart-promo-input" class="visually-hidden">Promo code (prototype preview)</label>
+                        <!-- Promo Code Row -->
+                        <div class="cart-promo-row" aria-label="Promotional code">
+                            <label for="cart-promo-input" class="visually-hidden">Promo code</label>
                             <input
                                 type="text"
                                 id="cart-promo-input"
                                 class="cart-promo-input"
-                                placeholder="Promo code (prototype preview)"
+                                placeholder="Promo code (optional)"
                                 disabled
                                 aria-disabled="true"
                             >
@@ -503,7 +598,7 @@ require_once dirname(__DIR__) . '/includes/header.php';
                             <?php endif; ?>
                         </div>
 
-                        <!-- Prototype Trust Badges Row -->
+                        <!-- Trust Badges Row -->
                         <div class="cart-trust-badges" aria-label="Secure checkout and shipping assurances">
                             <span class="cart-trust-icon" title="Secure Checkout">
                                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">

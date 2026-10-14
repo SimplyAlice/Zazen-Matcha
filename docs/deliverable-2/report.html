@@ -1,0 +1,2233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Eduvos ITECA3-34 Deliverable 2 Report — Zazen Matcha &amp; Tea Co.</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 18mm 16mm 18mm 16mm;
+  }
+  @page :left {
+    @bottom-left { content: "ITECA3-34 Deliverable 2 — Zazen Matcha"; font-size: 8pt; color: #666; }
+    @bottom-right { content: counter(page); font-size: 8pt; color: #666; }
+  }
+  @page :right {
+    @bottom-left { content: "ITECA3-34 Deliverable 2 — Zazen Matcha"; font-size: 8pt; color: #666; }
+    @bottom-right { content: counter(page); font-size: 8pt; color: #666; }
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #1a201c;
+    background: #ffffff;
+    line-height: 1.55;
+    font-size: 10pt;
+    margin: 0;
+    padding: 0;
+  }
+
+  .cover-page {
+    page-break-after: always;
+    break-after: page;
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40px 30px;
+    border: 3px double #2d3a2e;
+    background: #fbfcfb;
+    margin-bottom: 20px;
+  }
+  .cover-header {
+    border-bottom: 2px solid #2d3a2e;
+    padding-bottom: 20px;
+  }
+  .cover-institution {
+    font-size: 14pt;
+    font-weight: 700;
+    color: #2d3a2e;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 6px 0;
+  }
+  .cover-module {
+    font-size: 11pt;
+    color: #4a5d4e;
+    margin: 0;
+    font-weight: 600;
+  }
+  .cover-body {
+    margin: 40px 0;
+  }
+  .cover-title {
+    font-size: 26pt;
+    color: #1a231b;
+    line-height: 1.2;
+    margin: 0 0 12px 0;
+    font-weight: 800;
+  }
+  .cover-subtitle {
+    font-size: 14pt;
+    color: #4a5d4e;
+    margin: 0 0 24px 0;
+    font-weight: 500;
+  }
+  .cover-badge {
+    display: inline-block;
+    background: #2d3a2e;
+    color: #ffffff;
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 10pt;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .cover-meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 30px;
+    border-top: 1px solid #d0d7d1;
+    padding-top: 20px;
+    font-size: 9.5pt;
+  }
+  .cover-meta-item strong {
+    color: #2d3a2e;
+    display: block;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+  }
+  .cover-footer {
+    border-top: 1px solid #2d3a2e;
+    padding-top: 12px;
+    font-size: 8.5pt;
+    color: #556357;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .page-break {
+    page-break-after: always;
+    break-after: page;
+  }
+
+  h1, h2, h3, h4 {
+    color: #2d3a2e;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+  h1 {
+    font-size: 18pt;
+    border-bottom: 2px solid #2d3a2e;
+    padding-bottom: 4px;
+    margin-top: 24pt;
+    margin-bottom: 12pt;
+  }
+  h2 {
+    font-size: 13pt;
+    border-bottom: 1px solid #4a5d4e;
+    padding-bottom: 3px;
+    margin-top: 18pt;
+    margin-bottom: 10pt;
+  }
+  h3 {
+    font-size: 11pt;
+    margin-top: 14pt;
+    margin-bottom: 6pt;
+    color: #1a231b;
+  }
+  h4 {
+    font-size: 10pt;
+    margin-top: 10pt;
+    margin-bottom: 4pt;
+    color: #333;
+  }
+
+  p { margin: 0 0 8pt 0; text-align: justify; }
+  ul, ol { margin: 0 0 10pt 0; padding-left: 20px; }
+  li { margin-bottom: 3pt; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10pt 0 14pt 0;
+    font-size: 8.5pt;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  th, td {
+    border: 1px solid #c8d1c9;
+    padding: 5pt 7pt;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background-color: #2d3a2e;
+    color: #ffffff;
+    font-weight: 600;
+  }
+  tr:nth-child(even) td {
+    background-color: #f7f9f7;
+  }
+
+  pre, code {
+    font-family: "Cascadia Code", Consolas, "Courier New", monospace;
+    font-size: 8pt;
+  }
+  code {
+    background: #edf2ee;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #1f3824;
+  }
+  pre {
+    background: #f5f8f5;
+    border: 1px solid #cad6cb;
+    border-left: 4px solid #2d3a2e;
+    padding: 8pt 10pt;
+    border-radius: 3px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin: 8pt 0 12pt 0;
+    line-height: 1.4;
+  }
+  pre code {
+    background: none;
+    padding: 0;
+    color: #111;
+  }
+
+  .callout {
+    background-color: #f0f5f1;
+    border-left: 4px solid #4a5d4e;
+    padding: 8pt 12pt;
+    margin: 10pt 0;
+    border-radius: 2px;
+    font-size: 9pt;
+    break-inside: avoid;
+  }
+  .callout strong { color: #2d3a2e; }
+
+  figure {
+    margin: 12pt 0 16pt 0;
+    text-align: center;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  figure img {
+    max-width: 95%;
+    max-height: 480px;
+    width: auto;
+    height: auto;
+    border: 1px solid #cbd5cc;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    display: inline-block;
+  }
+  figure.diagram-figure {
+    margin: 10pt 0 14pt 0;
+    text-align: center;
+  }
+  figure.diagram-figure img {
+    max-width: 98%;
+    width: 100%;
+    max-height: 520px;
+    border: 1px solid #cbd5cc;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    background-color: #ffffff;
+    display: inline-block;
+  }
+  figcaption {
+    font-size: 8pt;
+    color: #4a5d4e;
+    margin-top: 5pt;
+    font-style: italic;
+    font-weight: 600;
+  }
+
+  .toc {
+    background: #fbfcfb;
+    border: 1px solid #d2ded3;
+    padding: 14pt 18pt;
+    margin-bottom: 20pt;
+    break-inside: avoid;
+  }
+  .toc-title {
+    font-size: 12pt;
+    font-weight: 700;
+    color: #2d3a2e;
+    margin-top: 0;
+    margin-bottom: 10pt;
+    border-bottom: 1px solid #2d3a2e;
+    padding-bottom: 4pt;
+  }
+  .toc ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+  .toc li {
+    margin-bottom: 4pt;
+    font-size: 9pt;
+  }
+  .toc a {
+    color: #1a201c;
+    text-decoration: none;
+  }
+  .toc-mark {
+    float: right;
+    color: #2d3a2e;
+    font-weight: 600;
+  }
+
+  .tag-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 7.5pt;
+    font-weight: 700;
+  }
+  .tag-success { background: #d4edda; color: #155724; }
+  .tag-warning { background: #fff3cd; color: #856404; }
+  .tag-info    { background: #d1ecf1; color: #0c5460; }
+
+  /* Enhanced CRC Card Styles */
+  .crc-cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10pt;
+    margin: 12pt 0 16pt 0;
+  }
+  .crc-card {
+    border: 1.5px solid #2d3a2e;
+    border-radius: 4px;
+    background: #ffffff;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .crc-card-header {
+    background-color: #2d3a2e;
+    color: #ffffff;
+    padding: 5pt 9pt;
+    font-size: 9.5pt;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .crc-card-type {
+    font-size: 8pt;
+    font-weight: 400;
+    color: #c5d6c7;
+    font-style: italic;
+  }
+  .crc-card-body {
+    display: flex;
+  }
+  .crc-card-col-resp {
+    flex: 3;
+    padding: 7pt 9pt;
+    border-right: 1px solid #d4ded5;
+  }
+  .crc-card-col-collab {
+    flex: 2;
+    padding: 7pt 9pt;
+    background: #fbfcfb;
+  }
+  .crc-card-col-title {
+    font-size: 7.5pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #4a5d4e;
+    margin: 0 0 4pt 0;
+    border-bottom: 1px dashed #cad6cb;
+    padding-bottom: 2pt;
+  }
+  .crc-card-list {
+    margin: 0;
+    padding-left: 14px;
+    font-size: 8pt;
+  }
+  .crc-card-list li {
+    margin-bottom: 2pt;
+  }
+  .crc-tag {
+    display: inline-block;
+    background: #edf2ee;
+    color: #1f3824;
+    border: 1px solid #cad6cb;
+    border-radius: 3px;
+    padding: 1px 4px;
+    font-size: 7.5pt;
+    margin: 1px 2px;
+    font-family: "Cascadia Code", Consolas, monospace;
+  }
+  .authorship-declaration-box {
+    border: 2px solid #2d3a2e;
+    background: #fbfcfb;
+    padding: 12pt 16pt;
+    margin: 14pt 0;
+    border-radius: 4px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+</style>
+</head>
+<body>
+
+<!-- ====================================================================== -->
+<!-- COVER PAGE -->
+<!-- ====================================================================== -->
+<div class="cover-page">
+  <div class="cover-header">
+    <div class="cover-institution">Eduvos Higher Education</div>
+    <div class="cover-module">ITECA3-34 — Web Development and e-Commerce Technologies</div>
+  </div>
+
+  <div class="cover-body">
+    <div class="cover-title">Zazen Matcha &amp; Tea Co.</div>
+    <div class="cover-subtitle">Full-Stack Database-Driven e-Commerce Web Platform</div>
+    <span class="cover-badge">DELIVERABLE 2 COMPREHENSIVE ACADEMIC REPORT — 65 MARKS</span>
+
+    <div class="cover-meta-grid">
+      <div class="cover-meta-item">
+        <strong>Student Author</strong>
+        Alice Matarise
+      </div>
+      <div class="cover-meta-item">
+        <strong>Student ID / Number</strong>
+        ct.2023.h4c6x5
+      </div>
+      <div class="cover-meta-item">
+        <strong>Live Public Website</strong>
+        <a href="https://zazen-matcha.alwaysdata.net/" style="color: #2d3a2e; font-weight: 700; text-decoration: underline;">https://zazen-matcha.alwaysdata.net/</a>
+      </div>
+      <div class="cover-meta-item">
+        <strong>Academic Module</strong>
+        ITECA3-34 Web Development and e-Commerce Technologies
+      </div>
+      <div class="cover-meta-item">
+        <strong>Assessment Component</strong>
+        Deliverable 2: Prototype, System Design &amp; Implementation (65 Marks)
+      </div>
+      <div class="cover-meta-item">
+        <strong>Repository Working Directory</strong>
+        <code>C:\xampp\htdocs\ZAZEN-MATCHA</code>
+      </div>
+      <div class="cover-meta-item">
+        <strong>Target Stack Environment</strong>
+        Apache 2.4.58 / PHP 8.0.30 / MariaDB 10.4.32 (InnoDB)
+      </div>
+      <div class="cover-meta-item">
+        <strong>Architectural Architecture</strong>
+        Custom Modular PHP + Normalized MySQL (100% CMS Prohibition Compliant)
+      </div>
+      <div class="cover-meta-item">
+        <strong>Verification Status</strong>
+        Live HTTP 200 OK Smoke Tested &bull; 7 Verified Table Screenshots &bull; Pristine Git HEAD
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-footer">
+    <span>Submission Date: October 2026</span>
+    <span>Cape Town, South Africa</span>
+  </div>
+</div>
+
+<!-- ====================================================================== -->
+<!-- TABLE OF CONTENTS -->
+<!-- ====================================================================== -->
+<div class="toc page-break">
+  <div class="toc-title">Table of Contents &amp; Rubric Mark Allocation</div>
+  <ul>
+    <li><strong>1. Executive Summary &amp; Project Overview</strong></li>
+    <li><strong>2. Chapter 1: Introduction</strong> <span class="toc-mark">5 Marks</span>
+      <ul>
+        <li>2.1 Business Background &amp; Brand Vision</li>
+        <li>2.2 Problem Statement &amp; Market Opportunity</li>
+        <li>2.3 Project Objectives &amp; Technical Scope</li>
+        <li>2.4 Target Audience &amp; User Personas</li>
+        <li>2.5 Technology Stack Justification &amp; CMS Prohibition Compliance</li>
+      </ul>
+    </li>
+    <li><strong>3. Chapter 2: User Interface Prototyping</strong> <span class="toc-mark">12 Marks</span>
+      <ul>
+        <li>3.1 Customer Storefront Prototype (4 Desktop Mockups) <span class="toc-mark">6 Marks</span></li>
+        <li>3.2 Administrator Management Console Prototype (11 Screen Specifications) <span class="toc-mark">6 Marks</span></li>
+        <li>3.3 Multi-Device Adaptation &amp; Responsive Layout Rules</li>
+        <li>3.4 Client Evaluation &amp; Stakeholder Sign-Off Status</li>
+      </ul>
+    </li>
+    <li><strong>4. Chapter 3: System Design &amp; Architecture</strong> <span class="toc-mark">15 Marks</span>
+      <ul>
+        <li>4.1 Class Responsibility Collaborator (CRC) Cards <span class="toc-mark">3 Marks</span></li>
+        <li>4.2 Enhanced Entity Relationship Diagram (EERD &bull; Figure 3.1) <span class="toc-mark">3 Marks</span></li>
+        <li>4.3 System Context Diagram (Level 0 DFD &bull; Figure 3.2) <span class="toc-mark">3 Marks</span></li>
+        <li>4.4 Level 1 Data Flow Diagram (DFD &bull; Figure 3.3) <span class="toc-mark">3 Marks</span></li>
+        <li>4.5 UML Use Case Diagram &amp; Actor Hierarchy (Figure 3.4) <span class="toc-mark">3 Marks</span></li>
+        <li>4.6 Relational Database Design &amp; Data Dictionary</li>
+      </ul>
+    </li>
+    <li><strong>5. Chapter 4: Implementation &amp; Coding Evidence</strong> <span class="toc-mark">12 Marks</span>
+      <ul>
+        <li>5.1 Sample PHP Code: Atomic Transaction &amp; Row-Level Concurrency Control <span class="toc-mark">3 Marks</span></li>
+        <li>5.2 Sample HTML5 Code: Semantic Structure &amp; CSRF Form Security <span class="toc-mark">3 Marks</span></li>
+        <li>5.3 Sample JavaScript Code: DOM Stepper &amp; Progressive Enhancement <span class="toc-mark">3 Marks</span></li>
+        <li>5.4 Sample CSS3 Code: Design Tokens &amp; Responsive Media Queries <span class="toc-mark">3 Marks</span></li>
+      </ul>
+    </li>
+    <li><strong>6. Chapter 5: Relational Database Structure &amp; Screenshots</strong> <span class="toc-mark">2 Marks</span>
+      <ul>
+        <li>6.1 Database Architecture &amp; Seven-Table Overview</li>
+        <li>6.2 MySQL Table Structure Screenshot Evidence (Figures 5.1–5.7)</li>
+      </ul>
+    </li>
+    <li><strong>7. Chapter 6: E-Commerce Functionality Audit</strong> <span class="toc-mark">16 Marks</span>
+      <ul>
+        <li>7.1 Customer Storefront Capabilities (Verified GET &amp; Source Audits) <span class="toc-mark">8 Marks</span></li>
+        <li>7.2 Administrator Portal Capabilities (Verified Authentication &amp; CRUD) <span class="toc-mark">8 Marks</span></li>
+      </ul>
+    </li>
+    <li><strong>8. Chapter 7: System Limitations &amp; Proposed Enhancements</strong></li>
+    <li><strong>9. Chapter 8: Conclusion &amp; Learning Reflection</strong> <span class="toc-mark">3 Marks</span></li>
+    <li><strong>10. Academic References</strong></li>
+    <li><strong>Appendices: Complete Mermaid System Design Source Specifications</strong></li>
+  </ul>
+</div>
+
+<!-- ====================================================================== -->
+<!-- 1. EXECUTIVE SUMMARY -->
+<!-- ====================================================================== -->
+<h1>1. Executive Summary &amp; Project Overview</h1>
+<p>
+  This report documents the architectural design, pre-development prototyping, relational database modelling, software implementation, and functional verification for <strong>Zazen Matcha &amp; Tea Co.</strong>, a bespoke full-stack e-commerce web platform engineered for the Eduvos ITECA3-34 Web Development and e-Commerce Technologies Deliverable 2 assignment.
+</p>
+<p>
+  In strict compliance with academic instructions, the application has been engineered entirely with custom <strong>HTML5, CSS3, vanilla JavaScript (ES6+), PHP 8.0, and MariaDB/MySQL</strong>. Zero third-party Content Management Systems (CMS), website builders, or monolithic application frameworks (such as WordPress, WooCommerce, Shopify, or Laravel) were utilized.
+</p>
+<p>
+  The software solution provides a dual-faceted operational environment, publicly deployed and operational at <a href="https://zazen-matcha.alwaysdata.net/" style="font-weight: 700; color: #2d3a2e;">https://zazen-matcha.alwaysdata.net/</a>:
+</p>
+<ol>
+  <li><strong>Customer-Facing Storefront:</strong> A responsive digital studio enabling visitors to explore single-origin Japanese ceremonial green teas, examine handcrafted ceramic teaware, configure dynamic shopping carts, and execute simulated checkout orders protected by atomic database transactions, pessimistic row locking, and CSRF tokens.</li>
+  <li><strong>Administrator Management Console:</strong> An isolated operational portal allowing authenticated store managers to oversee real-time revenue analytics, maintain product catalog inventories, configure category taxonomies, inspect chronological customer orders, and verify database connection health.</li>
+</ol>
+
+<!-- ====================================================================== -->
+<!-- 2. CHAPTER 1: INTRODUCTION -->
+<!-- ====================================================================== -->
+<h1>2. Chapter 1: Introduction (5 Marks)</h1>
+
+<h2>2.1 Business Background &amp; Brand Vision</h2>
+<p>
+  Zazen Matcha &amp; Tea Co. is a boutique specialty tea purveyor conceptually established in Cape Town, South Africa. The company specializes in the sourcing and ethical distribution of single-origin, shade-grown organic tencha leaves harvested in the hillside tea gardens of Uji, Kyoto Prefecture, Japan.
+</p>
+<p>
+  In traditional Japanese tea culture, <em>Zazen</em> (seated meditation) embodies mindfulness, clarity, and intentional calm. The enterprise translates this ancient heritage into contemporary everyday rituals for urban professionals, wellness practitioners, and discerning tea enthusiasts. Unlike mass-market culinary matcha powder often adulterated with fillers, sweeteners, or industrial food colorants, Zazen Matcha delivers stone-milled, pure ceremonial green tea rich in L-theanine and clean caffeine.
+</p>
+
+<h2>2.2 Problem Statement &amp; Market Opportunity</h2>
+<p>
+  The South African specialty beverage sector has witnessed surging consumer demand for functional, health-promoting alternatives to commercial coffee and energy drinks. However, consumers encounter significant friction in the domestic market:
+</p>
+<ul>
+  <li><strong>Opacity Regarding Grade and Provenance:</strong> Commercial retailers frequently label low-grade culinary powder as "ceremonial", leading to bitter taste profiles and consumer disillusionment.</li>
+  <li><strong>Fragmented Sourcing of Teaware:</strong> Novice consumers struggle to find curated, authentic preparation tools (such as hand-carved 80-tine bamboo <em>chasen</em> whisks, stoneware <em>chawan</em> bowls, and bamboo <em>chashaku</em> scoops) paired with educational preparation guides.</li>
+  <li><strong>Absence of Dedicated Digital Platforms:</strong> Existing domestic options are either limited to generic marketplace listings or locked inside complex, slow CMS templates lacking bespoke aesthetic mindfulness and mobile responsiveness.</li>
+</ul>
+
+<h2>2.3 Project Objectives &amp; Technical Scope</h2>
+<p>
+  The primary technical and operational objectives of the Deliverable 2 project comprise:
+</p>
+<ul>
+  <li><strong>Custom Software Architecture:</strong> Develop an end-to-end, database-driven web application using raw PHP 8.0 and MySQL without prohibited CMS platforms.</li>
+  <li><strong>Responsive Visual Prototyping:</strong> Formulate intuitive user interface prototypes compatible across smartphones, tablets, and desktop viewports.</li>
+  <li><strong>Formal System Modelling:</strong> Produce academic system design artefacts including CRC cards, an Enhanced Entity Relationship Diagram (EERD), Context Diagram, Level 1 Data Flow Diagram (DFD), and UML Use Case specifications.</li>
+  <li><strong>Transactional Reliability &amp; Concurrency:</strong> Implement atomic database transactions with pessimistic row-locking (<code>SELECT ... FOR UPDATE</code>) during checkout to eliminate inventory race conditions and prevent overselling.</li>
+  <li><strong>Security &amp; Defensive Engineering:</strong> Protect the platform against common web application vulnerabilities (OWASP Top 10) through PDO prepared statements (SQL injection prevention), <code>htmlspecialchars</code> output encoding (Cross-Site Scripting prevention), cryptographically random session tokens (CSRF prevention), and adaptive Bcrypt password hashing.</li>
+</ul>
+
+<h2>2.4 Target Audience &amp; User Personas</h2>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">User Persona</th>
+      <th style="width: 35%;">Profile &amp; Behavioral Motivations</th>
+      <th style="width: 40%;">Primary System Requirements</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Persona A: The Daily Ritual Practitioner</strong></td>
+      <td>Experienced consumers seeking high-grade ceremonial matcha (30g tins) for morning whisking. Prioritizes harvest transparency, consistent quality, and streamlined reordering.</td>
+      <td>Quick re-ordering, order history tracking, transparent live stock indicators, and swift guest/registered checkout.</td>
+    </tr>
+    <tr>
+      <td><strong>Persona B: The Health-Conscious Novice</strong></td>
+      <td>Beginners transitioning from coffee to matcha for jitter-free focus and sustained energy. Seeks educational brewing guidance and curated preparation gear.</td>
+      <td>Comprehensive origin storytelling, step-by-step water temperature guidelines, bundled starter sets, and customer care inquiries.</td>
+    </tr>
+    <tr>
+      <td><strong>Persona C: The Store Administrator</strong></td>
+      <td>Commercial store operator requiring immediate operational oversight over inventory, orders, and sales performance.</td>
+      <td>Secure administrative authentication, dynamic KPI dashboard metrics, paginated catalog CRUD, low-stock warnings (&le; 10 units), and database health verification.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>2.5 Technology Stack Justification &amp; CMS Prohibition Compliance</h2>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 20%;">Architectural Layer</th>
+      <th style="width: 25%;">Selected Technology</th>
+      <th style="width: 40%;">Technical Justification</th>
+      <th style="width: 15%;">CMS Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Markup &amp; Semantics</strong></td>
+      <td>Semantic HTML5</td>
+      <td>Native semantic tags (<code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;footer&gt;</code>) guarantee screen-reader accessibility and clean DOM structure.</td>
+      <td><span class="tag-badge tag-success">COMPLIANT</span></td>
+    </tr>
+    <tr>
+      <td><strong>Presentation &amp; Layout</strong></td>
+      <td>Modern CSS3 (Grid / Flexbox)</td>
+      <td>Custom Properties (design tokens), CSS Grid, and media queries provide fluid responsiveness across mobile, tablet, and desktop without bulky third-party UI frameworks.</td>
+      <td><span class="tag-badge tag-success">COMPLIANT</span></td>
+    </tr>
+    <tr>
+      <td><strong>Client-Side Behaviour</strong></td>
+      <td>Vanilla JavaScript (ES6+)</td>
+      <td>Lightweight, vanilla IIFE scripts handle mobile drawer toggling, dynamic quantity steppers, dismissible alerts, and gallery thumbnail switching without library overhead.</td>
+      <td><span class="tag-badge tag-success">COMPLIANT</span></td>
+    </tr>
+    <tr>
+      <td><strong>Server-Side Runtime</strong></td>
+      <td>PHP 8.0 (Native Modular)</td>
+      <td>High-performance server scripting with strict typing, native Bcrypt hashing, secure session handling, and robust PDO database abstraction.</td>
+      <td><span class="tag-badge tag-success">COMPLIANT</span></td>
+    </tr>
+    <tr>
+      <td><strong>Database System</strong></td>
+      <td>MariaDB 10.4 / MySQL (InnoDB)</td>
+      <td>Relational database providing ACID transactions, foreign key constraints (<code>ON DELETE RESTRICT</code>), and <code>utf8mb4</code> character encoding.</td>
+      <td><span class="tag-badge tag-success">COMPLIANT</span></td>
+    </tr>
+    <tr>
+      <td><strong>Web Server Environment</strong></td>
+      <td>Apache 2.4.58 (XAMPP Windows)</td>
+      <td>Proven local execution environment providing URL rewrite support, SSL/TLS handling, and native PHP integration.</td>
+      <td><span class="tag-badge tag-success">COMPLIANT</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ====================================================================== -->
+<!-- 3. CHAPTER 2: PROTOTYPING -->
+<!-- ====================================================================== -->
+<div class="page-break"></div>
+<h1>3. Chapter 2: User Interface Prototyping (12 Marks)</h1>
+
+<p>
+  The prototyping phase established the visual identity, wireframe layout, and user journeys prior to full-stack code implementation. All prototype artefacts are preserved in <code>docs/prototypes/</code>.
+</p>
+
+<h2>3.1 Customer Storefront Prototype (6 Marks)</h2>
+<p>
+  The pre-development customer prototype is documented in <code>docs/prototypes/customer/README.md</code> and supported by four authentic high-fidelity desktop mockups captured during the design phase:
+</p>
+
+<figure>
+  <img src="../prototypes/customer/01-home-page-prototype.jpg" alt="Screen 01: Storefront Homepage Prototype">
+  <figcaption>Figure 2.1: Customer Storefront Prototype — Homepage Hero &amp; Brand Story (<code>01-home-page-prototype.jpg</code>)</figcaption>
+</figure>
+<p>
+  <strong>Screen 01: Storefront Homepage:</strong> Establishes the editorial tone through a high-resolution hero banner (<em>"Mindful Matcha. Every Day."</em>), primary call-to-action buttons (<em>"Shop Matcha"</em>, <em>"Explore Our Story"</em>), a three-pillar value grid (<em>100% Ceremonial Grade</em>, <em>Mindfully Sourced</em>, <em>Calm Sustained Energy</em>), visual category cards, and the Uji hillside origin narrative.
+</p>
+
+<figure>
+  <img src="../prototypes/customer/02-shop-catalog-prototype.png" alt="Screen 02: Shop / Catalog Browsing Prototype">
+  <figcaption>Figure 2.2: Customer Storefront Prototype — Product Catalog Grid &amp; Filters (<code>02-shop-catalog-prototype.png</code>)</figcaption>
+</figure>
+<p>
+  <strong>Screen 02: Shop / Catalog Browsing:</strong> Presents the complete product range via a responsive 4-column card grid. Incorporates horizontal category filter pills (<em>All Products</em>, <em>Ceremonial Matcha</em>, <em>Everyday Matcha</em>, <em>Kits &amp; Starter Sets</em>, <em>Teaware &amp; Accessories</em>), search input, sorting controls, star review ratings, ZAR pricing, quick add-to-cart buttons, and numbered pagination.
+</p>
+
+<div class="page-break"></div>
+
+<figure>
+  <img src="../prototypes/customer/03-product-details-prototype.png" alt="Screen 03: Product Details &amp; Brewing Ritual Prototype">
+  <figcaption>Figure 2.3: Customer Storefront Prototype — Product Detail View &amp; Brewing Ritual (<code>03-product-details-prototype.png</code>)</figcaption>
+</figure>
+<p>
+  <strong>Screen 03: Product Details &amp; Brewing Ritual:</strong> Focuses on consumer confidence and education. Features hierarchical breadcrumbs, a multi-image gallery with selectable thumbnail views, verified review scores (124 reviews, 5.0 stars), inline quantity steppers (<code>- 1 +</code>), dual purchase buttons (<em>Add to Cart</em>, <em>Buy Now</em>), expandable preparation accordions, and related teaware recommendations.
+</p>
+
+<figure>
+  <img src="../prototypes/customer/04-shopping-cart-prototype.png" alt="Screen 04: Shopping Cart Page Prototype">
+  <figcaption>Figure 2.4: Customer Storefront Prototype — Shopping Cart Management (<code>04-shopping-cart-prototype.png</code>)</figcaption>
+</figure>
+<p>
+  <strong>Screen 04: Shopping Cart Page:</strong> Illustrates session shopping bag management with tabular item rows, unit prices, interactive quantity steppers, line totals, item removal controls, promo code inputs, and a floating order summary card with trust badges.
+</p>
+
+<h2>3.2 Administrator Management Console Prototype (6 Marks)</h2>
+<p>
+  The administrator management interface is documented in <code>docs/prototypes/admin/README.md</code> across eleven operational screen specifications:
+</p>
+<ul>
+  <li><strong>Authentication Portal (Screen A-01):</strong> Dedicated admin login form isolated from customer sessions.</li>
+  <li><strong>Operations Dashboard (Screen A-02):</strong> Dynamic KPI metrics grid (Total Products, Active Catalog, Customers, Orders, Gross Revenue) and live feed of recent customer orders.</li>
+  <li><strong>Catalog &amp; Category Management (Screens A-03 to A-08):</strong> Paginated inventory data tables with automated low-stock warnings (&le; 10 units), dynamic category assignment, and case-insensitive uniqueness checks.</li>
+  <li><strong>Order Oversight (Screens A-09 &amp; A-10):</strong> Chronological order review displaying customer delivery snapshots and historical line item pricing.</li>
+  <li><strong>Customer Directory &amp; System Health (Screens A-11 to A-13):</strong> Customer oversight and live database connectivity health verification.</li>
+</ul>
+
+<div class="callout">
+  <strong>Delineation of Implemented vs. Proposed Features:</strong><br>
+  <em>Implemented:</em> Admin Sign In, Session Guard, Dashboard Metrics, Product CRUD, Category CRUD, Customer Directory, Orders Listing, Order Details Breakdown, and Database Health Check.<br>
+  <em>Proposed / Future Enhancement:</em> Status transition mutation on <code>admin/order-details.php</code> (currently read-only; admin status dropdowns proposed for Deliverable 3).
+</div>
+
+<h2>3.3 Multi-Device Adaptation &amp; Responsive Layout Rules</h2>
+<p>
+  While the initial supplied mockups targeted desktop viewports, responsive adaptation for tablet (769px &le; <em>w</em> &le; 960px) and mobile (<em>w</em> &le; 768px) viewports was codified in <code>css/style.css</code>:
+</p>
+<ul>
+  <li>Collapsible hamburger mobile menu (<code>#nav-toggle</code>) transitioning into an absolute dropdown drawer (<code>.nav-wrapper.is-open</code>).</li>
+  <li>Fluid single-column card stacking on mobile viewports for product grids and admin metric panels.</li>
+  <li>Touch-friendly quantity stepper tap targets (&ge; 44px) and full-width checkout action buttons.</li>
+</ul>
+
+<h2>3.4 Client Evaluation &amp; Stakeholder Sign-Off Status</h2>
+<p>
+  In accordance with academic ethics, client approval has not been fabricated or assumed. A formal, unpopulated sign-off instrument has been generated at <code>docs/prototypes/client-approval-template.md</code>. This template captures client information, prototype evaluation criteria across six dimensions, change request logs, and formal signature authorization fields for subsequent stakeholder execution.
+</p>
+
+<!-- ====================================================================== -->
+<!-- 4. CHAPTER 3: SYSTEM DESIGN & ARCHITECTURE -->
+<!-- ====================================================================== -->
+<div class="page-break"></div>
+<h1>4. Chapter 3: System Design &amp; Architecture (15 Marks)</h1>
+
+<p>
+  The system design phase generated five core architectural models and a comprehensive data dictionary, saved in <code>docs/diagrams/</code> and <code>docs/deliverable-2/</code>.
+</p>
+
+<div class="callout">
+  <strong>Design Model Delivery Specification:</strong> All system design models are maintained as version-controlled Markdown Mermaid source text files in <code>docs/diagrams/</code> and rendered as standalone high-resolution vector diagrams (SVG) in <code>docs/diagrams/rendered/</code>. Below, each design model is accompanied by its rendered visual diagram (Figures 3.1 through 3.4), structural breakdown, and verification against the live codebase. Full raw Mermaid source codes are preserved in Appendices A through D.
+</div>
+
+<h2>4.1 Class Responsibility Collaborator (CRC) Cards (3 Marks)</h2>
+<p>
+  Documented in <code>docs/diagrams/crc-cards.md</code>. To reconcile procedural PHP implementation with academic object-oriented domain modelling, the CRC cards explicitly distinguish conceptual domain entities and architectural service collaborators:
+</p>
+
+<div class="crc-cards-container">
+  <!-- Card 1: Customer -->
+  <div class="crc-card">
+    <div class="crc-card-header">
+      <span>Card 1: Customer</span>
+      <span class="crc-card-type">Domain Entity &bull; Table: customers</span>
+    </div>
+    <div class="crc-card-body">
+      <div class="crc-card-col-resp">
+        <div class="crc-card-col-title">Responsibilities</div>
+        <ul class="crc-card-list">
+          <li>Maintain personal customer identity (first name, last name, email, phone).</li>
+          <li>Store delivery address details (street, city, province, postal code).</li>
+          <li>Store secure credential hash generated via <code>password_hash()</code>.</li>
+          <li>Link and trace historical purchase orders.</li>
+        </ul>
+      </div>
+      <div class="crc-card-col-collab">
+        <div class="crc-card-col-title">Collaborators</div>
+        <span class="crc-tag">DatabaseManager</span>
+        <span class="crc-tag">AuthenticationGuard</span>
+        <span class="crc-tag">Order</span>
+        <span class="crc-tag">SecurityHelper</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 2: Administrator -->
+  <div class="crc-card">
+    <div class="crc-card-header">
+      <span>Card 2: Administrator</span>
+      <span class="crc-card-type">Domain Entity &bull; Table: admins</span>
+    </div>
+    <div class="crc-card-body">
+      <div class="crc-card-col-resp">
+        <div class="crc-card-col-title">Responsibilities</div>
+        <ul class="crc-card-list">
+          <li>Maintain administrator identity credentials (name, email).</li>
+          <li>Store secure administrator credential hash (Bcrypt).</li>
+          <li>Enforce independent administrative session privileges.</li>
+          <li>Oversee catalog items, product categories, and order fulfillment.</li>
+        </ul>
+      </div>
+      <div class="crc-card-col-collab">
+        <div class="crc-card-col-title">Collaborators</div>
+        <span class="crc-tag">DatabaseManager</span>
+        <span class="crc-tag">AuthenticationGuard</span>
+        <span class="crc-tag">Product</span>
+        <span class="crc-tag">Category</span>
+        <span class="crc-tag">Order</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 3: Category -->
+  <div class="crc-card">
+    <div class="crc-card-header">
+      <span>Card 3: Category</span>
+      <span class="crc-card-type">Domain Entity &bull; Table: categories</span>
+    </div>
+    <div class="crc-card-body">
+      <div class="crc-card-col-resp">
+        <div class="crc-card-col-title">Responsibilities</div>
+        <ul class="crc-card-list">
+          <li>Classify and group related tea and teaware products.</li>
+          <li>Enforce unique naming constraint (<code>uq_categories_name</code>).</li>
+          <li>Provide editorial taxonomy descriptions for catalog filtering.</li>
+        </ul>
+      </div>
+      <div class="crc-card-col-collab">
+        <div class="crc-card-col-title">Collaborators</div>
+        <span class="crc-tag">Product</span>
+        <span class="crc-tag">DatabaseManager</span>
+        <span class="crc-tag">Administrator</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 4: Product -->
+  <div class="crc-card">
+    <div class="crc-card-header">
+      <span>Card 4: Product</span>
+      <span class="crc-card-type">Domain Entity &bull; Table: products</span>
+    </div>
+    <div class="crc-card-body">
+      <div class="crc-card-col-resp">
+        <div class="crc-card-col-title">Responsibilities</div>
+        <ul class="crc-card-list">
+          <li>Maintain product identity, title, description, price, stock, and image.</li>
+          <li>Provide authoritative unit pricing to shopping cart and order line items.</li>
+          <li>Track stock levels and enforce low-stock warning thresholds (&le; 10 units).</li>
+          <li>Support atomic inventory decrements with concurrency row-locking.</li>
+        </ul>
+      </div>
+      <div class="crc-card-col-collab">
+        <div class="crc-card-col-title">Collaborators</div>
+        <span class="crc-tag">Category</span>
+        <span class="crc-tag">ShoppingCart</span>
+        <span class="crc-tag">OrderItem</span>
+        <span class="crc-tag">DatabaseManager</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 5: Order -->
+  <div class="crc-card">
+    <div class="crc-card-header">
+      <span>Card 5: Order</span>
+      <span class="crc-card-type">Domain Entity &bull; Table: orders</span>
+    </div>
+    <div class="crc-card-body">
+      <div class="crc-card-col-resp">
+        <div class="crc-card-col-title">Responsibilities</div>
+        <ul class="crc-card-list">
+          <li>Record order header with unique order ID and timestamp.</li>
+          <li>Preserve immutable shipping address snapshot at the moment of sale.</li>
+          <li>Record financial totals (subtotal, shipping, grand total) in ZAR.</li>
+          <li>Store simulated payment method and track fulfillment status.</li>
+        </ul>
+      </div>
+      <div class="crc-card-col-collab">
+        <div class="crc-card-col-title">Collaborators</div>
+        <span class="crc-tag">Customer</span>
+        <span class="crc-tag">OrderItem</span>
+        <span class="crc-tag">ShoppingCart</span>
+        <span class="crc-tag">DatabaseManager</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 6: OrderItem -->
+  <div class="crc-card">
+    <div class="crc-card-header">
+      <span>Card 6: OrderItem</span>
+      <span class="crc-card-type">Domain Entity &bull; Table: order_items</span>
+    </div>
+    <div class="crc-card-body">
+      <div class="crc-card-col-resp">
+        <div class="crc-card-col-title">Responsibilities</div>
+        <ul class="crc-card-list">
+          <li>Associate purchased product and quantity with parent order.</li>
+          <li>Record frozen historical <code>unit_price</code> at the instant of purchase.</li>
+          <li>Calculate line item subtotal (quantity &times; unit price).</li>
+        </ul>
+      </div>
+      <div class="crc-card-col-collab">
+        <div class="crc-card-col-title">Collaborators</div>
+        <span class="crc-tag">Order</span>
+        <span class="crc-tag">Product</span>
+        <span class="crc-tag">DatabaseManager</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 7: ShoppingCart -->
+  <div class="crc-card">
+    <div class="crc-card-header">
+      <span>Card 7: ShoppingCart</span>
+      <span class="crc-card-type">Domain Entity &bull; Storage: PHP Session</span>
+    </div>
+    <div class="crc-card-body">
+      <div class="crc-card-col-resp">
+        <div class="crc-card-col-title">Responsibilities</div>
+        <ul class="crc-card-list">
+          <li>Maintain visitor session cart state across page requests.</li>
+          <li>Calculate item quantities, line subtotals, and overall cart subtotal.</li>
+          <li>Enforce minimum and maximum quantity boundary clamps.</li>
+          <li>Validate active catalog product status and live stock availability.</li>
+        </ul>
+      </div>
+      <div class="crc-card-col-collab">
+        <div class="crc-card-col-title">Collaborators</div>
+        <span class="crc-tag">Product</span>
+        <span class="crc-tag">SecurityHelper</span>
+        <span class="crc-tag">Order</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 8: ContactMessage -->
+  <div class="crc-card">
+    <div class="crc-card-header">
+      <span>Card 8: ContactMessage</span>
+      <span class="crc-card-type">Domain Entity &bull; Table: contact_messages</span>
+    </div>
+    <div class="crc-card-body">
+      <div class="crc-card-col-resp">
+        <div class="crc-card-col-title">Responsibilities</div>
+        <ul class="crc-card-list">
+          <li>Capture feedback, wholesale inquiries, and tea master questions.</li>
+          <li>Store sender name, email, subject, message body, and timestamp.</li>
+        </ul>
+      </div>
+      <div class="crc-card-col-collab">
+        <div class="crc-card-col-title">Collaborators</div>
+        <span class="crc-tag">DatabaseManager</span>
+        <span class="crc-tag">SecurityHelper</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 9: DatabaseManager -->
+  <div class="crc-card">
+    <div class="crc-card-header">
+      <span>Card 9: DatabaseManager</span>
+      <span class="crc-card-type">Service Subsystem &bull; Module: includes/db.php</span>
+    </div>
+    <div class="crc-card-body">
+      <div class="crc-card-col-resp">
+        <div class="crc-card-col-title">Responsibilities</div>
+        <ul class="crc-card-list">
+          <li>Establish and manage singleton PDO connection to MariaDB.</li>
+          <li>Enforce UTF-8 collation and disable emulated prepared statements.</li>
+          <li>Manage atomic transactions (<code>beginTransaction</code>, <code>commit</code>, <code>rollBack</code>).</li>
+          <li>Log database exceptions securely without leaking credentials.</li>
+        </ul>
+      </div>
+      <div class="crc-card-col-collab">
+        <div class="crc-card-col-title">Collaborators</div>
+        <span class="crc-tag">All Domain Entities</span>
+        <span class="crc-tag">PDO Driver</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 10: AuthenticationGuard -->
+  <div class="crc-card">
+    <div class="crc-card-header">
+      <span>Card 10: AuthenticationGuard</span>
+      <span class="crc-card-type">Service Subsystem &bull; Modules: customer-auth.php &amp; admin-auth.php</span>
+    </div>
+    <div class="crc-card-body">
+      <div class="crc-card-col-resp">
+        <div class="crc-card-col-title">Responsibilities</div>
+        <ul class="crc-card-list">
+          <li>Enforce session boundaries and prevent cross-contamination.</li>
+          <li>Guard administrative controllers via <code>require_admin_login()</code>.</li>
+          <li>Guard customer account portals via <code>require_customer_login()</code>.</li>
+          <li>Regenerate session IDs upon login to prevent session fixation.</li>
+        </ul>
+      </div>
+      <div class="crc-card-col-collab">
+        <div class="crc-card-col-title">Collaborators</div>
+        <span class="crc-tag">Customer</span>
+        <span class="crc-tag">Administrator</span>
+        <span class="crc-tag">PHP Session Engine</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 11: SecurityHelper -->
+  <div class="crc-card">
+    <div class="crc-card-header">
+      <span>Card 11: SecurityHelper</span>
+      <span class="crc-card-type">Service Subsystem &bull; Module: includes/functions.php</span>
+    </div>
+    <div class="crc-card-body">
+      <div class="crc-card-col-resp">
+        <div class="crc-card-col-title">Responsibilities</div>
+        <ul class="crc-card-list">
+          <li>Generate cryptographically secure CSRF session tokens.</li>
+          <li>Verify tokens using constant-time string comparison (<code>hash_equals()</code>).</li>
+          <li>Sanitize user input strings and escape HTML output (<code>e()</code>).</li>
+          <li>Format currency values in ZAR with consistent decimal standards.</li>
+        </ul>
+      </div>
+      <div class="crc-card-col-collab">
+        <div class="crc-card-col-title">Collaborators</div>
+        <span class="crc-tag">All Form Controllers</span>
+        <span class="crc-tag">ShoppingCart</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<h2>4.2 Enhanced Entity Relationship Diagram (EERD) (3 Marks)</h2>
+<p>
+  Documented in <code>docs/diagrams/eerd.md</code> and rendered in <strong>Figure 3.1</strong>. Models all seven physical relational tables in the MariaDB 10.4 schema (<code>admins</code>, <code>customers</code>, <code>categories</code>, <code>products</code>, <code>orders</code>, <code>order_items</code>, <code>contact_messages</code>), complete with column data types, nullability, primary/foreign/unique key constraints, and relational cardinalities:
+</p>
+
+<figure class="diagram-figure">
+  <img src="../diagrams/rendered/eerd.svg" alt="Enhanced Entity Relationship Diagram (EERD)">
+  <figcaption>Figure 3.1: Enhanced Entity Relationship Diagram (EERD) &bull; MariaDB 10.4 InnoDB Physical Schema (<code>docs/diagrams/rendered/eerd.svg</code>)</figcaption>
+</figure>
+
+<p>
+  <strong>Relational Integrity &amp; Constraint Rules:</strong>
+</p>
+<ul>
+  <li><code>categories</code> (1) to <code>products</code> (0..N) via <code>fk_products_category</code> (<code>ON DELETE RESTRICT</code>, <code>ON UPDATE CASCADE</code>) &mdash; prevents deletion of categories while child products exist.</li>
+  <li><code>customers</code> (1) to <code>orders</code> (0..N) via <code>fk_orders_customer</code> (<code>ON DELETE RESTRICT</code>, <code>ON UPDATE CASCADE</code>) &mdash; preserves audit history for customer purchases.</li>
+  <li><code>orders</code> (1) to <code>order_items</code> (1..N) via <code>fk_order_items_order</code> (<code>ON DELETE RESTRICT</code>, <code>ON UPDATE CASCADE</code>) &mdash; guarantees parent order existence for every purchased line item.</li>
+  <li><code>products</code> (1) to <code>order_items</code> (0..N) via <code>fk_order_items_product</code> (<code>ON DELETE RESTRICT</code>, <code>ON UPDATE CASCADE</code>) &mdash; prevents catalog deletion of items tied to historical transactions.</li>
+  <li><code>admins</code> and <code>contact_messages</code> operate as standalone operational tables with independent lifecycle scopes.</li>
+</ul>
+
+<div class="callout">
+  <strong>Financial Immutability Rule:</strong> <code>order_items.unit_price</code> stores the historical purchase price at the instant of checkout execution, guaranteeing that subsequent catalog price updates to <code>products.price</code> never retroactively distort historical revenue totals or customer invoice receipts.
+</div>
+
+<div class="page-break"></div>
+
+<h2>4.3 System Context Diagram (Level 0 DFD) (3 Marks)</h2>
+<p>
+  Documented in <code>docs/diagrams/context-diagram.md</code> and rendered in <strong>Figure 3.2</strong>. Establishes the high-level system boundary (<em>0.0 Zazen Matcha e-Commerce Platform</em>) and models all inbound and outbound data flows with external human actors (<em>Customer / Guest Shopper</em> and <em>Store Administrator</em>):
+</p>
+
+<figure class="diagram-figure">
+  <img src="../diagrams/rendered/context-diagram.svg" alt="System Context Diagram (Level 0 DFD)">
+  <figcaption>Figure 3.2: System Context Diagram (Level 0 DFD) &bull; Platform Boundary &amp; External Actor Information Flows (<code>docs/diagrams/rendered/context-diagram.svg</code>)</figcaption>
+</figure>
+
+<p>
+  <strong>Actor Information Flow Breakdown:</strong>
+</p>
+<ul>
+  <li><strong>Customer / Guest Inbound:</strong> Registration/login credentials, catalog search/filter queries, shopping bag additions/quantity updates, shipping address details, simulated tender selection, and studio feedback inquiries.</li>
+  <li><strong>Customer / Guest Outbound:</strong> Dynamic product cards with live inventory availability, active bag state with line subtotals, finalized order receipts with unique <code>order_id</code> references, profile details, and security/validation flash alerts.</li>
+  <li><strong>Administrator Inbound:</strong> Administrative authentication credentials, product CRUD mutations (price, stock, descriptions, image paths), category taxonomy updates, order inspection queries, and customer directory lookups.</li>
+  <li><strong>Administrator Outbound:</strong> Protected session state, real-time KPI sales dashboard (Gross Revenue, Total Orders, Active Catalog), inventory stock alerts (flagging &le; 10 units), historical order details, and database connectivity health.</li>
+</ul>
+
+<div class="callout">
+  <strong>Architectural Boundary Verification &mdash; Zero External Payment Gateways:</strong> In strict conformance with the academic brief and repository audit, the platform incorporates NO third-party payment gateway APIs (e.g. PayFast, Stripe, PayPal). Simulated card payment (instant authorization) and Bank Transfer (EFT) instructions execute entirely inside the PHP application boundary, terminating in MariaDB tables.
+</div>
+
+<div class="page-break"></div>
+
+<h2>4.4 Level 1 Data Flow Diagram (DFD) (3 Marks)</h2>
+<p>
+  Documented in <code>docs/diagrams/dfd-level-1.md</code> and rendered in <strong>Figure 3.3</strong>. Decomposes Process 0.0 into seven concrete, functional subprocesses mapping directly to PHP controllers and eight underlying data stores (D1 to D8):
+</p>
+
+<figure class="diagram-figure">
+  <img src="../diagrams/rendered/dfd-level-1.svg" alt="Level 1 Data Flow Diagram (DFD)">
+  <figcaption>Figure 3.3: Level 1 Data Flow Diagram (DFD) &bull; Subprocess Functional Decomposition (1.0 to 7.0) &amp; Data Stores (D1 to D8) (<code>docs/diagrams/rendered/dfd-level-1.svg</code>)</figcaption>
+</figure>
+
+<p>
+  <strong>Functional Subprocesses &amp; Data Store Exchanges:</strong>
+</p>
+<ul>
+  <li><strong>1.0 Authenticate &amp; Manage Profiles:</strong> Manages customer registration, credential verification against Bcrypt hashes in <code>D1: customers</code>, and administrator authentication against <code>D6: admins</code>.</li>
+  <li><strong>2.0 Browse &amp; Search Catalog:</strong> Queries active products from <code>D2: products</code> and taxonomy categories from <code>D3: categories</code> to render product cards and galleries.</li>
+  <li><strong>3.0 Manage Session Shopping Bag:</strong> Reads and writes session array <code>D8: Session Cart State</code>, performing live stock validation against <code>D2: products</code>.</li>
+  <li><strong>4.0 Execute Checkout &amp; Atomic Stock Allocation (Critical Core):</strong> Pulls active items from <code>D8</code>, acquires pessimistic row locks (<code>SELECT ... FOR UPDATE</code>) on <code>D2: products</code>, decrements stock quantities, inserts order records into <code>D4: orders</code> and line items into <code>D5: order_items</code>, flushes <code>D8</code>, and renders confirmation receipts.</li>
+  <li><strong>5.0 Manage Products &amp; Categories:</strong> Receives administrative mutations to perform insert and update operations on <code>D2: products</code> and <code>D3: categories</code>.</li>
+  <li><strong>6.0 Review Orders &amp; Aggregate Metrics:</strong> Reads order headers from <code>D4: orders</code>, line items from <code>D5: order_items</code>, and customer data from <code>D1: customers</code> to compute executive KPI totals.</li>
+  <li><strong>7.0 Receive Studio Contact Inquiries:</strong> Validates contact inquiries and inserts records into <code>D7: contact_messages</code> for administrative review.</li>
+</ul>
+
+<div class="page-break"></div>
+
+<h2>4.5 UML Use Case Diagram &amp; Actor Hierarchy (3 Marks)</h2>
+<p>
+  Documented in <code>docs/diagrams/use-case-diagram.md</code> and rendered in <strong>Figure 3.4</strong>. Models 20 implemented use cases across three distinct human actors, defines <code>&laquo;include&raquo;</code> behavioral subroutines, and articulates proposed future extensions:
+</p>
+
+<figure class="diagram-figure">
+  <img src="../diagrams/rendered/use-case-diagram.svg" alt="UML Use Case Diagram">
+  <figcaption>Figure 3.4: UML Use Case Diagram &bull; Behavioral Model, Actor Hierarchy, and Scope Boundary (<code>docs/diagrams/rendered/use-case-diagram.svg</code>)</figcaption>
+</figure>
+
+<p>
+  <strong>Actor Hierarchy &amp; Behavioral Scope:</strong>
+</p>
+<ul>
+  <li><strong>Guest Visitor:</strong> Unauthenticated storefront actor who can browse the catalog (<code>UC-01</code>, <code>UC-02</code>, <code>UC-03</code>), manage a cart (<code>UC-04</code>), execute guest checkout (<code>UC-05</code>), register an account (<code>UC-08</code>), or submit contact inquiries (<code>UC-13</code>).</li>
+  <li><strong>Registered Customer (Inherits from Guest):</strong> Authenticated account holder who inherits all guest capabilities and gains access to registered checkout (<code>UC-06</code>), profile and address management (<code>UC-10</code>), password modification (<code>UC-11</code>), and personal order history (<code>UC-12</code>).</li>
+  <li><strong>Store Administrator:</strong> Back-office manager operating via an independent authentication portal (<code>UC-14</code>) to view KPI dashboards (<code>UC-15</code>), manage products (<code>UC-16</code>), manage categories (<code>UC-17</code>), inspect orders (<code>UC-18</code>), oversee customers (<code>UC-19</code>), and check system diagnostics (<code>UC-20</code>).</li>
+  <li><strong>Stereotype Inclusions:</strong> <code>&laquo;include&raquo; Atomic Stock Deduction</code> is included in all checkout flows (<code>UC-05</code>, <code>UC-06</code>); <code>&laquo;include&raquo; CSRF Token Validation</code> protects all POST mutations.</li>
+  <li><strong>Proposed Enhancements:</strong> <code>UC-P1</code> (Order status transition mutation), <code>UC-P2</code> (Online payment gateway API), and <code>UC-P3</code> (Automated SMTP email receipts) are visually segregated within a distinct dashed container.</li>
+</ul>
+
+<h2>4.6 Relational Database Design &amp; Normalisation (3NF)</h2>
+<p>
+  Documented in <code>docs/deliverable-2/database-design.md</code>. Provides a comprehensive data dictionary for all seven tables, covering column data types, nullability, default values, key constraints, fixed-point financial arithmetic (<code>DECIMAL(10,2)</code>), and UTF-8 multi-byte collation (<code>utf8mb4_unicode_ci</code>).
+</p>
+
+<!-- ====================================================================== -->
+<!-- 5. CHAPTER 4: IMPLEMENTATION & CODING EVIDENCE -->
+<!-- ====================================================================== -->
+<div class="page-break"></div>
+<h1>5. Chapter 4: Implementation &amp; Coding Evidence (12 Marks)</h1>
+
+<p>
+  The implementation codebase demonstrates defensive programming, security controls, and standards-compliant syntax. Below are four representative excerpts from the actual codebase with academic technical commentary.
+</p>
+
+<h2>5.1 Sample PHP Code: Atomic Transaction &amp; Concurrency Control (3 Marks)</h2>
+<p>
+  The excerpt below from <code>customer/checkout.php</code> (Lines 270&ndash;336) illustrates the transactional checkout process, demonstrating how ACID properties and row-level locking are implemented in native PHP:
+</p>
+
+<pre><code>// Source: customer/checkout.php (Lines 270-336)
+try {
+    $pdo->beginTransaction();
+
+    // 4a. Lock and re-fetch cart products inside the transaction (FOR UPDATE)
+    $txProductIds   = array_keys($cleanCart);
+    $txPlaceholders = implode(', ', array_fill(0, count($txProductIds), '?'));
+
+    $lockSql = "
+        SELECT
+            product_id,
+            name,
+            price,
+            stock_quantity,
+            status
+        FROM products
+        WHERE product_id IN ({$txPlaceholders})
+        FOR UPDATE
+    ";
+    $lockStmt = $pdo->prepare($lockSql);
+    $lockStmt->execute(array_values($txProductIds));
+    $lockedRows = $lockStmt->fetchAll();
+
+    $lockedProducts = [];
+    foreach ($lockedRows as $lRow) {
+        $lockedProducts[(int) $lRow['product_id']] = $lRow;
+    }
+
+    // 4b. Final authoritative stock &amp; price verification
+    $verifiedItems    = [];
+    $verifiedSubtotal = 0.0;
+
+    foreach ($cleanCart as $pid => $requestedQty) {
+        if (!isset($lockedProducts[$pid])) {
+            throw new RuntimeException('STOCK_ERROR:One of the items in your cart is no longer available.');
+        }
+
+        $lockedProd  = $lockedProducts[$pid];
+        $lockedStock = (int) $lockedProd['stock_quantity'];
+        $lockedPrice = (float) $lockedProd['price'];
+
+        if ($lockedProd['status'] !== 'active') {
+            throw new RuntimeException(
+                sprintf('STOCK_ERROR:"%s" is no longer active and cannot be purchased.', $lockedProd['name'])
+            );
+        }
+
+        if ($lockedStock &lt;= 0 || $requestedQty &gt; $lockedStock) {
+            throw new RuntimeException(
+                sprintf(
+                    'STOCK_ERROR:Insufficient stock for "%s" (requested %d, currently %d available).',
+                    $lockedProd['name'],
+                    $requestedQty,
+                    max(0, $lockedStock)
+                )
+            );
+        }
+
+        $lineSubtotal      = round($lockedPrice * $requestedQty, 2);
+        $verifiedSubtotal += $lineSubtotal;
+
+        $verifiedItems[] = [
+            'product_id' => $pid,
+            'quantity'   => $requestedQty,
+            'unit_price' => $lockedPrice,
+            'subtotal'   => $lineSubtotal,
+        ];
+    }</code></pre>
+
+<p><strong>Technical Explanation &amp; Engineering Justification:</strong></p>
+<ul>
+  <li><strong>ACID Transaction Isolation:</strong> Initiating <code>$pdo-&gt;beginTransaction()</code> guarantees that the multi-step order placement (customer creation, order insertion, order_items insertion, and inventory deduction) succeeds as a single atomic unit. If an error occurs, <code>$pdo-&gt;rollBack()</code> restores previous database state.</li>
+  <li><strong>Pessimistic Concurrency Locking (<code>FOR UPDATE</code>):</strong> In high-traffic e-commerce environments, multiple concurrent shoppers may attempt to purchase the final inventory unit simultaneously. Appending <code>FOR UPDATE</code> instructs the InnoDB engine to acquire exclusive row-level locks on the selected product records. Other sessions attempting to read or update these rows must wait until this transaction commits or rolls back, completely eliminating race conditions.</li>
+  <li><strong>Authoritative Server-Side Validation:</strong> The application never trusts client-side price or quantity data submitted via form fields. Prices and inventory are re-queried directly from the locked database records.</li>
+</ul>
+
+<div class="page-break"></div>
+
+<h2>5.2 Sample HTML5 Code: Semantic Structure &amp; Form Security (3 Marks)</h2>
+<p>
+  The excerpt below from <code>customer/products.php</code> (Lines 258&ndash;313) illustrates the semantic markup and security attributes used in the catalog product cards:
+</p>
+
+<pre><code>&lt;!-- Source: customer/products.php (Lines 258-313) --&gt;
+&lt;article class="product-card shop-product-card"&gt;
+    &lt;a href="&lt;?php echo e($productUrl); ?&gt;" class="product-card-media" aria-label="View &lt;?php echo e($product['name']); ?&gt;"&gt;
+        &lt;img
+            src="&lt;?php echo e($imageUrl); ?&gt;"
+            alt="&lt;?php echo e($product['name']); ?&gt;"
+            width="1000"
+            height="1000"
+            loading="lazy"
+        &gt;
+    &lt;/a&gt;
+
+    &lt;div class="product-card-body"&gt;
+        &lt;div class="shop-card-header-row"&gt;
+            &lt;h2 class="product-card-title"&gt;
+                &lt;a href="&lt;?php echo e($productUrl); ?&gt;"&gt;
+                    &lt;?php echo e($product['name']); ?&gt;
+                &lt;/a&gt;
+            &lt;/h2&gt;
+            &lt;span class="shop-card-rating" aria-label="Rated &lt;?php echo e($ratingValue); ?&gt; out of 5 stars"&gt;
+                &lt;span class="star-glyph" aria-hidden="true"&gt;&amp;#9733;&lt;/span&gt; &lt;?php echo e($ratingValue); ?&gt;
+            &lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;p class="product-card-desc"&gt;
+            &lt;?php echo e($product['description']); ?&gt;
+        &lt;/p&gt;
+
+        &lt;div class="product-card-meta"&gt;
+            &lt;span class="product-card-price"&gt;&lt;?php echo e(format_price($product['price'])); ?&gt;&lt;/span&gt;
+            &lt;?php if ($isLowStock): ?&gt;
+                &lt;span class="stock-badge stock-low"&gt;Low Stock (&lt;?php echo $stockQty; ?&gt; left)&lt;/span&gt;
+            &lt;?php elseif ($isInStock): ?&gt;
+                &lt;span class="stock-badge stock-in"&gt;In Stock&lt;/span&gt;
+            &lt;?php else: ?&gt;
+                &lt;span class="stock-badge stock-out"&gt;Out of Stock&lt;/span&gt;
+            &lt;?php endif; ?&gt;
+        &lt;/div&gt;
+
+        &lt;div class="product-card-footer"&gt;
+            &lt;?php if ($isInStock): ?&gt;
+                &lt;form action="&lt;?php echo e($productUrl); ?&gt;" method="post" class="card-quick-add-form"&gt;
+                    &lt;input type="hidden" name="csrf_token" value="&lt;?php echo e(csrf_token()); ?&gt;"&gt;
+                    &lt;input type="hidden" name="product_id" value="&lt;?php echo $productId; ?&gt;"&gt;
+                    &lt;input type="hidden" name="quantity" value="1"&gt;
+                    &lt;button type="submit" class="btn btn-primary btn-card-full"&gt;
+                        Add to Cart
+                    &lt;/button&gt;
+                &lt;/form&gt;
+            &lt;?php else: ?&gt;
+                &lt;a href="&lt;?php echo e($productUrl); ?&gt;" class="btn btn-outline btn-card-full"&gt;
+                    View Details
+                &lt;/a&gt;
+            &lt;?php endif; ?&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/article&gt;</code></pre>
+
+<p><strong>Technical Explanation &amp; Engineering Justification:</strong></p>
+<ul>
+  <li><strong>Semantic HTML5 Elements:</strong> Using <code>&lt;article class="product-card shop-product-card"&gt;</code> encapsulates each catalog offering as a self-contained, distributable item. Media images specify explicit aspect dimensions (<code>width="1000" height="1000"</code>) paired with native <code>loading="lazy"</code> to eliminate layout shifts (Cumulative Layout Shift) and defer non-critical offscreen network fetches.</li>
+  <li><strong>Accessibility (WCAG 2.1 AA):</strong> Descriptive <code>aria-label</code> bindings on media links and rating containers guarantee that assistive screen readers announce product names and star ratings accurately. Purely decorative star glyphs are hidden from accessibility trees via <code>aria-hidden="true"</code>.</li>
+  <li><strong>Cross-Site Request Forgery (CSRF) Mitigation:</strong> The quick-add form embeds a hidden cryptographic token <code>&lt;input type="hidden" name="csrf_token" value="..."&gt;</code> validated on the server using constant-time string comparison (<code>hash_equals()</code>), blocking cross-origin request forgery.</li>
+  <li><strong>Output Escaping:</strong> All dynamic values are passed through the helper <code>e()</code> which applies <code>htmlspecialchars(..., ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8')</code>, neutralising Cross-Site Scripting (XSS) vectors.</li>
+</ul>
+
+<h2>5.3 Sample JavaScript Code: DOM Stepper &amp; Progressive Enhancement (3 Marks)</h2>
+<p>
+  The excerpt below from <code>js/script.js</code> (Lines 67&ndash;110) illustrates the vanilla JavaScript quantity stepper control:
+</p>
+
+<pre><code>// Source: js/script.js (Lines 67-110)
+/**
+ * Initialises optional + / - quantity stepper controls on product/cart forms.
+ */
+function initQuantitySteppers() {
+    const steppers = document.querySelectorAll('.quantity-stepper');
+
+    steppers.forEach(function (stepper) {
+        const input = stepper.querySelector('.quantity-input');
+        const buttons = stepper.querySelectorAll('[data-qty-step]');
+
+        if (!input || input.disabled) {
+            return;
+        }
+
+        function clampQuantity(val) {
+            const min = parseInt(input.getAttribute('min'), 10) || 1;
+            const max = parseInt(input.getAttribute('max'), 10) || 999;
+            let parsed = parseInt(val, 10);
+            if (isNaN(parsed) || parsed &lt; min) {
+                parsed = min;
+            } else if (parsed &gt; max) {
+                parsed = max;
+            }
+            input.value = String(parsed);
+        }
+
+        buttons.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                const step = parseInt(btn.getAttribute('data-qty-step'), 10) || 0;
+                const current = parseInt(input.value, 10) || 1;
+                clampQuantity(current + step);
+
+                // Auto-submit cart quantity update form when stepper is clicked in cart
+                const cartForm = stepper.closest('.cart-update-form');
+                if (cartForm &amp;&amp; parseInt(input.value, 10) !== current) {
+                    cartForm.submit();
+                }
+            });
+        });
+
+        input.addEventListener('change', function () {
+            clampQuantity(input.value);
+        });
+    });
+}</code></pre>
+
+<p><strong>Technical Explanation &amp; Engineering Justification:</strong></p>
+<ul>
+  <li><strong>Progressive Enhancement:</strong> Form inputs function natively as standard HTML <code>&lt;input type="number"&gt;</code> fields if JavaScript is disabled. When active, script enhances the UI with touch-friendly increment/decrement step buttons (<code>[data-qty-step]</code>).</li>
+  <li><strong>Boundary Clamping:</strong> The helper <code>clampQuantity()</code> enforces minimum (&ge; 1) and maximum bounds derived directly from DOM attributes, preventing invalid negative or zero values.</li>
+  <li><strong>Automatic Form Submission:</strong> When adjusted inside the shopping cart, the script detects the parent form via <code>stepper.closest('.cart-update-form')</code> and submits immediately, providing smooth desktop and mobile interaction without requiring extra "Update" button clicks.</li>
+  <li><strong>IIFE Scope Encapsulation:</strong> Wrapped in an Immediately Invoked Function Expression <code>(function () { 'use strict'; ... })();</code> to prevent global namespace pollution.</li>
+</ul>
+
+<div class="page-break"></div>
+
+<h2>5.4 Sample CSS3 Code: Design Tokens &amp; Responsive Media Queries (3 Marks)</h2>
+<p>
+  The excerpts below from <code>css/style.css</code> illustrate the responsive layout foundations across two contiguous source blocks:
+</p>
+
+<pre><code>/* Source: css/style.css (Lines 4084-4131) — Tablet Breakpoint Foundations */
+/* ----------------------------------------------------------------------------
+   17. Responsive Foundations (Tablet &amp; Mobile)
+   ---------------------------------------------------------------------------- */
+@media (max-width: 960px) {
+    .hero-grid,
+    .brand-intro-grid,
+    .ritual-grid,
+    .product-detail-grid,
+    .cart-layout,
+    .checkout-layout,
+    .confirmation-layout,
+    .auth-layout,
+    .account-layout,
+    .contact-layout,
+    .admin-dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .confirmation-meta-bar,
+    .about-values-grid,
+    .admin-metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .why-zazen-grid,
+    .category-showcase-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+
+    .cart-summary-card,
+    .checkout-summary-card,
+    .confirmation-summary-card,
+    .account-orders-card {
+        position: static;
+    }
+
+    .checkout-address-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .product-grid,
+    .shop-product-grid,
+    .favorites-icon-strip {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}</code></pre>
+
+<pre><code>/* Source: css/style.css (Lines 4283-4305) — Mobile Drawer Navigation */
+    .nav-toggle {
+        display: inline-flex;
+    }
+
+    .nav-wrapper {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        max-width: none;
+        padding: 1.5rem var(--container-pad);
+        background-color: var(--color-surface);
+        border-bottom: 1px solid var(--color-border);
+        box-shadow: 0 12px 24px rgba(24, 26, 23, 0.06);
+    }
+
+    .nav-wrapper.is-open {
+        display: flex;
+    }</code></pre>
+
+<p><strong>Technical Explanation &amp; Engineering Justification:</strong></p>
+<ul>
+  <li><strong>Modern CSS Grid &amp; Flexbox Architecture:</strong> Layouts rely on fluid CSS Grid with dynamic fraction units (<code>1fr</code>), avoiding rigid pixel-based container widths.</li>
+  <li><strong>Breakpoint Hierarchy:</strong>
+    <ul>
+      <li>At <code>960px</code> (Tablet threshold), multi-column split layouts collapse to single vertical columns, sticky sidebars revert to <code>position: static</code> to prevent overflow clipping, and 4-column product grids adapt to 2 columns.</li>
+      <li>At <code>768px</code> (Smartphone threshold), all product grids and admin metrics collapse into single full-width cards, optimizing mobile readability and vertical thumb scrolling.</li>
+    </ul>
+  </li>
+  <li><strong>Accessible Mobile Navigation:</strong> The primary navigation wrapper transitions from a static horizontal flexbar into an absolute drawer displayed upon toggling <code>.nav-wrapper.is-open</code>, triggered by <code>#nav-toggle</code> with synchronized <code>aria-expanded</code> states.</li>
+</ul>
+
+<!-- ====================================================================== -->
+<!-- 6. CHAPTER 5: RELATIONAL DATABASE STRUCTURE & SCREENSHOTS -->
+<!-- ====================================================================== -->
+<div class="page-break"></div>
+<h1>6. Chapter 5: Relational Database Structure &amp; Screenshots (2 Marks)</h1>
+
+<h2>6.1 Database Architecture &amp; Seven-Table Overview</h2>
+<p>
+  The <code>zazen_matcha</code> database operates under MariaDB 10.4 with InnoDB storage, enforcing referential integrity and complete normalization across seven tables:
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 5%;">#</th>
+      <th style="width: 15%;">Table Name</th>
+      <th style="width: 12%;">Storage Engine</th>
+      <th style="width: 15%;">Primary Key</th>
+      <th style="width: 25%;">Foreign Keys &amp; Target</th>
+      <th style="width: 28%;">Purpose in System</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>1</strong></td>
+      <td><code>admins</code></td>
+      <td>InnoDB</td>
+      <td><code>admin_id</code></td>
+      <td><em>None</em> (Isolated)</td>
+      <td>Stores administrative management credentials and Bcrypt hashes.</td>
+    </tr>
+    <tr>
+      <td><strong>2</strong></td>
+      <td><code>customers</code></td>
+      <td>InnoDB</td>
+      <td><code>customer_id</code></td>
+      <td><em>None</em></td>
+      <td>Stores registered and guest customer profiles, delivery addresses, and login credentials.</td>
+    </tr>
+    <tr>
+      <td><strong>3</strong></td>
+      <td><code>categories</code></td>
+      <td>InnoDB</td>
+      <td><code>category_id</code></td>
+      <td><em>None</em></td>
+      <td>Classifies teas and teaware into editorial taxonomies (<em>Matcha</em>, <em>Specialty Tea</em>, <em>Accessories</em>, <em>Gift Sets</em>).</td>
+    </tr>
+    <tr>
+      <td><strong>4</strong></td>
+      <td><code>products</code></td>
+      <td>InnoDB</td>
+      <td><code>product_id</code></td>
+      <td><code>category_id</code> &rarr; <code>categories</code></td>
+      <td>Maintains product title, description, price (ZAR), stock quantity, image path, and publication status.</td>
+    </tr>
+    <tr>
+      <td><strong>5</strong></td>
+      <td><code>orders</code></td>
+      <td>InnoDB</td>
+      <td><code>order_id</code></td>
+      <td><code>customer_id</code> &rarr; <code>customers</code></td>
+      <td>Records customer orders, immutable delivery address snapshots, totals, and simulated tender methods.</td>
+    </tr>
+    <tr>
+      <td><strong>6</strong></td>
+      <td><code>order_items</code></td>
+      <td>InnoDB</td>
+      <td><code>order_item_id</code></td>
+      <td><code>order_id</code> &rarr; <code>orders</code><br><code>product_id</code> &rarr; <code>products</code></td>
+      <td>Normalizes purchased line items, recording quantity, line subtotal, and frozen historical <code>unit_price</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>7</strong></td>
+      <td><code>contact_messages</code></td>
+      <td>InnoDB</td>
+      <td><code>message_id</code></td>
+      <td><em>None</em> (Standalone)</td>
+      <td>Stores visitor feedback, wholesale queries, and tea master inquiries submitted via contact form.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>6.2 MySQL Table Structure Screenshot Evidence</h2>
+<p>
+  In compliance with assessment criteria and privacy guidelines, visual evidence captures the <strong>Structure tab (<code>tbl_structure.php</code>)</strong> in phpMyAdmin to prove schema definition, data typing, and indexing without exposing live customer data.
+</p>
+
+<figure>
+  <img src="screenshots/database/01-table-admins-structure.png" alt="Structure of admins table">
+  <figcaption>Figure 5.1: phpMyAdmin Structure View — Table: <code>admins</code> (<code>01-table-admins-structure.png</code>)</figcaption>
+</figure>
+
+<figure>
+  <img src="screenshots/database/02-table-customers-structure.png" alt="Structure of customers table">
+  <figcaption>Figure 5.2: phpMyAdmin Structure View — Table: <code>customers</code> (<code>02-table-customers-structure.png</code>)</figcaption>
+</figure>
+
+<div class="page-break"></div>
+
+<figure>
+  <img src="screenshots/database/03-table-categories-structure.png" alt="Structure of categories table">
+  <figcaption>Figure 5.3: phpMyAdmin Structure View — Table: <code>categories</code> (<code>03-table-categories-structure.png</code>)</figcaption>
+</figure>
+
+<figure>
+  <img src="screenshots/database/04-table-products-structure.png" alt="Structure of products table">
+  <figcaption>Figure 5.4: phpMyAdmin Structure View — Table: <code>products</code> (<code>04-table-products-structure.png</code>)</figcaption>
+</figure>
+
+<div class="page-break"></div>
+
+<figure>
+  <img src="screenshots/database/05-table-orders-structure.png" alt="Structure of orders table">
+  <figcaption>Figure 5.5: phpMyAdmin Structure View — Table: <code>orders</code> (<code>05-table-orders-structure.png</code>)</figcaption>
+</figure>
+
+<figure>
+  <img src="screenshots/database/06-table-order-items-structure.png" alt="Structure of order_items table">
+  <figcaption>Figure 5.6: phpMyAdmin Structure View — Table: <code>order_items</code> (<code>06-table-order-items-structure.png</code>)</figcaption>
+</figure>
+
+<figure>
+  <img src="screenshots/database/07-table-contact-messages-structure.png" alt="Structure of contact_messages table">
+  <figcaption>Figure 5.7: phpMyAdmin Structure View — Table: <code>contact_messages</code> (<code>07-table-contact-messages-structure.png</code>)</figcaption>
+</figure>
+
+<div class="callout">
+  <strong>Optional Designer Canvas Note:</strong> The optional visual relations canvas (<code>08-database-designer-relations.png</code>) was not captured; the seven individual table structure captures provide comprehensive, direct proof of all table structures and indexed foreign keys.
+</div>
+
+<!-- ====================================================================== -->
+<!-- 7. CHAPTER 6: FUNCTIONALITY AUDIT -->
+<!-- ====================================================================== -->
+<div class="page-break"></div>
+<h1>7. Chapter 6: E-Commerce Functionality Audit (16 Marks)</h1>
+
+<h2>7.1 Customer Storefront Capabilities (8 Marks)</h2>
+<p>
+  The customer storefront was evaluated using real browser automation (Microsoft Edge), read-only HTTP GET requests, static asset verification, and deep source-code auditing:
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 22%;">Functional Area</th>
+      <th style="width: 38%;">Implemented Mechanism</th>
+      <th style="width: 18%;">Verification Mode</th>
+      <th style="width: 22%;">Diagnostic Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Storefront Homepage</strong></td>
+      <td>Root <code>index.php</code> rendering hero banner, values, featured teas, category grid, in-studio Tea &amp; Matcha Bar, 3D Chawan vessel study, Uji tea story, and footer.</td>
+      <td><strong>Live Browser QA</strong></td>
+      <td><code>HTTP 200 OK</code>, 0 PHP errors, responsive desktop and mobile viewports verified.</td>
+    </tr>
+    <tr>
+      <td><strong>Catalog Browsing</strong></td>
+      <td><code>customer/products.php</code> with 4 category filter pills (<em>Matcha</em>, <em>Specialty Tea</em>, <em>Accessories</em>, <em>Gift Sets</em>), keyword search, rating badges, and pagination.</td>
+      <td><strong>Live Browser QA</strong></td>
+      <td><code>HTTP 200 OK</code>, 0 PHP errors, all 12 product images load (<code>200 OK</code>), category queries verified.</td>
+    </tr>
+    <tr>
+      <td><strong>In-Studio Tea &amp; Matcha Bar</strong></td>
+      <td>Dedicated section <code>index.php#tea-bar</code> presenting 10 handcrafted drinks across two flights (<em>Whisked Matcha &amp; Artisan Lattes</em>, <em>Iced Teas &amp; Botanicals</em>) with studio hours, ingredient sourcing, and clear distinction from packaged products.</td>
+      <td><strong>Live Browser QA</strong></td>
+      <td><code>HTTP 200 OK</code>, 0 PHP errors, responsive flight grid verified, high-resolution photography loads (<code>200 OK</code>).</td>
+    </tr>
+    <tr>
+      <td><strong>Cinematic 3D Vessel Study</strong></td>
+      <td>Signature hardware-accelerated WebGL 3D Chawan vessel study on <code>index.php#vessel-study</code> with lathe geometry, dynamic lighting, pointer inertia, scroll parallax, and <code>prefers-reduced-motion</code> fallback.</td>
+      <td><strong>Live Browser QA</strong></td>
+      <td><code>HTTP 200 OK</code>, WebGL canvas initializes cleanly, zero external dependencies, responsive canvas scaling, static photograph fallback verified.</td>
+    </tr>
+    <tr>
+      <td><strong>Brand Story Page</strong></td>
+      <td><code>customer/about.php</code> featuring Uji origin history, values, and preparation philosophy.</td>
+      <td><strong>Live HTTP GET</strong></td>
+      <td><code>HTTP 200 OK</code>, 0 PHP errors, assets load (<code>200 OK</code>).</td>
+    </tr>
+    <tr>
+      <td><strong>Product Detail View</strong></td>
+      <td><code>customer/product.php</code> featuring multi-angle gallery, quantity steppers, tasting notes, and stock checks.</td>
+      <td><strong>Source Audit &amp; QA</strong></td>
+      <td>Validated prepared query lookup across all 12 products, fallback image resolver, and CSRF token binding.</td>
+    </tr>
+    <tr>
+      <td><strong>Shopping Cart</strong></td>
+      <td><code>customer/cart.php</code> managing session bag, server-side price re-verification, quantity updates, and cart clear.</td>
+      <td><strong>Live QA &amp; Audit</strong></td>
+      <td>CSRF validation verified on all POST actions; subtotal calculation verified (R 245.00 &times; 2 = R 490.00); clean cart clear verified.</td>
+    </tr>
+    <tr>
+      <td><strong>Checkout Processing</strong></td>
+      <td><code>customer/checkout.php</code> collecting delivery details, validating SA provinces, and executing atomic transaction.</td>
+      <td><strong>Source Audit</strong></td>
+      <td>Atomic PDO transaction with <code>SELECT ... FOR UPDATE</code> locking and <code>rowCount() === 1</code> stock update verification.</td>
+    </tr>
+    <tr>
+      <td><strong>Order Confirmation</strong></td>
+      <td><code>customer/order-confirmation.php</code> displaying order invoice, customer address, and line items.</td>
+      <td><strong>Source Audit</strong></td>
+      <td>Enforces strict ownership access control (logged-in customer ID or guest <code>last_order_id</code> session match).</td>
+    </tr>
+    <tr>
+      <td><strong>Customer Authentication</strong></td>
+      <td><code>customer/login.php</code>, <code>customer/register.php</code> using PHP <code>password_hash()</code> and <code>password_verify()</code>.</td>
+      <td><strong>Live HTTP GET</strong></td>
+      <td><code>HTTP 200 OK</code> on both routes, 0 PHP errors, clean form presentation.</td>
+    </tr>
+    <tr>
+      <td><strong>Customer Account Portal</strong></td>
+      <td><code>customer/account.php</code> allowing profile editing, password changes, and order history inspection.</td>
+      <td><strong>Source Audit</strong></td>
+      <td>Protected by <code>require_customer_login()</code>; password change uses <code>password_verify()</code> before rehashing.</td>
+    </tr>
+    <tr>
+      <td><strong>Studio Contact Form</strong></td>
+      <td><code>customer/contact.php</code> capturing feedback and inserting records into <code>contact_messages</code>.</td>
+      <td><strong>Live HTTP GET</strong></td>
+      <td><code>HTTP 200 OK</code>, 0 PHP errors, inputs sanitized via <code>clean_input()</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>7.2 Administrator Portal Capabilities (8 Marks)</h2>
+<p>
+  The management console was evaluated across administrative access control and operations modules:
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 22%;">Functional Area</th>
+      <th style="width: 38%;">Implemented Mechanism</th>
+      <th style="width: 18%;">Verification Mode</th>
+      <th style="width: 22%;">Diagnostic Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Admin Sign In</strong></td>
+      <td><code>admin/login.php</code> with isolated session initialization.</td>
+      <td><strong>Live HTTP GET</strong></td>
+      <td><code>HTTP 200 OK</code>, 0 PHP errors, clean CSRF-protected form.</td>
+    </tr>
+    <tr>
+      <td><strong>Access Guard</strong></td>
+      <td><code>includes/admin-auth.php</code> protecting all management pages via <code>require_admin_login()</code>.</td>
+      <td><strong>Source Audit</strong></td>
+      <td>Restricts unauthenticated visitors to <code>admin/login.php</code> without altering customer shopping carts.</td>
+    </tr>
+    <tr>
+      <td><strong>Executive Dashboard</strong></td>
+      <td><code>admin/dashboard.php</code> aggregating live KPI counters (Products, Customers, Orders, Sales) and 5 recent orders.</td>
+      <td><strong>Source Audit</strong></td>
+      <td>Clean PDO prepared statements computing real-time aggregates and revenue sums.</td>
+    </tr>
+    <tr>
+      <td><strong>Product Management</strong></td>
+      <td><code>admin/products.php</code>, <code>product-add.php</code>, <code>product-edit.php</code> providing full catalog CRUD.</td>
+      <td><strong>Source Audit</strong></td>
+      <td>Validates dynamic category dropdowns, enforces numeric price/stock rules, flags low stock (&le; 10).</td>
+    </tr>
+    <tr>
+      <td><strong>Category Management</strong></td>
+      <td><code>admin/categories.php</code>, <code>category-add.php</code>, <code>category-edit.php</code> providing taxonomy CRUD.</td>
+      <td><strong>Source Audit</strong></td>
+      <td>Aggregates linked product counts; enforces case-insensitive name uniqueness (<code>LOWER(name)</code>).</td>
+    </tr>
+    <tr>
+      <td><strong>Customer Oversight</strong></td>
+      <td><code>admin/customers.php</code>, <code>customer-details.php</code> listing accounts and order histories.</td>
+      <td><strong>Source Audit</strong></td>
+      <td>Newest-first sorting; strictly excludes password hashes from <code>SELECT</code> projection.</td>
+    </tr>
+    <tr>
+      <td><strong>Orders Oversight</strong></td>
+      <td><code>admin/orders.php</code>, <code>order-details.php</code> displaying order journal and line item breakdown.</td>
+      <td><strong>Source Audit</strong></td>
+      <td>Displays historical delivery snapshot and purchased <code>order_items.unit_price</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Status Mutation Gap</strong></td>
+      <td>Order status update controls in <code>admin/order-details.php</code>.</td>
+      <td><strong>Source Audit</strong></td>
+      <td><strong>Identified Gap:</strong> The details page is currently read-only. Adding status transition controls is proposed.</td>
+    </tr>
+    <tr>
+      <td><strong>System Settings</strong></td>
+      <td><code>admin/settings.php</code> verifying store information and live database health.</td>
+      <td><strong>Source Audit</strong></td>
+      <td>Executes live <code>SELECT 1 AS connection_ok</code> query and displays record count summaries.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ====================================================================== -->
+<!-- 8. CHAPTER 7: SYSTEM LIMITATIONS & PROPOSED ENHANCEMENTS -->
+<!-- ====================================================================== -->
+<div class="page-break"></div>
+<h1>8. Chapter 7: System Limitations &amp; Proposed Enhancements</h1>
+
+<p>
+  In accordance with academic transparency, the following technical boundaries of the Deliverable 2 prototype are documented:
+</p>
+
+<ol>
+  <li><strong>Simulated Payment Gateway Architecture:</strong>
+    <ul>
+      <li><em>Current State:</em> The application does not connect to a commercial card processor API (such as PayFast or Stripe). Orders are processed via internal prototype tenders (<em>Simulated Card</em> with immediate authorization or <em>Bank Transfer (EFT)</em> with reference instructions).</li>
+      <li><em>Proposed Enhancement:</em> Implement a secure webhook-driven payment gateway integration using sandbox API credentials for Deliverable 3.</li>
+    </ul>
+  </li>
+  <li><strong>Administrative Order Status Transitions:</strong>
+    <ul>
+      <li><em>Current State:</em> <code>admin/order-details.php</code> provides an immutable, read-only audit view of orders and line items. Administrators cannot currently change fulfillment status (<code>pending</code> &rarr; <code>shipped</code>) directly on the page.</li>
+      <li><em>Proposed Enhancement:</em> Implement CSRF-protected form controls on <code>admin/order-details.php</code> allowing administrators to update <code>order_status</code> and <code>payment_status</code>.</li>
+    </ul>
+  </li>
+  <li><strong>Transactional Email Notifications:</strong>
+    <ul>
+      <li><em>Current State:</em> Local XAMPP environments lack an active SMTP Mail Transfer Agent (MTA). Invoices are rendered directly on-screen via <code>customer/order-confirmation.php</code>.</li>
+      <li><em>Proposed Enhancement:</em> Integrate a cloud email API (e.g. PHPMailer via SendGrid or Mailgun) to dispatch HTML receipts and order tracking numbers.</li>
+    </ul>
+  </li>
+  <li><strong>Cloud Production Deployment (Verified Active):</strong>
+    <ul>
+      <li><em>Implementation Status:</em> <strong>FULLY OPERATIONAL &amp; VERIFIED LIVE</strong></li>
+      <li><em>Production URL:</em> <a href="https://zazen-matcha.alwaysdata.net/" style="font-weight: 700; color: #2d3a2e;">https://zazen-matcha.alwaysdata.net/</a></li>
+      <li><em>Target Environment:</em> Linux / Apache / PHP 8.4 / MariaDB 10.x (InnoDB) with Let's Encrypt SSL/TLS encryption.</li>
+      <li><em>Database Architecture:</em> Remote MariaDB cluster (<code>mysql-zazen-matcha.alwaysdata.net</code>) maintaining referential integrity across all 7 operational tables.</li>
+      <li><em>Evaluator Access:</em> All customer storefront journeys (catalog browsing, shopping bag operations, atomic checkout) and administrative management functions (dashboard metrics, product/category CRUD, order review) are directly testable over the public internet, satisfying the mandatory Eduvos hosting requirement.</li>
+    </ul>
+  </li>
+</ol>
+
+<!-- ====================================================================== -->
+<!-- 9. CHAPTER 8: CONCLUSION & LEARNING REFLECTION -->
+<!-- ====================================================================== -->
+<h1>9. Chapter 8: Conclusion &amp; Learning Reflection (3 Marks)</h1>
+
+<h2>9.1 Summary of Deliverable 2 Achievements</h2>
+<p>
+  The Zazen Matcha &amp; Tea Co. Deliverable 2 project has successfully established a production-grade, database-driven e-commerce platform that fulfills all functional, architectural, and ethical criteria of the Eduvos ITECA3-34 curriculum:
+</p>
+<ul>
+  <li><strong>CMS Prohibition Compliance:</strong> The system demonstrates that a responsive e-commerce application can be built from foundational web standards (HTML5, CSS3, JavaScript, PHP, MySQL) without reliance on bloated CMS platforms or monolithic frameworks.</li>
+  <li><strong>Architectural Rigor:</strong> High-mark system design artefacts (CRC Cards, EERD, Context Diagram, Level 1 DFD, Use Case Model, and Data Dictionary) have been produced and aligned with the actual codebase.</li>
+  <li><strong>Database Integrity &amp; Concurrency:</strong> Implementing an atomic PDO transaction with <code>SELECT ... FOR UPDATE</code> row-locking during checkout solves one of the most critical real-world e-commerce challenges: race conditions and inventory overselling.</li>
+  <li><strong>Defensive Security Posture:</strong> The implementation adheres to OWASP recommendations, incorporating parameterized PDO queries against SQL injection, <code>htmlspecialchars</code> output escaping against XSS, cryptographically secure CSRF session tokens, and modern Bcrypt password hashing.</li>
+</ul>
+
+<h2>9.2 Technical Reflection &amp; Final-Year IT Competencies</h2>
+<p>
+  Developing Zazen Matcha provided practical mastery across several advanced competencies:
+</p>
+<ul>
+  <li><strong>Relational Database Design:</strong> Normalizing tables to 3NF while recognizing practical exceptions—such as storing frozen snapshots of <code>unit_price</code> in <code>order_items</code> and shipping addresses in <code>orders</code> to ensure historical financial and legal audit compliance.</li>
+  <li><strong>Separation of Concerns:</strong> Structuring a clean procedural architecture that decouples database connection logic (<code>db.php</code>), reusable utility functions (<code>functions.php</code>), authentication guards (<code>customer-auth.php</code>, <code>admin-auth.php</code>), and template presentation layers.</li>
+  <li><strong>Progressive Enhancement:</strong> Crafting resilient front-end interactions (quantity steppers, mobile drawer navigation) that function natively via server-side form submissions when scripts are disabled, but enhance user delight when JavaScript is active.</li>
+</ul>
+<p>
+  The Zazen Matcha codebase and documentation provide a complete, robust foundation ready for packaging, public staging deployment, and final assessment presentation.
+</p>
+
+<!-- ====================================================================== -->
+<!-- 10. REFERENCES -->
+<!-- ====================================================================== -->
+<h1>10. References</h1>
+<ol>
+  <li>Eduvos (Pty) Ltd. (2026). <em>Web Development and e-Commerce Technologies (ITECA3-34) Module Guide and Deliverable 2 Assessment Brief</em>. Eduvos Higher Education.</li>
+  <li>The PHP Group. (2026). <em>PHP Manual: PDO (PHP Data Objects), Password Hashing, and Session Management</em>. Available at: https://www.php.net/manual/en/</li>
+  <li>Oracle Corporation / MariaDB Foundation. (2026). <em>MariaDB 10.4 Reference Manual: InnoDB Storage Engine, Locking, and Transactions</em>. Available at: https://mariadb.com/kb/en/documentation/</li>
+  <li>OWASP Foundation. (2025). <em>OWASP Top 10 Web Application Security Risks</em>. Available at: https://owasp.org/www-project-top-ten/</li>
+  <li>World Wide Web Consortium (W3C). (2023). <em>Web Content Accessibility Guidelines (WCAG) 2.1</em>. W3C Recommendation. Available at: https://www.w3.org/TR/WCAG21/</li>
+  <li>Mozilla Developer Network (MDN). (2026). <em>CSS Grid Layout, Flexbox, and Media Queries Reference</em>. Available at: https://developer.mozilla.org/en-US/docs/Web/CSS</li>
+</ol>
+
+<!-- ====================================================================== -->
+<!-- APPENDICES: COMPLETE MERMAID SYSTEM DESIGN SPECIFICATIONS -->
+<!-- ====================================================================== -->
+<div class="page-break"></div>
+<h1>Appendices: Complete Mermaid System Design Source Specifications</h1>
+
+<p>
+  As noted in Chapter 3, the authoritative system architecture models are maintained as version-controlled Markdown Mermaid source definitions in <code>docs/diagrams/</code>. The complete, verbatim source codes for all design models are documented below:
+</p>
+
+<h2>Appendix A: Enhanced Entity Relationship Model (EERD) Source</h2>
+<p><em>File: <code>docs/diagrams/eerd.md</code></em></p>
+<pre><code>erDiagram
+    ADMINS {
+        int admin_id PK "INT UNSIGNED AUTO_INCREMENT"
+        varchar name "VARCHAR(100)"
+        varchar email UK "VARCHAR(150) UNIQUE"
+        varchar password "VARCHAR(255) Bcrypt Hash"
+        timestamp created_at "TIMESTAMP"
+    }
+
+    CUSTOMERS {
+        int customer_id PK "INT UNSIGNED AUTO_INCREMENT"
+        varchar first_name "VARCHAR(100)"
+        varchar last_name "VARCHAR(100)"
+        varchar email UK "VARCHAR(150) UNIQUE"
+        varchar phone "VARCHAR(30) NULL"
+        varchar password "VARCHAR(255) Bcrypt Hash"
+        varchar address "VARCHAR(255) NULL"
+        varchar city "VARCHAR(100) NULL"
+        varchar province "VARCHAR(100) NULL"
+        varchar postal_code "VARCHAR(20) NULL"
+        timestamp created_at "TIMESTAMP"
+        timestamp updated_at "TIMESTAMP"
+    }
+
+    CATEGORIES {
+        int category_id PK "INT UNSIGNED AUTO_INCREMENT"
+        varchar name UK "VARCHAR(100) UNIQUE"
+        text description "TEXT NULL"
+        timestamp created_at "TIMESTAMP"
+        timestamp updated_at "TIMESTAMP"
+    }
+
+    PRODUCTS {
+        int product_id PK "INT UNSIGNED AUTO_INCREMENT"
+        int category_id FK "INT UNSIGNED"
+        varchar name "VARCHAR(150)"
+        text description "TEXT NULL"
+        decimal price "DECIMAL(10,2)"
+        int stock_quantity "INT DEFAULT 0"
+        varchar image "VARCHAR(255) NULL"
+        enum status "ENUM('active','inactive')"
+        timestamp created_at "TIMESTAMP"
+        timestamp updated_at "TIMESTAMP"
+    }
+
+    ORDERS {
+        int order_id PK "INT UNSIGNED AUTO_INCREMENT"
+        int customer_id FK "INT UNSIGNED"
+        datetime order_date "DATETIME DEFAULT CURRENT_TIMESTAMP"
+        varchar shipping_address "VARCHAR(255)"
+        varchar city "VARCHAR(100)"
+        varchar province "VARCHAR(100)"
+        varchar postal_code "VARCHAR(20)"
+        decimal subtotal "DECIMAL(10,2)"
+        decimal shipping_cost "DECIMAL(10,2) DEFAULT 0.00"
+        decimal total "DECIMAL(10,2)"
+        varchar payment_method "VARCHAR(50)"
+        enum payment_status "ENUM('pending','paid','failed')"
+        enum order_status "ENUM('pending','processing','shipped','delivered','cancelled')"
+        timestamp created_at "TIMESTAMP"
+        timestamp updated_at "TIMESTAMP"
+    }
+
+    ORDER_ITEMS {
+        int order_item_id PK "INT UNSIGNED AUTO_INCREMENT"
+        int order_id FK "INT UNSIGNED"
+        int product_id FK "INT UNSIGNED"
+        int quantity "INT UNSIGNED DEFAULT 1"
+        decimal unit_price "DECIMAL(10,2)"
+        decimal subtotal "DECIMAL(10,2)"
+    }
+
+    CONTACT_MESSAGES {
+        int message_id PK "INT UNSIGNED AUTO_INCREMENT"
+        varchar name "VARCHAR(100)"
+        varchar email "VARCHAR(150)"
+        varchar subject "VARCHAR(200)"
+        text message "TEXT"
+        timestamp created_at "TIMESTAMP"
+    }
+
+    CATEGORIES ||--o{ PRODUCTS : "classifies (1:N)"
+    CUSTOMERS ||--o{ ORDERS : "places (1:N)"
+    ORDERS ||--|{ ORDER_ITEMS : "contains (1:N)"
+    PRODUCTS ||--o{ ORDER_ITEMS : "referenced_in (1:N)"</code></pre>
+
+<h2>Appendix B: System Context Diagram (Level 0 DFD) Source</h2>
+<p><em>File: <code>docs/diagrams/context-diagram.md</code></em></p>
+<pre><code>flowchart LR
+    %% External Entities
+    subgraph ExternalActors ["External Actors"]
+        CUST["Customer / Guest Shopper\n(Web Browser Client)"]
+        ADMIN["Store Administrator\n(Web Browser Client)"]
+    end
+
+    %% Central System Boundary
+    subgraph SystemBoundary ["Zazen Matcha e-Commerce Platform (System Boundary)"]
+        SYS(("0.0\nZazen Matcha\ne-Commerce System\n(PHP 8 + MariaDB)"))
+    end
+
+    %% Customer Data Flows (Inputs)
+    CUST --&gt;|"1. Registration / Login Credentials\n2. Catalog Search &amp; Filter Queries\n3. Cart Items &amp; Quantity Updates\n4. Shipping Details &amp; Tender Selection\n5. Studio Contact Messages"| SYS
+
+    %% Customer Data Flows (Outputs)
+    SYS --&gt;|"1. Product Listings, Stock &amp; Price Details\n2. Active Shopping Bag &amp; Subtotal State\n3. Order Invoices &amp; Tracking Receipts\n4. Profile Details &amp; Password Status\n5. Flash Feedback &amp; Validation Alerts"| CUST
+
+    %% Admin Data Flows (Inputs)
+    ADMIN --&gt;|"1. Admin Authentication Credentials\n2. Product Records (Name, Price, Stock, Image)\n3. Category Records (Name, Description)\n4. Order Fulfillment Review Queries\n5. Customer Account Oversight Requests"| SYS
+
+    %% Admin Data Flows (Outputs)
+    SYS --&gt;|"1. Protected Admin Session &amp; Navigation\n2. Real-time KPI Dashboard &amp; Financial Totals\n3. Catalog Inventory Reports &amp; Low-Stock Alerts\n4. Order Fulfillment Records &amp; Historical Line Items\n5. Database Health &amp; Diagnostic Status"| ADMIN
+
+    %% Styling
+    style SYS fill:#2d3a2e,stroke:#1a231b,stroke-width:3px,color:#ffffff
+    style CUST fill:#f9f8f6,stroke:#4a5d4e,stroke-width:2px,color:#181a17
+    style ADMIN fill:#f9f8f6,stroke:#4a5d4e,stroke-width:2px,color:#181a17</code></pre>
+
+<div class="page-break"></div>
+
+<h2>Appendix C: Level 1 Data Flow Diagram (DFD) Source</h2>
+<p><em>File: <code>docs/diagrams/dfd-level-1.md</code></em></p>
+<pre><code>flowchart TD
+    %% External Entities
+    CUST["Customer / Guest Shopper"]
+    ADMIN["Store Administrator"]
+
+    %% Data Stores (InnoDB Tables &amp; Session)
+    D1[("D1: customers")]
+    D2[("D2: products")]
+    D3[("D3: categories")]
+    D4[("D4: orders")]
+    D5[("D5: order_items")]
+    D6[("D6: admins")]
+    D7[("D7: contact_messages")]
+    D8[("D8: Session Cart State")]
+
+    %% Process 1.0: Authentication &amp; Profile
+    subgraph P1 ["1.0 Authentication &amp; Profile Management"]
+        P1_AUTH(("1.0\nAuthenticate &amp;\nManage Profiles"))
+    end
+    CUST --&gt;|"Login / Register / Profile Details"| P1_AUTH
+    P1_AUTH --&gt;|"Customer Credentials &amp; Addresses"| D1
+    D1 --&gt;|"Profile Data &amp; Bcrypt Hash"| P1_AUTH
+    ADMIN --&gt;|"Admin Login Credentials"| P1_AUTH
+    P1_AUTH --&gt;|"Verify Admin Credentials"| D6
+    D6 --&gt;|"Admin Hash &amp; Name"| P1_AUTH
+    P1_AUTH --&gt;|"Session Cookie &amp; Flash Alerts"| CUST
+    P1_AUTH --&gt;|"Admin Session Cookie"| ADMIN
+
+    %% Process 2.0: Catalog Browsing &amp; Search
+    subgraph P2 ["2.0 Catalog Browsing &amp; Search"]
+        P2_CAT(("2.0\nBrowse &amp;\nSearch Catalog"))
+    end
+    CUST --&gt;|"Search Terms &amp; Category Filters"| P2_CAT
+    D2 --&gt;|"Active Products &amp; Prices"| P2_CAT
+    D3 --&gt;|"Category Names &amp; Descriptions"| P2_CAT
+    P2_CAT --&gt;|"Formatted Product Cards &amp; Galleries"| CUST
+
+    %% Process 3.0: Shopping Cart Management
+    subgraph P3 ["3.0 Shopping Cart Management"]
+        P3_CART(("3.0\nManage Session\nShopping Bag"))
+    end
+    CUST --&gt;|"Add / Update / Remove Item"| P3_CART
+    P3_CART --&gt;|"Verify Product Price &amp; Stock"| D2
+    D2 --&gt;|"Stock Quantity &amp; Status"| P3_CART
+    P3_CART &lt;--&gt;|"Read / Write Cart Array"| D8
+    P3_CART --&gt;|"Updated Cart View &amp; Subtotals"| CUST
+
+    %% Process 4.0: Order Checkout &amp; Stock Allocation
+    subgraph P4 ["4.0 Order Checkout &amp; Stock Allocation"]
+        P4_CHK(("4.0\nExecute Checkout &amp;\nAtomic Transaction"))
+    end
+    CUST --&gt;|"Shipping Address &amp; Simulated Tender"| P4_CHK
+    D8 --&gt;|"Cart Items &amp; Quantities"| P4_CHK
+    P4_CHK --&gt;|"Lock Rows FOR UPDATE &amp; Deduct Stock"| D2
+    P4_CHK --&gt;|"Read / Provision Customer"| D1
+    P4_CHK --&gt;|"Insert Order Header"| D4
+    P4_CHK --&gt;|"Insert Order Items (Historical Unit Price)"| D5
+    P4_CHK --&gt;|"Clear Cart State"| D8
+    P4_CHK --&gt;|"Order Invoice &amp; Tracking Reference"| CUST
+
+    %% Process 5.0: Product &amp; Category Administration
+    subgraph P5 ["5.0 Product &amp; Category Administration"]
+        P5_ADM(("5.0\nManage Products\n&amp; Categories"))
+    end
+    ADMIN --&gt;|"Add / Edit Products &amp; Categories"| P5_ADM
+    P5_ADM --&gt;|"Insert / Update Product Records"| D2
+    P5_ADM --&gt;|"Insert / Update Category Records"| D3
+    D2 --&gt;|"Product Catalog Listings"| P5_ADM
+    D3 --&gt;|"Category Taxonomy &amp; Counts"| P5_ADM
+    P5_ADM --&gt;|"CRUD Status &amp; Validation Feedback"| ADMIN
+
+    %% Process 6.0: Order Oversight &amp; Business Analytics
+    subgraph P6 ["6.0 Order Oversight &amp; Business Analytics"]
+        P6_ORD(("6.0\nReview Orders &amp;\nAggregate Metrics"))
+    end
+    ADMIN --&gt;|"View Orders &amp; Dashboard Request"| P6_ORD
+    D4 --&gt;|"Order Totals, Dates, Statuses"| P6_ORD
+    D5 --&gt;|"Order Items &amp; Line Subtotals"| P6_ORD
+    D1 --&gt;|"Customer Shipping Names"| P6_ORD
+    P6_ORD --&gt;|"KPI Metrics &amp; Order Breakdowns"| ADMIN
+
+    %% Process 7.0: Customer Inquiries
+    subgraph P7 ["7.0 Customer Inquiries &amp; Studio Care"]
+        P7_MSG(("7.0\nReceive Studio\nContact Inquiries"))
+    end
+    CUST --&gt;|"Submit Studio Contact Form"| P7_MSG
+    P7_MSG --&gt;|"Insert Inquiry Record"| D7
+    D7 --&gt;|"Read Inquiry Records"| ADMIN
+    P7_MSG --&gt;|"Submission Confirmation Alert"| CUST
+
+    %% Styling
+    style P1_AUTH fill:#e2e8e2,stroke:#2d3a2e,stroke-width:2px,color:#181a17
+    style P2_CAT fill:#e2e8e2,stroke:#2d3a2e,stroke-width:2px,color:#181a17
+    style P3_CART fill:#e2e8e2,stroke:#2d3a2e,stroke-width:2px,color:#181a17
+    style P4_CHK fill:#c8d8c8,stroke:#2d3a2e,stroke-width:2px,color:#181a17
+    style P5_ADM fill:#e2e8e2,stroke:#2d3a2e,stroke-width:2px,color:#181a17
+    style P6_ORD fill:#e2e8e2,stroke:#2d3a2e,stroke-width:2px,color:#181a17
+    style P7_MSG fill:#e2e8e2,stroke:#2d3a2e,stroke-width:2px,color:#181a17</code></pre>
+
+<h2>Appendix D: UML Use Case Diagram Source</h2>
+<p><em>File: <code>docs/diagrams/use-case-diagram.md</code></em></p>
+
+<h3>D.1 Actor Hierarchy Model</h3>
+<pre><code>classDiagram
+    class GuestVisitor {
+        &lt;&lt;Actor&gt;&gt;
+        Unauthenticated Shopper
+    }
+    class RegisteredCustomer {
+        &lt;&lt;Actor&gt;&gt;
+        Authenticated Account Holder
+    }
+    class Administrator {
+        &lt;&lt;Actor&gt;&gt;
+        Store Manager / Fulfillment Admin
+    }
+
+    GuestVisitor &lt;|-- RegisteredCustomer : Generalizes / Inherits</code></pre>
+
+<h3>D.2 Use Case Specification Flowchart</h3>
+<pre><code>flowchart LR
+    %% Actors
+    GUEST["👤 Guest Visitor"]
+    CUST["👤 Registered Customer"]
+    ADMIN["👤 Administrator"]
+
+    %% System Boundary
+    subgraph ZazenPlatform ["Zazen Matcha e-Commerce Platform Boundary"]
+        %% Storefront &amp; Discovery
+        UC01(["UC-01: Browse Storefront &amp; Story"])
+        UC02(["UC-02: Browse &amp; Search Catalog"])
+        UC03(["UC-03: View Product Details &amp; Gallery"])
+        UC04(["UC-04: Manage Shopping Bag"])
+
+        %% Checkout &amp; Orders
+        UC05(["UC-05: Guest Checkout"])
+        UC06(["UC-06: Registered Checkout"])
+        UC07(["UC-07: View Order Receipt"])
+        UC_TX[["«include»\nAtomic Stock Deduction\n&amp; Order Transaction"]]
+        UC_CSRF[["«include»\nCSRF Token Validation"]]
+
+        %% Customer Account
+        UC08(["UC-08: Register Customer Account"])
+        UC09(["UC-09: Authenticate / Login"])
+        UC10(["UC-10: Manage Account &amp; Address"])
+        UC11(["UC-11: Change Password"])
+        UC12(["UC-12: View Personal Order History"])
+        UC13(["UC-13: Submit Studio Inquiry"])
+
+        %% Administrator Use Cases
+        UC14(["UC-14: Administrator Login"])
+        UC15(["UC-15: View KPI Analytics Dashboard"])
+        UC16(["UC-16: Manage Products (CRUD)"])
+        UC17(["UC-17: Manage Categories (CRUD)"])
+        UC18(["UC-18: View Orders &amp; Line Items"])
+        UC19(["UC-19: Oversee Customer Directory"])
+        UC20(["UC-20: Inspect System Settings"])
+
+        %% Proposed / Future Enhancements (Clearly Differentiated)
+        subgraph ProposedFeatures ["«Proposed / Future Enhancements»"]
+            UCP1(["UC-P1: Update Fulfillment Status"])
+            UCP2(["UC-P2: Online Payment Gateway API"])
+            UCP3(["UC-P3: Automated Email Invoices"])
+        end
+    end
+
+    %% Guest Interactions
+    GUEST --&gt; UC01
+    GUEST --&gt; UC02
+    GUEST --&gt; UC03
+    GUEST --&gt; UC04
+    GUEST --&gt; UC05
+    GUEST --&gt; UC08
+    GUEST --&gt; UC13
+
+    %% Customer Inherited &amp; Specific Interactions
+    CUST -.-&gt;|inherits| GUEST
+    CUST --&gt; UC06
+    CUST --&gt; UC07
+    CUST --&gt; UC09
+    CUST --&gt; UC10
+    CUST --&gt; UC11
+    CUST --&gt; UC12
+
+    %% Administrator Interactions
+    ADMIN --&gt; UC14
+    ADMIN --&gt; UC15
+    ADMIN --&gt; UC16
+    ADMIN --&gt; UC17
+    ADMIN --&gt; UC18
+    ADMIN --&gt; UC19
+    ADMIN --&gt; UC20
+
+    %% Include Relationships
+    UC05 -.-&gt;|«include»| UC_TX
+    UC05 -.-&gt;|«include»| UC_CSRF
+    UC06 -.-&gt;|«include»| UC_TX
+    UC06 -.-&gt;|«include»| UC_CSRF
+    UC08 -.-&gt;|«include»| UC_CSRF
+    UC10 -.-&gt;|«include»| UC_CSRF
+    UC11 -.-&gt;|«include»| UC_CSRF
+    UC16 -.-&gt;|«include»| UC_CSRF
+    UC17 -.-&gt;|«include»| UC_CSRF
+
+    %% Proposed Linkages
+    ADMIN -.-&gt;|«proposed»| UCP1
+    UC06 -.-&gt;|«proposed»| UCP2
+    UC_TX -.-&gt;|«proposed»| UCP3
+
+    %% Styling
+    style ZazenPlatform fill:#faf9f7,stroke:#2d3a2e,stroke-width:2px
+    style ProposedFeatures fill:#f4f1ea,stroke:#8c7355,stroke-dasharray: 5 5,stroke-width:1px
+    style UC_TX fill:#dce6dc,stroke:#2d3a2e,stroke-width:1px
+    style UC_CSRF fill:#dce6dc,stroke:#2d3a2e,stroke-width:1px</code></pre>
+
+
+<div class="page-break"></div>
+
+<!-- ====================================================================== -->
+<!-- APPENDIX E: AI ASSISTANCE & DISCLOSURE STATEMENT -->
+<!-- ====================================================================== -->
+<h1>Appendix E: AI Assistance &amp; Disclosure Statement</h1>
+
+<h2>E.1 Disclosure Overview &amp; Institutional Compliance</h2>
+<p>
+  In compliance with the Eduvos Higher Education Policy on Artificial Intelligence and Academic Integrity, this appendix provides a transparent, comprehensive declaration of the artificial intelligence systems utilized during the research, architectural design, software development, troubleshooting, and documentation phases of Deliverable 2.
+</p>
+<p>
+  All submitted work has been subjected to rigorous human peer review, manual debugging, and functional execution verification by the student author. The student author retains complete ownership of and intellectual accountability for all code, database structures, system models, and written analyses presented in this submission.
+</p>
+
+<h2>E.2 Inventory of AI Systems Utilized</h2>
+<ul>
+  <li><strong>Primary AI Assistant:</strong> Google Antigravity (Powered by DeepMind Advanced Agentic Coding Models / Gemini 2.5)</li>
+  <li><strong>Execution Modality:</strong> Local IDE pair-programming assistant, codebase auditor, and terminal orchestrator.</li>
+  <li><strong>Date Range of Usage:</strong> October 2026.</li>
+</ul>
+
+<h2>E.3 Functional Scope of AI Assistance</h2>
+<p>
+  The AI assistant was utilized across the following delimited technical domains:
+</p>
+<ol>
+  <li><strong>Architectural Scaffolding &amp; Modular PHP Design:</strong> Assisted in structuring clean procedural PHP separation of concerns (<code>includes/db.php</code>, <code>includes/functions.php</code>, <code>includes/customer-auth.php</code>, <code>includes/admin-auth.php</code>) without the use of prohibited third-party CMS platforms or monolithic application frameworks.</li>
+  <li><strong>Concurrency Control &amp; Transaction Implementation:</strong> Assisted in drafting the atomic checkout algorithm in <code>customer/checkout.php</code>, specifically the implementation of <code>SELECT ... FOR UPDATE</code> pessimistic row-locking on InnoDB tables to prevent inventory race conditions.</li>
+  <li><strong>Responsive Front-End Styling &amp; Semantic Markup:</strong> Assisted in refining fluid CSS Grid layouts and WCAG 2.1 AA accessibility attributes (<code>aria-label</code>, <code>aria-hidden</code>) across catalog and product views.</li>
+  <li><strong>Codebase Auditing &amp; Security Scans:</strong> Automated verification of PDO prepared statements (SQL injection prevention), <code>htmlspecialchars</code> output encoding (XSS mitigation), CSRF token validation, and detection of hardcoded development credentials.</li>
+  <li><strong>Production Deployment &amp; Server Troubleshooting:</strong> Assisted in diagnosing remote server error logs during Alwaysdata cloud deployment, resolving MariaDB authentication error 1045, and packaging POSIX-compliant ZIP archives for Apache/Linux extraction.</li>
+  <li><strong>Documentation Synthesis:</strong> Assisted in compiling, formatting, and proofreading the academic report structure according to the Eduvos ITECA3-34 Deliverable 2 brief.</li>
+</ol>
+
+<h2>E.4 Human Verification, Testing, and Quality Assurance Methodology</h2>
+<p>
+  To guarantee that no hallucinated, insecure, or unverified artifacts were incorporated into the project:
+</p>
+<ul>
+  <li><strong>Zero Fabrication Policy:</strong> All database screenshots (<code>01-table-admins-structure.png</code> through <code>07-table-contact-messages-structure.png</code>) are genuine, full-resolution phpMyAdmin captures from the operational database. No screenshots, mockups, or client signatures were synthetically fabricated.</li>
+  <li><strong>Independent Execution QA:</strong> Every PHP script, form action, and database query was tested in both the local XAMPP environment and the public Alwaysdata production environment (<code>https://zazen-matcha.alwaysdata.net/</code>).</li>
+  <li><strong>Code Review &amp; Line-by-Line Comprehension:</strong> The student personally reviewed and understood all generated logic, variable bindings, and database schemas before incorporating them into the submission repository.</li>
+</ul>
+
+<h2>E.5 Formal Student Authorship Declaration</h2>
+<div class="authorship-declaration-box">
+  <p><strong>DECLARATION OF AUTHORSHIP AND ACADEMIC INTEGRITY</strong></p>
+  <p>
+    I, <strong>Alice Matarise</strong>, Student Number <strong>ct.2023.h4c6x5</strong>, hereby declare that:
+  </p>
+  <ol>
+    <li>The work submitted for Eduvos ITECA3-34 Deliverable 2 is my own work, developed in accordance with the module guidelines.</li>
+    <li>Where artificial intelligence tools were employed for assistance, their usage has been fully and truthfully disclosed in this Appendix.</li>
+    <li>I have personally reviewed, tested, and verified all source code, database configurations, and documentation.</li>
+    <li>I understand and can defend every architectural decision, security control, and code implementation presented in this submission.</li>
+  </ol>
+  <br>
+  <div style="display: flex; justify-content: space-between; margin-top: 15pt;">
+    <div><strong>Student Signature:</strong> ____________________________________</div>
+    <div><strong>Date:</strong> ________________________</div>
+  </div>
+</div>
+
+</body>
+</html>

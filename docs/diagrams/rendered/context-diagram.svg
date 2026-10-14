@@ -1,0 +1,221 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 720" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 20px; font-weight: bold; fill: #2d3a2e; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; fill: #556357; }
+      .entity-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: bold; fill: #ffffff; }
+      .entity-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #d8e2d9; }
+      .sys-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 16px; font-weight: bold; fill: #a3c4a8; }
+      .sys-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 16px; font-weight: bold; fill: #ffffff; }
+      .sys-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #d8e2d9; }
+      .flow-hdr-in { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: bold; fill: #1e3a8a; }
+      .flow-hdr-out { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: bold; fill: #14532d; }
+      .flow-item { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 10px; fill: #2d3748; }
+      .callout-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: bold; fill: #78350f; }
+      .callout-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 10px; fill: #92400e; }
+      .marker-arrow { fill: #2d3a2e; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#2d3a2e" />
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#1e3a8a" />
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#14532d" />
+    </marker>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1080" height="720" fill="#ffffff" />
+  <rect x="15" y="15" width="1050" height="690" fill="none" stroke="#e0e6e1" stroke-width="1.5" rx="6" />
+
+  <!-- Diagram Header -->
+  <text x="35" y="45" class="title">Zazen Matcha &amp; Tea Co. — System Context Diagram (Level 0 DFD)</text>
+  <text x="35" y="65" class="subtitle">Platform Architecture Scope, External Entity Boundaries, and Top-Level Information Exchange Flows</text>
+
+  <!-- ============================================================ -->
+  <!-- EXTERNAL ENTITY 1: CUSTOMER (LEFT)                           -->
+  <!-- ============================================================ -->
+  <g transform="translate(35, 110)" filter="url(#shadow)">
+    <rect width="210" height="110" fill="#fcfdfc" stroke="#2d3a2e" stroke-width="1.8" rx="6" />
+    <path d="M 0 0 L 210 0 L 210 36 L 0 36 Z" fill="#2d3a2e" />
+    <!-- Actor Icon -->
+    <circle cx="24" cy="18" r="8" fill="#ffffff" />
+    <path d="M 16 32 C 16 26 32 26 32 32 Z" fill="#ffffff" />
+    <text x="42" y="19" class="entity-title">Customer / Guest</text>
+    <text x="42" y="31" class="entity-sub">External Shopper / Web Client</text>
+    
+    <text x="14" y="58" font-family="sans-serif" font-size="10.5" fill="#333333">• Guest Visitors (Catalog &amp; Cart)</text>
+    <text x="14" y="76" font-family="sans-serif" font-size="10.5" fill="#333333">• Registered Account Holders</text>
+    <text x="14" y="94" font-family="sans-serif" font-size="10" fill="#556357">Access: Storefront Web Browser</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- CENTRAL SYSTEM BOUNDARY (PROCESS 0.0)                        -->
+  <!-- ============================================================ -->
+  <!-- System Boundary Enclosure (Dashed) -->
+  <rect x="420" y="95" width="240" height="490" fill="#f8faf8" stroke="#7a967e" stroke-width="1.5" stroke-dasharray="6,4" rx="8" />
+  <text x="430" y="115" font-family="sans-serif" font-size="10" font-weight="bold" fill="#4a5d4e">APPLICATION BOUNDARY</text>
+
+  <!-- Process 0.0 Center Circle/Pill -->
+  <g transform="translate(435, 140)" filter="url(#shadow)">
+    <rect width="210" height="430" fill="#2d3a2e" stroke="#1b241c" stroke-width="2" rx="10" />
+    
+    <text x="105" y="42" text-anchor="middle" class="sys-num">PROCESS 0.0</text>
+    <text x="105" y="68" text-anchor="middle" class="sys-title">Zazen Matcha</text>
+    <text x="105" y="88" text-anchor="middle" class="sys-title">e-Commerce Platform</text>
+    <text x="105" y="108" text-anchor="middle" class="sys-sub">Core Web Application</text>
+    
+    <line x1="20" y1="124" x2="190" y2="124" stroke="#4a5d4e" stroke-width="1" />
+
+    <!-- System Internals Summary -->
+    <text x="25" y="148" font-family="sans-serif" font-size="11" font-weight="bold" fill="#a3c4a8">Server Environment:</text>
+    <text x="25" y="166" font-family="sans-serif" font-size="10" fill="#e2ede3">• Apache HTTP Server</text>
+    <text x="25" y="182" font-family="sans-serif" font-size="10" fill="#e2ede3">• PHP 8.2 Runtime</text>
+    <text x="25" y="198" font-family="sans-serif" font-size="10" fill="#e2ede3">• MariaDB 10.4 (InnoDB)</text>
+
+    <line x1="20" y1="214" x2="190" y2="214" stroke="#4a5d4e" stroke-width="1" />
+
+    <text x="25" y="238" font-family="sans-serif" font-size="11" font-weight="bold" fill="#a3c4a8">Functional Domains:</text>
+    <text x="25" y="256" font-family="sans-serif" font-size="10" fill="#e2ede3">• User Authentication &amp; RBAC</text>
+    <text x="25" y="272" font-family="sans-serif" font-size="10" fill="#e2ede3">• Dynamic Product Catalog</text>
+    <text x="25" y="288" font-family="sans-serif" font-size="10" fill="#e2ede3">• Session Shopping Bag</text>
+    <text x="25" y="304" font-family="sans-serif" font-size="10" fill="#e2ede3">• Atomic Order Transactions</text>
+    <text x="25" y="320" font-family="sans-serif" font-size="10" fill="#e2ede3">• Simulated Payment Tender</text>
+    <text x="25" y="336" font-family="sans-serif" font-size="10" fill="#e2ede3">• Admin KPI Reporting</text>
+    <text x="25" y="352" font-family="sans-serif" font-size="10" fill="#e2ede3">• Inventory &amp; Order Oversight</text>
+    <text x="25" y="368" font-family="sans-serif" font-size="10" fill="#e2ede3">• Contact Message Dispatch</text>
+
+    <line x1="20" y1="384" x2="190" y2="384" stroke="#4a5d4e" stroke-width="1" />
+    <text x="105" y="408" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#c4d6c6">Zero External Payment Gateways</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- EXTERNAL ENTITY 2: STORE ADMINISTRATOR (RIGHT)               -->
+  <!-- ============================================================ -->
+  <g transform="translate(835, 110)" filter="url(#shadow)">
+    <rect width="210" height="110" fill="#fcfdfc" stroke="#2d3a2e" stroke-width="1.8" rx="6" />
+    <path d="M 0 0 L 210 0 L 210 36 L 0 36 Z" fill="#2d3a2e" />
+    <!-- Admin Badge Icon -->
+    <rect x="18" y="10" width="14" height="16" rx="2" fill="#ffffff" />
+    <circle cx="25" cy="16" r="3" fill="#2d3a2e" />
+    <line x1="21" y1="22" x2="29" y2="22" stroke="#2d3a2e" stroke-width="1.5" />
+    <text x="40" y="19" class="entity-title">Administrator</text>
+    <text x="40" y="31" class="entity-sub">Store Manager / Fulfillment Admin</text>
+    
+    <text x="14" y="58" font-family="sans-serif" font-size="10.5" fill="#333333">• Store Operations &amp; Inventory</text>
+    <text x="14" y="76" font-family="sans-serif" font-size="10.5" fill="#333333">• Financial &amp; KPI Oversight</text>
+    <text x="14" y="94" font-family="sans-serif" font-size="10" fill="#556357">Access: Protected Admin Portal</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- DATA FLOWS: CUSTOMER <-> SYSTEM                             -->
+  <!-- ============================================================ -->
+  
+  <!-- Flow 1: Customer -> System (Inputs) -->
+  <g transform="translate(250, 140)">
+    <!-- Connection Arrow Line -->
+    <path d="M 0 50 L 165 50" stroke="#1e3a8a" stroke-width="2" marker-end="url(#arrow-blue)" />
+    
+    <!-- Flow Labels Box -->
+    <rect x="5" y="-15" width="160" height="60" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1" rx="4" />
+    <text x="12" y="-2" class="flow-hdr-in">CUSTOMER INPUTS [Inbound]:</text>
+    <text x="12" y="11" class="flow-item">1. Credentials &amp; Registration Info</text>
+    <text x="12" y="23" class="flow-item">2. Catalog Search &amp; Filter Queries</text>
+    <text x="12" y="35" class="flow-item">3. Cart Operations &amp; Quantities</text>
+  </g>
+
+  <g transform="translate(250, 240)">
+    <!-- Additional Customer Inputs -->
+    <path d="M 0 25 L 165 25" stroke="#1e3a8a" stroke-width="2" marker-end="url(#arrow-blue)" />
+    <rect x="5" y="-22" width="160" height="42" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1" rx="4" />
+    <text x="12" y="-8" class="flow-item">4. Shipping Details &amp; Simulated Tender</text>
+    <text x="12" y="6" class="flow-item">5. Studio Inquiry &amp; Feedback Form</text>
+  </g>
+
+  <!-- Flow 2: System -> Customer (Outputs) -->
+  <g transform="translate(250, 340)">
+    <!-- Return Arrow Line -->
+    <path d="M 170 50 L 5 50" stroke="#14532d" stroke-width="2" marker-end="url(#arrow-green)" />
+    
+    <!-- Flow Labels Box -->
+    <rect x="5" y="-15" width="160" height="60" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1" rx="4" />
+    <text x="12" y="-2" class="flow-hdr-out">CUSTOMER OUTPUTS [Outbound]:</text>
+    <text x="12" y="11" class="flow-item">1. Product Cards, Prices &amp; Stock</text>
+    <text x="12" y="23" class="flow-item">2. Active Bag State &amp; Line Subtotals</text>
+    <text x="12" y="35" class="flow-item">3. Order Receipts &amp; Reference IDs</text>
+  </g>
+
+  <g transform="translate(250, 440)">
+    <path d="M 170 25 L 5 25" stroke="#14532d" stroke-width="2" marker-end="url(#arrow-green)" />
+    <rect x="5" y="-22" width="160" height="42" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1" rx="4" />
+    <text x="12" y="-8" class="flow-item">4. Profile Information &amp; History</text>
+    <text x="12" y="6" class="flow-item">5. Flash Banners &amp; Validation Alerts</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- DATA FLOWS: ADMIN <-> SYSTEM                                -->
+  <!-- ============================================================ -->
+
+  <!-- Flow 3: Admin -> System (Inputs) -->
+  <g transform="translate(665, 140)">
+    <!-- Connection Arrow Line -->
+    <path d="M 165 50 L 5 50" stroke="#1e3a8a" stroke-width="2" marker-end="url(#arrow-blue)" />
+    
+    <!-- Flow Labels Box -->
+    <rect x="5" y="-15" width="155" height="60" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1" rx="4" />
+    <text x="12" y="-2" class="flow-hdr-in">ADMIN INPUTS [Inbound]:</text>
+    <text x="12" y="11" class="flow-item">1. Administrator Auth Credentials</text>
+    <text x="12" y="23" class="flow-item">2. Product Data &amp; Image Filenames</text>
+    <text x="12" y="35" class="flow-item">3. Category Taxonomy Definitions</text>
+  </g>
+
+  <g transform="translate(665, 240)">
+    <path d="M 165 25 L 5 25" stroke="#1e3a8a" stroke-width="2" marker-end="url(#arrow-blue)" />
+    <rect x="5" y="-22" width="155" height="42" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1" rx="4" />
+    <text x="12" y="-8" class="flow-item">4. Order Oversight &amp; Audit Queries</text>
+    <text x="12" y="6" class="flow-item">5. Customer Directory Inspection</text>
+  </g>
+
+  <!-- Flow 4: System -> Admin (Outputs) -->
+  <g transform="translate(665, 340)">
+    <!-- Return Arrow Line -->
+    <path d="M 0 50 L 160 50" stroke="#14532d" stroke-width="2" marker-end="url(#arrow-green)" />
+    
+    <!-- Flow Labels Box -->
+    <rect x="5" y="-15" width="155" height="60" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1" rx="4" />
+    <text x="12" y="-2" class="flow-hdr-out">ADMIN OUTPUTS [Outbound]:</text>
+    <text x="12" y="11" class="flow-item">1. Protected Session State</text>
+    <text x="12" y="23" class="flow-item">2. Real-Time KPI Metrics Dashboard</text>
+    <text x="12" y="35" class="flow-item">3. Inventory Stock &amp; Low-Stock Flags</text>
+  </g>
+
+  <g transform="translate(665, 440)">
+    <path d="M 0 25 L 160 25" stroke="#14532d" stroke-width="2" marker-end="url(#arrow-green)" />
+    <rect x="5" y="-22" width="155" height="42" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1" rx="4" />
+    <text x="12" y="-8" class="flow-item">4. Order Details &amp; Historical Lines</text>
+    <text x="12" y="6" class="flow-item">5. Database Diagnostics &amp; Inquiries</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- ARCHITECTURAL CALLOUT FOOTER                                 -->
+  <!-- ============================================================ -->
+  <g transform="translate(35, 605)">
+    <rect width="1010" height="85" fill="#fefce8" stroke="#f59e0b" stroke-width="1.2" rx="5" />
+    <!-- Info Icon -->
+    <circle cx="26" cy="24" r="10" fill="#d97706" />
+    <text x="26" y="28" font-family="sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">i</text>
+    
+    <text x="46" y="24" class="callout-title">ARCHITECTURAL BOUNDARY VERIFICATION — SIMULATED PAYMENT TENDER ONLY</text>
+    <text x="46" y="40" class="callout-body">
+      <tspan x="46" dy="0">In strict conformance with the academic assignment brief and repository audit, the platform features NO connection to external third-party payment gateways (e.g. PayFast, Stripe, PayPal).</tspan>
+      <tspan x="46" dy="14">Simulated card payment (instant authorization) and Bank Transfer (EFT) instructions execute entirely within the local PHP application boundary, terminating at MariaDB.</tspan>
+    </text>
+    <text x="46" y="70" font-family="sans-serif" font-size="9.5" fill="#78350f">Source Code References: customer/checkout.php (lines 20-136) &#8226; includes/functions.php (pdo_transaction) &#8226; database/zazen_matcha.sql</text>
+  </g>
+
+</svg>

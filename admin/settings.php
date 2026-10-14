@@ -121,7 +121,7 @@ require_once dirname(__DIR__) . '/includes/admin-header.php';
                 </div>
 
                 <p class="account-section-note">
-                    Zazen Matcha is a minimalist Japanese matcha and tea e-commerce storefront providing ceremonial and everyday matcha powders, traditional bamboo whisks, handcrafted ceramic bowls, and gift sets.
+                    Zazen Matcha &amp; Tea Co. is a minimalist e-commerce storefront providing single-origin ceremonial matcha, artisan loose-leaf specialty teas, traditional bamboo whisks, handcrafted ceramic bowls, and gift sets.
                 </p>
 
                 <hr class="summary-divider">

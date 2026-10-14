@@ -156,9 +156,9 @@ require_once dirname(__DIR__) . '/includes/header.php';
         <div class="checkout-hero-inner">
             <div>
                 <span class="eyebrow">Zazen Matcha &amp; Tea Co. &mdash; Studio Enquiries</span>
-                <h1 id="contact-heading" class="checkout-title">Let's Talk Matcha.</h1>
+                <h1 id="contact-heading" class="checkout-title">Let's Talk Matcha &amp; Tea.</h1>
                 <p class="checkout-subtitle">
-                    Questions about an order, a product, or the ritual itself? Leave us a note and we'll get back to you.
+                    Questions about an order, our specialty teas, or the ritual itself? Leave us a note and we'll get back to you.
                 </p>
             </div>
             <p class="contact-hero-note">
@@ -185,25 +185,26 @@ require_once dirname(__DIR__) . '/includes/header.php';
 
                     <dl class="contact-detail-list">
                         <div class="contact-detail-item">
-                            <dt>Email</dt>
+                            <dt>Studio Email</dt>
                             <dd>
-                                <a href="mailto:hello@zazenmatcha.test">hello@zazenmatcha.test</a>
+                                <a href="mailto:hello@zazenmatcha.co.za" class="contact-email-link">hello@zazenmatcha.co.za</a>
+                                <span class="contact-subtext">Direct correspondence with our Cape Town tea studio.</span>
                             </dd>
                         </div>
 
                         <div class="contact-detail-item">
-                            <dt>Phone (Prototype Demo)</dt>
-                            <dd>+27 00 000 0000</dd>
+                            <dt>Studio Location</dt>
+                            <dd>Cape Town, South Africa</dd>
                         </div>
 
                         <div class="contact-detail-item">
-                            <dt>Location</dt>
-                            <dd>Cape Town, South Africa</dd>
+                            <dt>Studio Hours</dt>
+                            <dd>Monday &ndash; Saturday, 08:30 &ndash; 17:00 SAST</dd>
                         </div>
                     </dl>
 
-                    <p class="contact-prototype-note">
-                        Note: Contact details above are demonstration placeholders for the Zazen Matcha university e-commerce project prototype.
+                    <p class="contact-studio-note">
+                        All correspondence and tasting enquiries are reviewed by our tea specialists within one business day.
                     </p>
 
                     <div class="contact-info-links">
@@ -225,7 +226,7 @@ require_once dirname(__DIR__) . '/includes/header.php';
                     <div class="contact-success-banner" role="status">
                         <p class="contact-success-title">Thank you for your message. We've received your note.</p>
                         <p class="contact-success-text">
-                            Your enquiry has been recorded by the Zazen Matcha studio.
+                            Your enquiry has been recorded in the Zazen Matcha &amp; Tea Co. studio message log.
                         </p>
                     </div>
                 <?php endif; ?>

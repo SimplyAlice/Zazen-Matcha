@@ -18,14 +18,20 @@ require_once dirname(__DIR__) . '/includes/header.php';
 
 <!-- 1. Hero Section -->
 <section class="hero-section about-hero-section" aria-labelledby="about-hero-heading">
-    <div class="container hero-grid">
-        <div class="hero-content">
-            <span class="eyebrow">Zazen Matcha &amp; Tea Co. &mdash; Our Philosophy</span>
-            <h1 id="about-hero-heading" class="hero-title">A Ritual Worth Slowing Down For.</h1>
-            <p class="hero-lead">
+    <div class="container hero-grid about-hero-grid">
+        <div class="hero-content about-hero-content">
+            <div class="about-eyebrow-wrap">
+                <span class="eyebrow about-eyebrow">
+                    <span class="eyebrow-accent">Vol. 01</span>
+                    <span class="eyebrow-sep">/</span>
+                    Philosophy of Quietude
+                </span>
+            </div>
+            <h1 id="about-hero-heading" class="hero-title about-hero-title">A Ritual Worth Slowing Down For.</h1>
+            <p class="hero-lead about-hero-lead">
                 Zazen Matcha was created around a quiet conviction: that preparing a bowl of matcha is not merely a way to start the morning, but a deliberate pause within an otherwise hurried day.
             </p>
-            <div class="hero-actions">
+            <div class="hero-actions about-hero-actions">
                 <a href="<?php echo e($shopUrl); ?>" class="btn btn-primary">
                     Shop Matcha
                 </a>
@@ -34,34 +40,37 @@ require_once dirname(__DIR__) . '/includes/header.php';
                 </a>
             </div>
 
-            <dl class="hero-pillars" aria-label="Brand ethos">
-                <div class="hero-pillar-item">
+            <dl class="hero-pillars about-hero-pillars" aria-label="Brand ethos">
+                <div class="hero-pillar-item about-pillar-item">
                     <dt>01 / Preparation</dt>
                     <dd>Measured by hand, never rushed</dd>
                 </div>
-                <div class="hero-pillar-item">
+                <div class="hero-pillar-item about-pillar-item">
                     <dt>02 / Objects</dt>
                     <dd>Tactile vessels &amp; balanced tools</dd>
                 </div>
-                <div class="hero-pillar-item">
+                <div class="hero-pillar-item about-pillar-item">
                     <dt>03 / Rhythm</dt>
                     <dd>A quiet five-minute daily pause</dd>
                 </div>
             </dl>
         </div>
 
-        <figure class="hero-visual">
-            <div class="hero-image-frame">
-                <img
-                    src="<?php echo e(site_url('images/hero-matcha.jpg')); ?>"
-                    alt="Zazen Matcha tin alongside a dark wide-base ceramic tea bowl"
-                    width="1000"
-                    height="1200"
-                >
+        <figure class="hero-visual about-hero-visual">
+            <div class="about-visual-frame-wrapper">
+                <div class="hero-image-frame about-image-frame">
+                    <img
+                        src="<?php echo e(site_url('images/about-tea-ritual.jpg')); ?>"
+                        alt="Authentic Japanese tea ceremony with handcrafted ceramic chawan bowl and fresh matcha on tatami"
+                        width="1800"
+                        height="1200"
+                        fetchpriority="high"
+                    >
+                </div>
             </div>
-            <figcaption class="editorial-caption">
-                <span>Fig. 01 &mdash; Quiet Preparation at the Table</span>
-                <span>Zazen Matcha Studio</span>
+            <figcaption class="editorial-caption about-editorial-caption">
+                <span class="caption-figure">Fig. 01 &mdash; The Mindful Presentation &amp; Tatami Ritual</span>
+                <span class="caption-provenance">Kobori Enshu Ryu &bull; Zazen Archive</span>
             </figcaption>
         </figure>
     </div>
@@ -86,7 +95,7 @@ require_once dirname(__DIR__) . '/includes/header.php';
                     At Zazen Matcha &amp; Tea Co., we approach matcha as a tactile, everyday practice. Whether prepared warm in a wide ceramic bowl at dawn or poured over ice in the middle of a focused afternoon, the act of measuring, whisking, and pausing creates a clear boundary between one task and the next.
                 </p>
                 <p>
-                    Our collection brings together finely milled green tea powders for ceremonial and everyday preparation alongside simple, well-proportioned tools—ceramic bowls, multi-prong whisks, and curated gift sets—designed to sit naturally on the contemporary South African table.
+                    Our collection brings together finely milled single-origin matcha, artisan loose-leaf specialty teas, and simple, well-proportioned tools—ceramic chawan bowls, bamboo whisks, and curated gift sets—designed to sit naturally on the contemporary South African table.
                 </p>
             </div>
         </div>

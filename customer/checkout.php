@@ -35,10 +35,10 @@ $allowedProvinces = [
     'Western Cape',
 ];
 
-// Allowed simulated payment methods for this university prototype
+// Payment methods accepted by the tea studio
 $allowedPaymentMethods = [
-    'Simulated Card'      => 'Simulated Card Payment (Prototype)',
-    'Bank Transfer (EFT)' => 'Manual EFT / Bank Transfer (Prototype)',
+    'Simulated Card'      => 'Credit / Debit Card (Studio Processing)',
+    'Bank Transfer (EFT)' => 'Direct EFT / Bank Transfer',
 ];
 
 // ----------------------------------------------------------------------------
@@ -804,9 +804,9 @@ require_once dirname(__DIR__) . '/includes/header.php';
                     </div>
 
                     <div class="checkout-card">
-                        <h2 class="checkout-section-heading">03 / Payment Method (University Prototype)</h2>
+                        <h2 class="checkout-section-heading">03 / Payment Method</h2>
                         <p class="checkout-payment-note">
-                            No real payment gateway is connected for this academic prototype. Select a simulated payment method to record your order.
+                            Select your preferred payment method to finalize your order.
                         </p>
 
                         <div class="payment-options" role="radiogroup" aria-label="Payment method">

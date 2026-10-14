@@ -167,6 +167,16 @@ function csrf_token(): string
 }
 
 /**
+ * Alias for csrf_token() for compatibility with forms expecting generate_csrf_token().
+ *
+ * @return string
+ */
+function generate_csrf_token(): string
+{
+    return csrf_token();
+}
+
+/**
  * Validates a submitted CSRF token against the session token.
  *
  * @param string|null $submittedToken
@@ -267,4 +277,226 @@ function product_image_url(?string $imageFilename): string
     }
 
     return site_url('images/products/placeholder.jpg');
+}
+
+/**
+ * Returns contextual gallery thumbnails for a product based on its category
+ * and specific product identity.
+ *
+ * Each item in the returned array contains:
+ * - 'src': Fully qualified URL to the high-resolution image asset
+ * - 'alt': Accessible, editorial description for the image
+ *
+ * @param array $product Associative array containing product_id, category_id, name, and image
+ * @return array<int, array{src: string, alt: string}>
+ */
+function get_product_gallery(array $product): array
+{
+    $productId   = (int) ($product['product_id'] ?? 0);
+    $productName = (string) ($product['name'] ?? 'Product');
+    $imageUrl    = product_image_url($product['image'] ?? null);
+
+    // Primary image is always index 0
+    $primary = [
+        'src' => $imageUrl,
+        'alt' => $productName . ' — Primary product presentation',
+    ];
+
+    switch ($productId) {
+        // --- Category 1: Packaged Matcha Powders ---
+        case 1:
+            // Ceremonial Matcha
+            return [
+                $primary,
+                [
+                    'src' => site_url('images/gallery/matcha-powder-detail.jpg'),
+                    'alt' => $productName . ' — Silk-fine stone-ground Uji tencha ceremonial powder detail',
+                ],
+                [
+                    'src' => site_url('images/gallery/whisked-matcha-bowl.jpg'),
+                    'alt' => $productName . ' — Frothy emerald microfoam usucha bowl preparation',
+                ],
+            ];
+
+        case 2:
+            // Everyday Matcha
+            return [
+                $primary,
+                [
+                    'src' => site_url('images/gallery/matcha-powder-detail.jpg'),
+                    'alt' => $productName . ' — Finely milled stone-ground green tea powder detail',
+                ],
+                [
+                    'src' => site_url('images/gallery/whisked-matcha-bowl.jpg'),
+                    'alt' => $productName . ' — Freshly whisked everyday morning matcha bowl',
+                ],
+            ];
+
+        // --- Category 4: Specialty Loose-Leaf Teas ---
+        case 7:
+            // Saffron Golden Infusion
+            return [
+                $primary,
+                [
+                    'src' => site_url('images/gallery/golden-saffron-botanicals.jpg'),
+                    'alt' => $productName . ' — Hand-picked botanical saffron threads, chamomile, and dried citrus peel',
+                ],
+                [
+                    'src' => site_url('images/gallery/golden-saffron-steep.jpg'),
+                    'alt' => $productName . ' — Luminous golden-amber herbal liquor slow steep in glass teapot',
+                ],
+            ];
+
+        case 8:
+            // Midnight Bloom
+            return [
+                $primary,
+                [
+                    'src' => site_url('images/gallery/butterfly-pea-botanicals.jpg'),
+                    'alt' => $productName . ' — Sun-dried Clitoria ternatea blue butterfly pea flower blossoms on slate',
+                ],
+                [
+                    'src' => site_url('images/gallery/butterfly-pea-color-shift.jpg'),
+                    'alt' => $productName . ' — Pure indigo botanical infusion liquor and citrus color-shift',
+                ],
+            ];
+
+        case 12:
+            // Jasmine Pearls
+            return [
+                $primary,
+                [
+                    'src' => site_url('images/gallery/iced-jasmine-pearls-detail.jpg'),
+                    'alt' => $productName . ' — Hand-rolled tender green tea pearls with fresh jasmine blossoms',
+                ],
+            ];
+
+        // --- Category 5: Prepared Drinks (Tea Bar) ---
+        case 13:
+            // Traditional Whisked Usucha
+            return [
+                $primary,
+                [
+                    'src' => site_url('images/gallery/whisked-matcha-bowl.jpg'),
+                    'alt' => $productName . ' — Handcrafted ceramic chawan with frothy usucha microfoam',
+                ],
+                [
+                    'src' => site_url('images/gallery/matcha-powder-detail.jpg'),
+                    'alt' => $productName . ' — Silk-fine single-origin ceremonial matcha base',
+                ],
+            ];
+
+        case 14:
+            // Classic Iced Matcha Latte
+            return [
+                $primary,
+                [
+                    'src' => site_url('images/gallery/classic-iced-matcha-prep.jpg'),
+                    'alt' => $productName . ' — Ceremonial matcha whisked over organic oat milk and ice',
+                ],
+                [
+                    'src' => site_url('images/gallery/matcha-powder-detail.jpg'),
+                    'alt' => $productName . ' — Vibrant stone-ground ceremonial matcha powder base',
+                ],
+                [
+                    'src' => site_url('images/tea-bar/matcha-bar-feature.jpg'),
+                    'alt' => $productName . ' — Cape Town tea bar counter service presentation',
+                ],
+            ];
+
+        case 15:
+            // Strawberry Matcha Latte (STRICTLY NO PLAIN MATCHA LATTE PREP)
+            return [
+                $primary,
+                [
+                    'src' => site_url('images/gallery/strawberry-matcha-layer-detail.jpg'),
+                    'alt' => $productName . ' — House-made ripe strawberry puree and ceremonial matcha gradient layering',
+                ],
+            ];
+
+        case 16:
+            // Vanilla Bean Matcha Latte
+            return [
+                $primary,
+                [
+                    'src' => site_url('images/gallery/vanilla-bean-matcha-detail.jpg'),
+                    'alt' => $productName . ' — Madagascar vanilla bean caviar infusion with whole vanilla pods',
+                ],
+            ];
+
+        case 17:
+            // Iced Coconut Matcha
+            return [
+                $primary,
+                [
+                    'src' => site_url('images/gallery/iced-coconut-matcha-detail.jpg'),
+                    'alt' => $productName . ' — Pure young coconut water topped with vibrant green matcha swirl',
+                ],
+            ];
+
+        case 18:
+            // Roasted Hojicha Latte
+            return [
+                $primary,
+                [
+                    'src' => site_url('images/gallery/roasted-hojicha-detail.jpg'),
+                    'alt' => $productName . ' — Charcoal-roasted Kyoto green tea micro-mill and warm layered latte',
+                ],
+            ];
+
+        case 19:
+            // Iced Jasmine Pearl Tea
+            return [
+                $primary,
+                [
+                    'src' => site_url('images/gallery/iced-jasmine-pearls-detail.jpg'),
+                    'alt' => $productName . ' — Hand-rolled jasmine green tea pearls cold extraction and steep',
+                ],
+            ];
+
+        case 20:
+            // White Peach Iced Oolong
+            return [
+                $primary,
+                [
+                    'src' => site_url('images/gallery/white-peach-oolong-prep.jpg'),
+                    'alt' => $productName . ' — High-mountain oolong cold-steeped with fresh white peach slices and ice',
+                ],
+            ];
+
+        case 21:
+            // Butterfly Pea Flower Lemonade
+            return [
+                $primary,
+                [
+                    'src' => site_url('images/gallery/butterfly-pea-color-shift.jpg'),
+                    'alt' => $productName . ' — Luminous violet and indigo natural citrus color-shift infusion',
+                ],
+                [
+                    'src' => site_url('images/gallery/butterfly-pea-botanicals.jpg'),
+                    'alt' => $productName . ' — Sun-dried Clitoria ternatea blue butterfly pea flower blossoms on slate',
+                ],
+            ];
+
+        case 22:
+            // Golden Saffron Herbal Infusion
+            return [
+                $primary,
+                [
+                    'src' => site_url('images/gallery/golden-saffron-steep.jpg'),
+                    'alt' => $productName . ' — Luminous golden-amber slow herbal steep in glass teapot',
+                ],
+                [
+                    'src' => site_url('images/gallery/golden-saffron-botanicals.jpg'),
+                    'alt' => $productName . ' — Hand-picked botanical saffron threads and dried citrus peel',
+                ],
+            ];
+
+        // --- All other products (Accessories, Living Botanicals, Teaware, Sets without extra angles) ---
+        // Retain verified primary product image and omit unrelated supplementary imagery
+        default:
+            return [
+                $primary,
+            ];
+    }
 }

@@ -44,6 +44,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ? site_url('customer/product.php?id=' . $postProductId)
         : site_url('customer/products.php');
 
+    if (!empty($_POST['return_url']) && !is_array($_POST['return_url'])) {
+        $candidateReturn = trim((string) $_POST['return_url']);
+        $parsed = parse_url($candidateReturn);
+        $candidatePath = $parsed['path'] ?? $candidateReturn;
+        if (strpos($candidatePath, BASE_URL) === 0 || (BASE_URL === '' && strpos($candidatePath, '/') === 0)) {
+            $returnUrl = $candidateReturn;
+        } elseif (strpos($candidateReturn, 'customer/') === 0 || strpos($candidateReturn, 'index.php') === 0) {
+            $returnUrl = site_url($candidateReturn);
+        }
+    }
+
     // Verify CSRF token
     $submittedToken = isset($_POST['csrf_token']) && !is_array($_POST['csrf_token'])
         ? (string) $_POST['csrf_token']
@@ -213,27 +224,24 @@ require_once dirname(__DIR__) . '/includes/header.php';
     $isInStock       = ($stockQty > 0);
     $isLowStock      = ($stockQty > 0 && $stockQty <= 10);
     $imageUrl        = product_image_url($product['image']);
-    $categoryShopUrl = site_url('customer/products.php?category=' . $categoryId);
     $inCartQty       = isset($_SESSION['cart'][$productId]) ? (int) $_SESSION['cart'][$productId] : 0;
+    // Determine category portal and back-link destination
+    if ($categoryId === 5) {
+        $parentShopUrl   = site_url('customer/drinks.php');
+        $parentShopLabel = 'Drinks Menu';
+        $categoryShopUrl = site_url('customer/drinks.php');
+    } elseif ($categoryId === 1 || $categoryId === 4) {
+        $parentShopUrl   = site_url('customer/tea.php');
+        $parentShopLabel = 'Tea Collection';
+        $categoryShopUrl = site_url('customer/tea.php?category=' . $categoryId);
+    } else {
+        $parentShopUrl   = site_url('customer/products.php');
+        $parentShopLabel = 'Shop';
+        $categoryShopUrl = site_url('customer/products.php?category=' . $categoryId);
+    }
 
-    $galleryThumbs = [
-        [
-            'src' => $imageUrl,
-            'alt' => $product['name'],
-        ],
-        [
-            'src' => site_url('images/gallery/matcha-powder-detail.jpg'),
-            'alt' => $product['name'] . ' — Vibrant stone-ground matcha powder detail',
-        ],
-        [
-            'src' => site_url('images/gallery/whisked-matcha-bowl.jpg'),
-            'alt' => $product['name'] . ' — Frothy whisked matcha in ceramic bowl',
-        ],
-        [
-            'src' => site_url('images/gallery/matcha-tin-linen.jpg'),
-            'alt' => $product['name'] . ' — Matcha tin and presentation box on natural linen',
-        ],
-    ];
+    // Contextual secondary thumbnails based on product category & individual item
+    $galleryThumbs = get_product_gallery($product);
     ?>
 
     <!-- Breadcrumb Bar -->
@@ -246,7 +254,7 @@ require_once dirname(__DIR__) . '/includes/header.php';
                     </li>
                     <li aria-hidden="true" class="breadcrumb-sep">/</li>
                     <li>
-                        <a href="<?php echo e(site_url('customer/products.php')); ?>">Shop</a>
+                        <a href="<?php echo e($parentShopUrl); ?>"><?php echo e($parentShopLabel); ?></a>
                     </li>
                     <li aria-hidden="true" class="breadcrumb-sep">/</li>
                     <li>
@@ -259,8 +267,8 @@ require_once dirname(__DIR__) . '/includes/header.php';
                 </ol>
             </nav>
 
-            <a href="<?php echo e(site_url('customer/products.php')); ?>" class="breadcrumb-back-link">
-                &larr; Back to Shop
+            <a href="<?php echo e($parentShopUrl); ?>" class="breadcrumb-back-link">
+                &larr; Back to <?php echo e($parentShopLabel); ?>
             </a>
         </div>
     </div>
@@ -283,26 +291,28 @@ require_once dirname(__DIR__) . '/includes/header.php';
                         >
                     </div>
 
-                    <div class="product-gallery-thumbs" role="group" aria-label="Product image thumbnails">
-                        <?php foreach ($galleryThumbs as $thumbIndex => $thumb): ?>
-                            <button
-                                type="button"
-                                class="product-thumb-btn<?php echo $thumbIndex === 0 ? ' is-active' : ''; ?>"
-                                data-gallery-thumb="<?php echo e($thumb['src']); ?>"
-                                data-gallery-alt="<?php echo e($thumb['alt']); ?>"
-                                aria-label="Show <?php echo e($thumb['alt']); ?>"
-                                aria-pressed="<?php echo $thumbIndex === 0 ? 'true' : 'false'; ?>"
-                            >
-                                <img
-                                    src="<?php echo e($thumb['src']); ?>"
-                                    alt="<?php echo e($thumb['alt']); ?>"
-                                    width="320"
-                                    height="240"
-                                    loading="lazy"
+                    <?php if (count($galleryThumbs) > 1): ?>
+                        <div class="product-gallery-thumbs" role="group" aria-label="Product image thumbnails">
+                            <?php foreach ($galleryThumbs as $thumbIndex => $thumb): ?>
+                                <button
+                                    type="button"
+                                    class="product-thumb-btn<?php echo $thumbIndex === 0 ? ' is-active' : ''; ?>"
+                                    data-gallery-thumb="<?php echo e($thumb['src']); ?>"
+                                    data-gallery-alt="<?php echo e($thumb['alt']); ?>"
+                                    aria-label="Show <?php echo e($thumb['alt']); ?>"
+                                    aria-pressed="<?php echo $thumbIndex === 0 ? 'true' : 'false'; ?>"
                                 >
-                            </button>
-                        <?php endforeach; ?>
-                    </div>
+                                    <img
+                                        src="<?php echo e($thumb['src']); ?>"
+                                        alt="<?php echo e($thumb['alt']); ?>"
+                                        width="320"
+                                        height="240"
+                                        loading="lazy"
+                                    >
+                                </button>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
 
                 <!-- Right Column: Product Information, Purchase Row, Accordion Specs & Related Products -->
@@ -413,44 +423,162 @@ require_once dirname(__DIR__) . '/includes/header.php';
                         <?php endif; ?>
                     </form>
 
-                    <!-- Prototype Accordion Specification Sections -->
+                    <!-- Category-Aware Accordion Specification Sections -->
+                    <?php
+                    if (in_array($categoryId, [1, 4], true)) {
+                        $ingredientsHeading = 'Ingredients &amp; Origin';
+                        $prepHeading        = 'Brewing &amp; Ritual';
+                    } elseif ($categoryId === 6) {
+                        $ingredientsHeading = 'Botanical Specimen &amp; Potting';
+                        $prepHeading        = 'Care, Light &amp; Watering';
+                    } else {
+                        $ingredientsHeading = 'Materials &amp; Craft';
+                        $prepHeading        = 'Care &amp; Usage';
+                    }
+                    $ingredientsText    = '';
+                    $prepText           = '';
+
+                    if ($categoryId === 1) {
+                        $ingredientsText = '100% Stone-Ground Japanese Green Tea (Tencha) from Uji, Kyoto. Single-origin, shade-cultivated first harvest with zero additives.';
+                        $prepText        = 'Sift 1/2 tsp (1g) into a pre-warmed chawan bowl, add 2 oz (60ml) filtered water at 176&deg;F (80&deg;C), and whisk briskly with a bamboo chasen in a W-motion until a dense, vibrant emerald microfoam forms.';
+                    } elseif ($categoryId === 4) {
+                        switch ($productId) {
+                            case 7:
+                                $ingredientsText = 'Artisan herbal infusion blending hand-harvested saffron threads, whole Egyptian chamomile blossoms, sweet fennel seeds, and sun-dried orange peel. Naturally caffeine-free.';
+                                $prepText        = 'Measure 2.5g in 250ml freshly boiled filtered water (95&deg;C / 203&deg;F). Steep for 5 to 7 minutes for a luminous golden-amber infusion. Enjoy pure or with a touch of raw honey.';
+                                break;
+                            case 8:
+                                $ingredientsText = 'Pure whole butterfly pea blossoms (Clitoria ternatea), hand-cut organic lemongrass, and wild Moroccan spearmint leaves. Naturally caffeine-free.';
+                                $prepText        = 'Infuse 2g (5&ndash;7 blossoms) in 250ml hot water (90&deg;C / 194&deg;F) for 4 to 5 minutes. Enjoy pure cobalt-blue or squeeze fresh lemon juice to watch it naturally transform to royal violet.';
+                                break;
+                            case 9:
+                                $ingredientsText = 'Semi-oxidized high-mountain Formosa-style oolong tea leaves scented with fresh autumn golden osmanthus blossom petals (Osmanthus fragrans).';
+                                $prepText        = 'Steep 4g in 200ml heated water (85&deg;C&ndash;90&deg;C / 185&deg;F&ndash;194&deg;F). Gongfu style: steep 45&ndash;60 seconds, re-steeping up to 5 times. Western style: steep 3 minutes.';
+                                break;
+                            case 10:
+                                $ingredientsText = 'Spring-harvested Chinese white tea (Bai Mu Dan) comprising silvery downy terminal buds and tender young leaves. Minimally processed and naturally sun-wilted.';
+                                $prepText        = 'Steep 3g in 250ml filtered water (80&deg;C / 176&deg;F) for 3 to 4 minutes. Leaves can be re-steeped up to 3 times to reveal delicate notes of honeydew melon and wild florals.';
+                                break;
+                            case 11:
+                                $ingredientsText = 'Cellar-aged Yunnan Shou (ripe) pu-erh post-fermented broad-leaf Camellia sinensis. Naturally fermented with zero artificial flavourings.';
+                                $prepText        = 'Use 5g in 150ml boiling water (100&deg;C / 212&deg;F). Perform a quick 5-second initial rinse to open the leaves, then steep 30 to 45 seconds across multiple rich infusions.';
+                                break;
+                            case 12:
+                                $ingredientsText = 'Hand-rolled silver-tipped green tea shoots from Fujian, meticulously layered and scented overnight with fresh nocturnal night-blooming jasmine flowers.';
+                                $prepText        = 'Drop 3g (~15 pearls) into 250ml filtered water at 75&deg;C&ndash;80&deg;C (167&deg;F&ndash;176&deg;F). Steep for 2 to 3 minutes as the pearls slowly unfurl in the cup. Re-steep up to 3 times.';
+                                break;
+                            default:
+                                $ingredientsText = 'Single-origin loose-leaf specialty tea honoring traditional heritage cultivars and artisanal small-batch processing.';
+                                $prepText        = 'Infuse 3g in 250ml filtered water at 80&deg;C&ndash;90&deg;C for 3 to 4 minutes. Re-steep as desired.';
+                                break;
+                        }
+                    } elseif ($categoryId === 2) {
+                        switch ($productId) {
+                            case 23:
+                                $ingredientsText = 'Handcrafted high-fired stoneware ceramic bowl. Authentic Kuro-Oribe style dark iron glaze with subtle forest-green pooling and wabi-sabi hand-pinched contouring.';
+                                $prepText        = 'Warm with hot water before whisking. Hand wash with warm water only, without harsh abrasives or dishwashing detergent, and allow to air dry completely.';
+                                break;
+                            case 24:
+                                $ingredientsText = 'Stoneware clay body layered with natural feldspathic Shino glaze exhibiting fine crackle lines and warm orange-red iron flashing (hi-iro).';
+                                $prepText        = 'Pre-warm before tea preparation. Rinse thoroughly after use with warm water and soft cloth; dry well to preserve the glaze integrity.';
+                                break;
+                            case 25:
+                                $ingredientsText = 'Pair of wheel-thrown ceramic yunomi tea cups with natural wood-ash glaze in muted sage and stone-grey tones, featuring tactile fluted side facets.';
+                                $prepText        = 'Comfortable to cup in both hands. Hand wash gently; suitable for hot green teas, hojicha, and botanical infusions.';
+                                break;
+                            case 26:
+                                $ingredientsText = 'Authentic Hagi-yaki porous stoneware chawan with soft blush-cream glaze, fine kan-nyu crazing, and traditional notched wari-kodai base.';
+                                $prepText        = 'Soak in clean water for a few minutes before first use. The porous clay and crazing will gradually develop a cherished tea patina over years of use.';
+                                break;
+                            case 27:
+                                $ingredientsText = 'Sustainable yakisugi charred cedar wood frame with a removable, precision-fitted matte cream ceramic slotted drainage tray.';
+                                $prepText        = 'Empty catch tray after tea sessions. Wipe cedar wood dry with a soft cloth; wash ceramic plate with warm water.';
+                                break;
+                            case 33:
+                                $ingredientsText = 'Moulded stoneware ceramic whisk keeper (chasen-naoshi) finished in a classic pale celadon jade-green crackle glaze.';
+                                $prepText        = 'After rinsing your bamboo whisk with clear warm water, mount it upright onto the curved bell keeper to air-dry and preserve tine shape.';
+                                break;
+                            case 34:
+                                $ingredientsText = '100% GOTS-certified unbleached natural flax organic linen cloth (chakin), woven without synthetic sizing, bleaches, or dyes.';
+                                $prepText        = 'Dampen slightly with clean warm water to fold into traditional ritual shape for warming and wiping chawan bowls. Hand rinse and line dry.';
+                                break;
+                            case 35:
+                                $ingredientsText = 'Single-stem hand-split natural golden bamboo, gently steam-curved at the tip to create a traditional chashaku matcha measure.';
+                                $prepText        = 'Wipe clean with a dry linen cloth after measuring matcha. Never soak bamboo in water or wash with dishwashing detergents.';
+                                break;
+                            default:
+                                $ingredientsText = 'Artisan Japanese Teaware: High-fired stoneware ceramic or natural hand-split bamboo crafted for mindful tea ritual.';
+                                $prepText        = 'Warm ceramic bowl with hot water prior to whisking. Rinse bamboo whisk in warm water to soften the tines before use; hand-rinse without detergent and air dry on a chasen-naoshi holder.';
+                                break;
+                        }
+                    } elseif ($categoryId === 3) {
+                        switch ($productId) {
+                            case 28:
+                                $ingredientsText = 'Curated artisan ceramic ensemble: Hand-glazed spouted stoneware pouring pitcher (katakuchi), two matching yunomi cups, and unbleached linen wrap in a recyclable presentation box.';
+                                $prepText        = 'Ideal for sharing whisked matcha or steeped specialty teas. Hand wash all ceramic pieces gently with warm water.';
+                                break;
+                            default:
+                                $ingredientsText = 'Curated Ceremonial Gift Set: Complete ceremonial kit featuring stone-ground matcha powder, handcrafted stoneware bowl, bamboo whisk, and measuring scoop.';
+                                $prepText        = 'Designed for complete ceremonial preparation. Pre-warm the ceramic chawan, measure matcha with the bamboo scoop, and whisk with the chasen in a brisk W-motion until velvety and frothy.';
+                                break;
+                        }
+                    } elseif ($categoryId === 6) {
+                        switch ($productId) {
+                            case 29:
+                                $ingredientsText = 'Living miniature dwarf flowering cherry shrub (Prunus cultivar) trained in classical bonsai habit, settled in an unglazed stoneware bonsai pot with living moss.';
+                                $prepText        = 'Bright filtered sunlight. Water 2–3 times weekly when topsoil begins to dry. Flowering occurs seasonally in spring; keep away from artificial heaters and air conditioners.';
+                                break;
+                            case 30:
+                                $ingredientsText = 'Living Japanese dwarf juniper (Juniperus procumbens nana) with sculpted curving trunk and emerald needle pads in a shallow glazed stoneware pot with moss.';
+                                $prepText        = 'Requires bright indirect light or gentle morning sun with good airflow. Water thoroughly when soil starts drying; mist foliage weekly. Do not let roots sit in standing water.';
+                                break;
+                            case 31:
+                                $ingredientsText = 'Living miniature maidenhair fern (Adiantum) bound in a sphere of natural peat, nutrient soil, and living sheet moss wrapped with biodegradable jute cord, with ceramic saucer.';
+                                $prepText        = 'Soak the moss ball in water for 5 minutes once or twice weekly, squeeze gently, and place on saucer. Prefers medium to bright indirect indoor light.';
+                                break;
+                            case 32:
+                                $ingredientsText = 'Living Satsuki azalea specimen with woody trunk and glossy foliage in an authentic terracotta bonsai basin with Kanuma acid-rich potting medium.';
+                                $prepText        = 'Morning sun and afternoon shade. Keep soil consistently moist with filtered water. Protect from extreme winter frost; seasonal blooms appear in spring/summer.';
+                                break;
+                            default:
+                                $ingredientsText = 'Living Japanese-inspired botanical specimen potted in artisan ceramic ware with natural moss dressing.';
+                                $prepText        = 'Place in bright indirect light. Water when topsoil feels dry to touch. Care card included.';
+                                break;
+                        }
+                    } else {
+                        $ingredientsText = 'Carefully curated artisan tea and teaware by Zazen Matcha &amp; Tea Co.';
+                        $prepText        = 'Prepare with filtered water at appropriate temperature for best aromatic expression.';
+                    }
+                    ?>
                     <div class="product-accordion-list">
                         <details class="product-accordion-item" open>
                             <summary class="product-accordion-summary">
-                                <span>Ingredients</span>
+                                <span><?php echo $ingredientsHeading; ?></span>
                                 <span class="accordion-chevron" aria-hidden="true">&#8964;</span>
                             </summary>
                             <div class="product-accordion-body">
-                                <p>
-                                    <?php if ($categoryId === 1): ?>
-                                        100% Stone-Ground Japanese Green Tea (Uji) &mdash; <?php echo e($product['category_name']); ?>
-                                    <?php else: ?>
-                                        Artisan Japanese Teaware &amp; Ceremonial Matcha Collection &mdash; <?php echo e($product['category_name']); ?>
-                                    <?php endif; ?>
-                                </p>
+                                <p><?php echo $ingredientsText; ?></p>
                             </div>
                         </details>
 
                         <details class="product-accordion-item" open>
                             <summary class="product-accordion-summary">
-                                <span>Preparation</span>
+                                <span><?php echo $prepHeading; ?></span>
                                 <span class="accordion-chevron" aria-hidden="true">&#8964;</span>
                             </summary>
                             <div class="product-accordion-body">
-                                <p>
-                                    Sift 1/2 tsp (1g) into a bowl, add 2 oz hot water (176&deg;F / 80&deg;C), whisk briskly in a W-motion until frothy.
-                                </p>
+                                <p><?php echo $prepText; ?></p>
                             </div>
                         </details>
 
                         <details class="product-accordion-item" open>
                             <summary class="product-accordion-summary">
-                                <span>Shipping</span>
+                                <span>Shipping &amp; Packaging</span>
                                 <span class="accordion-chevron" aria-hidden="true">&#8964;</span>
                             </summary>
                             <div class="product-accordion-body">
                                 <p>
-                                    Eco-friendly protective shipping for your tea ware and tins (<?php echo $isInStock ? $stockQty . ' available in stock' : 'Currently unavailable'; ?>).
+                                    Carefully packed in eco-friendly protective packaging to safeguard delicate ceramics and retain tea freshness (<?php echo $isInStock ? $stockQty . ' available in stock' : 'Currently unavailable'; ?>).
                                 </p>
                             </div>
                         </details>

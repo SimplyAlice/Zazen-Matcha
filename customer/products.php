@@ -10,12 +10,13 @@
 require_once dirname(__DIR__) . '/includes/db.php';
 require_once dirname(__DIR__) . '/includes/functions.php';
 
-$pageTitle = 'Shop Collection';
+$pageTitle = 'Teaware, Living Botanicals & Sets';
 
-// 1. Load all categories dynamically from MySQL for the filter bar
+// 1. Load Teaware, Gift Sets, and Living Botanicals categories (Categories 2, 3, 6) dynamically from MySQL
 $categoriesSql = "
     SELECT category_id, name, description
     FROM categories
+    WHERE category_id IN (2, 3, 6)
     ORDER BY category_id ASC
 ";
 $categories = db_fetch_all($pdo, $categoriesSql);
@@ -23,7 +24,10 @@ $categories = db_fetch_all($pdo, $categoriesSql);
 // 2. Read and sanitise GET filter parameters
 $selectedCategoryId = 0;
 if (isset($_GET['category']) && ctype_digit((string) $_GET['category'])) {
-    $selectedCategoryId = (int) $_GET['category'];
+    $rawCatId = (int) $_GET['category'];
+    if (in_array($rawCatId, [2, 3, 6], true)) {
+        $selectedCategoryId = $rawCatId;
+    }
 }
 
 $searchTerm = '';
@@ -53,7 +57,7 @@ foreach ($categories as $cat) {
 }
 
 // 3. Build the prepared product query dynamically based on active filters
-$whereClauses = ['p.status = :status'];
+$whereClauses = ['p.status = :status', 'p.category_id IN (2, 3, 6)'];
 $queryParams  = ['status' => 'active'];
 
 if ($selectedCategoryId > 0) {
@@ -115,14 +119,14 @@ function build_shop_filter_url(int $categoryId = 0, string $search = '', string 
     return site_url('customer/products.php' . ($query !== '' ? '?' . $query : ''));
 }
 
-// Deterministic rating display map for prototype visual fidelity
+// Deterministic rating display map for store visual fidelity
 $ratingMap = [
-    1 => '4.9',
-    2 => '4.8',
-    3 => '4.9',
-    4 => '4.8',
-    5 => '4.7',
-    6 => '5.0',
+    1  => '4.9', 2  => '4.8', 3  => '4.9', 4  => '4.8', 5  => '4.7', 6  => '5.0',
+    7  => '4.9', 8  => '4.8', 9  => '5.0', 10 => '4.8', 11 => '4.9', 12 => '5.0',
+    13 => '4.9', 14 => '4.9', 15 => '5.0', 16 => '4.8', 17 => '4.9', 18 => '4.9',
+    19 => '4.8', 20 => '4.9', 21 => '4.8', 22 => '4.9', 23 => '4.9', 24 => '4.8',
+    25 => '4.9', 26 => '5.0', 27 => '4.8', 28 => '5.0', 29 => '4.9', 30 => '4.9',
+    31 => '4.8', 32 => '5.0', 33 => '4.8', 34 => '4.9', 35 => '4.8',
 ];
 
 require_once dirname(__DIR__) . '/includes/header.php';
@@ -136,14 +140,14 @@ require_once dirname(__DIR__) . '/includes/header.php';
                 <?php if ($activeCategory !== null): ?>
                     <?php echo e($activeCategory['name']); ?>
                 <?php else: ?>
-                    The Shop
+                    Teaware, Living Botanicals &amp; Accessories
                 <?php endif; ?>
             </h1>
             <p class="shop-subtitle">
                 <?php if ($activeCategory !== null && !empty($activeCategory['description'])): ?>
                     <?php echo e($activeCategory['description']); ?>
                 <?php else: ?>
-                    Explore our curated collection of single-origin matcha, handcrafted starter kits, and traditional Japanese teaware.
+                    Handcrafted ceramic chawan bowls, living tabletop tea garden bonsai, hand-carved bamboo tools, and mindful gift sets. For packaged matcha and artisan loose-leaf teas, visit our <a href="<?php echo e(site_url('customer/tea.php')); ?>" class="shop-cross-link">Tea Collection &rarr;</a>
                 <?php endif; ?>
             </p>
         </div>
@@ -161,7 +165,7 @@ require_once dirname(__DIR__) . '/includes/header.php';
                         <a href="<?php echo e(build_shop_filter_url(0, $searchTerm, $sortOption)); ?>"
                            class="category-pill <?php echo $selectedCategoryId === 0 ? 'is-active' : ''; ?>"
                            <?php echo $selectedCategoryId === 0 ? 'aria-current="true"' : ''; ?>>
-                            All Products
+                            All Shop Items
                         </a>
                     </li>
                     <?php foreach ($categories as $category): ?>
@@ -299,6 +303,7 @@ require_once dirname(__DIR__) . '/includes/header.php';
                                         <input type="hidden" name="csrf_token" value="<?php echo e(csrf_token()); ?>">
                                         <input type="hidden" name="product_id" value="<?php echo $productId; ?>">
                                         <input type="hidden" name="quantity" value="1">
+                                        <input type="hidden" name="return_url" value="<?php echo e($_SERVER['REQUEST_URI'] ?? site_url('customer/products.php')); ?>">
                                         <button type="submit" class="btn btn-primary btn-card-full">
                                             Add to Cart
                                         </button>
@@ -314,7 +319,7 @@ require_once dirname(__DIR__) . '/includes/header.php';
                 <?php endforeach; ?>
             </div>
 
-            <!-- Prototype Bottom Count & Pagination Bar -->
+            <!-- Shop Bottom Count & Pagination Bar -->
             <div class="shop-pagination-bar">
                 <p class="shop-result-count" aria-live="polite">
                     Showing 1&ndash;<?php echo (int) $productCount; ?> of <?php echo (int) $productCount; ?>

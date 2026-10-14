@@ -12,6 +12,7 @@ USE `zazen_matcha`;
 
 SET FOREIGN_KEY_CHECKS = 0;
 
+DROP TABLE IF EXISTS `newsletter_subscribers`;
 DROP TABLE IF EXISTS `contact_messages`;
 DROP TABLE IF EXISTS `order_items`;
 DROP TABLE IF EXISTS `orders`;
@@ -167,6 +168,22 @@ CREATE TABLE `contact_messages` (
     KEY `idx_contact_messages_email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- ----------------------------------------------------------------------------
+-- 8. Table: newsletter_subscribers
+-- ----------------------------------------------------------------------------
+CREATE TABLE `newsletter_subscribers` (
+    `subscriber_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `email` VARCHAR(150) NOT NULL,
+    `status` ENUM('subscribed', 'unsubscribed') NOT NULL DEFAULT 'subscribed',
+    `ip_address` VARCHAR(45) DEFAULT NULL,
+    `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`subscriber_id`),
+    UNIQUE KEY `uq_newsletter_email` (`email`),
+    KEY `idx_newsletter_status` (`status`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
 -- ============================================================================
 -- SAMPLE SEED DATA (Prototype / Fictional Data for Testing)
 -- ============================================================================
@@ -189,20 +206,52 @@ INSERT INTO `customers` (
 
 -- 3. Sample Categories
 INSERT INTO `categories` (`category_id`, `name`, `description`) VALUES
-(1, 'Matcha', 'Fictional prototype selection of finely milled green tea powders for hot and iced preparation.'),
-(2, 'Accessories', 'Fictional prototype tea preparation tools including bowls, whisks, and scoops.'),
-(3, 'Gift Sets', 'Fictional prototype curated bundles combining matcha powders and preparation accessories.');
+(1, 'Matcha', 'Curated selection of single-origin stone-ground Uji green tea powders for traditional whisking and iced lattes.'),
+(2, 'Accessories', 'Artisan Japanese tea preparation ware including handcrafted ceramic chawan bowls, bamboo whisks, and carved scoops.'),
+(3, 'Gift Sets', 'Thoughtfully curated ceremonial gift boxes combining first-harvest matcha powders and tactile preparation ware.'),
+(4, 'Specialty Tea', 'Single-origin loose-leaf green, white, oolong, pu-erh, and botanical herbal infusions.'),
+(5, 'Prepared Drinks', 'Freshly prepared ceremonial matcha drinks, layered artisan lattes, slow cold brews, and botanical infusions crafted in our Cape Town studio tea bar.'),
+(6, 'Living Botanicals', 'Hand-nurtured miniature bonsai trees, flowering tea garden specimens, and tabletop greenery inspired by Japanese wabi-sabi aesthetics.');
 
--- 4. Sample Products (Fictional prototype items and prices)
+-- 4. Sample Products
 INSERT INTO `products` (
     `product_id`, `category_id`, `name`, `description`, `price`, `stock_quantity`, `image`, `status`
 ) VALUES
-(1, 1, 'Ceremonial Matcha', 'Fictional prototype fine green tea powder intended for traditional whisked tea preparation (30g tin).', 280.00, 25, 'ceremonial-matcha.jpg', 'active'),
-(2, 1, 'Everyday Matcha', 'Fictional prototype green tea powder blended for everyday lattes, smoothies, and iced drinks (50g pouch).', 195.00, 40, 'everyday-matcha.jpg', 'active'),
-(3, 3, 'Matcha Starter Kit', 'Fictional prototype starter bundle containing one tin of matcha powder, a whisk, and a scoop.', 520.00, 15, 'matcha-starter-kit.jpg', 'active'),
-(4, 2, 'Matcha Whisk', 'Fictional prototype multi-prong bamboo-style whisk designed for frothing matcha in a tea bowl.', 160.00, 30, 'matcha-whisk.jpg', 'active'),
-(5, 2, 'Matcha Bowl', 'Fictional prototype wide-base ceramic bowl shaped for comfortable whisking and pouring.', 240.00, 20, 'matcha-bowl.jpg', 'active'),
-(6, 3, 'Matcha Gift Set', 'Fictional prototype presentation box including ceremonial matcha, a ceramic bowl, whisk, and scoop.', 690.00, 10, 'matcha-gift-set.jpg', 'active');
+(1, 1, 'Ceremonial Matcha', 'Single-origin Uji ceremonial fine green tea powder for traditional whisked usucha and koicha preparation (30g tin).', 280.00, 25, 'ceremonial-matcha.jpg', 'active'),
+(2, 1, 'Everyday Matcha', 'Balanced stone-ground Uji green tea powder crafted for daily morning lattes, iced matcha, and smoothies (50g pouch).', 195.00, 40, 'everyday-matcha.jpg', 'active'),
+(3, 3, 'Matcha Starter Kit', 'Curated ceremonial starter bundle containing one tin of stone-ground matcha powder, a handcrafted bamboo chasen, and a bamboo scoop.', 520.00, 15, 'matcha-starter-kit.jpg', 'active'),
+(4, 2, 'Matcha Whisk', 'Traditional multi-prong bamboo chasen whisk handcrafted for aerating matcha into a rich, velvety microfoam froth.', 160.00, 30, 'matcha-whisk.jpg', 'active'),
+(5, 2, 'Matcha Bowl', 'Handcrafted wide-base cream ceramic chawan bowl with organic wabi-sabi contours, shaped for tactile whisking and cradle comfort.', 240.00, 20, 'matcha-bowl.jpg', 'active'),
+(6, 3, 'Matcha Gift Set', 'Luxury presentation gift box including first-harvest ceremonial matcha, a handcrafted ceramic chawan bowl, bamboo whisk, and carved scoop.', 690.00, 10, 'matcha-gift-set.jpg', 'active'),
+(7, 4, 'Saffron Golden Infusion', 'Herbal infusion pairing vibrant saffron threads with whole chamomile blossoms, sweet fennel seeds, and sun-dried citrus peel. Naturally caffeine-free with a luminous golden-amber liquor.', 245.00, 30, 'saffron-golden-infusion.jpg', 'active'),
+(8, 4, 'Midnight Bloom', 'Botanical infusion blending sun-dried whole butterfly pea flowers, organic lemongrass cuts, and wild spearmint leaves. Infuses an intense cobalt-blue liquor that naturally turns violet with citrus.', 190.00, 25, 'midnight-bloom.jpg', 'active'),
+(9, 4, 'Golden Osmanthus Oolong', 'Semi-oxidized high-mountain oolong tea naturally scented with sweet golden autumn osmanthus blossom petals. Delivers honeyed stonefruit and delicate orchid notes across multiple steepings.', 260.00, 20, 'golden-osmanthus-oolong.jpg', 'active'),
+(10, 4, 'White Peony', 'Spring-harvested white tea (Bai Mu Dan) comprising silvery down-covered terminal buds and tender young leaves. Gentle sun-withering yields a pale champagne liquor with notes of fresh melon and wild florals.', 210.00, 20, 'white-peony.jpg', 'active'),
+(11, 4, 'Earth & Ember Pu-erh', 'Cellar-aged Shou (ripe) pu-erh tea from Yunnan. Naturally fermented to produce a velvety, dark-mahogany liquor with rich undertones of damp forest cedar, roasted cacao, and petrichor.', 275.00, 15, 'earth-ember-pu-erh.jpg', 'active'),
+(12, 4, 'Jasmine Pearls', 'Hand-rolled tender green tea shoots scented with night-blooming jasmine flowers. Each silver-tipped pearl slowly unfurls in warm water, releasing an intoxicating floral aroma and fresh sweetness.', 230.00, 35, 'jasmine-pearls.jpg', 'active'),
+(13, 5, 'Traditional Whisked Usucha', 'Single-origin ceremonial Uji matcha whisked with 80°C spring water into a thick, velvety emerald microfoam. Served in a warm handcrafted chawan bowl.', 50.00, 50, 'traditional-whisked-usucha.jpg', 'active'),
+(14, 5, 'Classic Iced Matcha Latte', 'First-harvest ceremonial matcha hand-whisked and poured over cold organic oat milk and crystal clear ice. Balanced, creamy, and grounding.', 60.00, 50, 'classic-iced-matcha-latte.jpg', 'active'),
+(15, 5, 'Strawberry Matcha Latte', 'House-simmered organic strawberry compote layered with silky cold oat milk and stone-ground ceremonial matcha foam.', 68.00, 50, 'strawberry-matcha-latte.jpg', 'active'),
+(16, 5, 'Vanilla Bean Matcha Latte', 'Whole Madagascar vanilla bean infusion paired with gently steamed velvety microfoam milk and vibrant Japanese green tea.', 65.00, 50, 'vanilla-bean-matcha-latte.jpg', 'active'),
+(17, 5, 'Iced Coconut Matcha', 'Ceremonial matcha floated delicately over pure coconut water, coconut blossom nectar, and a float of coconut cream over ice.', 68.00, 50, 'iced-coconut-matcha.jpg', 'active'),
+(18, 5, 'Roasted Hojicha Latte', 'Slow charcoal-roasted Japanese green tea micro-powder steamed with silky milk. Rich nutty notes of roasted grain, cacao, and caramel.', 58.00, 50, 'roasted-hojicha-latte.jpg', 'active'),
+(19, 5, 'Iced Jasmine Pearl Tea', 'Hand-rolled silver-tipped green tea pearls cold-steeped for 12 hours with fresh night-blooming jasmine flowers. Floral, delicate, and refreshing.', 52.00, 50, 'iced-jasmine-pearl-tea.jpg', 'active'),
+(20, 5, 'White Peach Iced Oolong', 'High-mountain Formosa oolong cold-infused with white peach nectar and garden mint sprigs. Natural stonefruit sweetness with orchid aromatics.', 58.00, 50, 'white-peach-iced-oolong.jpg', 'active'),
+(21, 5, 'Butterfly Pea Flower Lemonade', 'Deep cobalt-blue butterfly pea flower infusion paired with freshly squeezed lemon juice and sparkling water. Naturally shifts to royal violet.', 56.00, 50, 'butterfly-pea-lemonade.jpg', 'active'),
+(22, 5, 'Golden Saffron Herbal Infusion', 'Pure saffron threads gently brewed with chamomile blossoms, citrus peel, and Cape honey. Luminous amber liquor served warm or chilled.', 62.00, 50, 'golden-saffron-herbal-infusion.jpg', 'active'),
+(23, 2, 'Kuro-Oribe Ceramic Chawan', 'Handcrafted Japanese-style chawan matcha bowl in traditional Kuro-Oribe dark iron glaze with subtle forest-green pooling, organic wabi-sabi rim, and an earthy textured foot ring. Ideal for whisking ceremonial matcha.', 380.00, 20, 'kuro-oribe-chawan.jpg', 'active'),
+(24, 2, 'Shino Glaze Tenmoku Matcha Bowl', 'Minimalist tea bowl featuring a creamy feldspathic Shino crackle glaze over iron-rich stoneware with warm burnt-orange accents and comfortable hand-cupping wabi-sabi indentations.', 340.00, 25, 'shino-glaze-bowl.jpg', 'active'),
+(25, 2, 'Yunomi Hand-Thrown Ceramic Cups (Pair)', 'Pair of small, tactile ceramic sipping cups with fluted finger ridges and natural wood-ash glaze in subtle sage and stone-grey tones, sized for mindful green tea drinking.', 290.00, 30, 'yunomi-ceramic-cups.jpg', 'active'),
+(26, 2, 'Hagi-Yaki Wabi Tea Bowl', 'Traditional Japanese Hagi-yaki stoneware chawan in soft pale blush-ivory glaze with fine spiderweb crazing (kan-nyu) and a classic wari-kodai notched foot, developing a natural tea patina with use.', 420.00, 15, 'hagi-yaki-tea-bowl.jpg', 'active'),
+(27, 2, 'Carved Cedar & Ceramic Drip Tray', 'Minimalist dry tea tray combining water-resistant charred Japanese cedar wood (yakisugi) with a removable inset matte cream ceramic drainage plate for tranquil gongfu tea service.', 360.00, 18, 'cedar-ceramic-tea-tray.jpg', 'active'),
+(28, 3, 'Wabi Ceramic Tasting Gift Set', 'Thoughtfully curated ceramic ensemble comprising an artisan-glazed pouring pitcher (katakuchi), two matching yunomi cups, and an unbleached linen wrap in a recyclable presentation box.', 580.00, 12, 'wabi-ceramic-tasting-set.jpg', 'active'),
+(29, 6, 'Miniature Flowering Sakura Cherry Blossom (Living Shrub)', 'Compact living dwarf flowering shrub specimen trained in classical bonsai style with delicate pale pink seasonal blossoms in an unglazed ceramic pot. (Living plant: flowering occurs seasonally based on daylight and temperature; care card included).', 480.00, 10, 'sakura-bonsai-tree.jpg', 'active'),
+(30, 6, 'Japanese Juniper Bonsai (Living Evergreen)', 'Living evergreen Japanese dwarf juniper (Juniperus procumbens nana) with sculpted curving trunk and dense emerald needle pads in a shallow stoneware pot with velvet moss dressing. (Living plant: requires bright filtered light and moderate moisture).', 450.00, 14, 'juniper-bonsai-plant.jpg', 'active'),
+(31, 6, 'Kokedama Moss Ball Tabletop Fern (Living Botanical)', 'Traditional Japanese moss ball botanical specimen cradling a living ornamental micro-fern, bound in natural peat moss and twine, resting on a glazed dark ceramic saucer. Designed for tabletop tea spaces and desk corners.', 220.00, 22, 'kokedama-moss-ball-fern.jpg', 'active'),
+(32, 6, 'Tea Corner Flowering Azalea Bonsai (Living Plant)', 'Compact living Satsuki azalea specimen exhibiting bright pink ruffled seasonal blooms against deep-green glossy foliage in an earthenware bonsai basin. (Living plant: seasonal bloom depends on ambient light and seasonal cycles).', 520.00, 8, 'azalea-bonsai-plant.jpg', 'active'),
+(33, 2, 'Celadon Ceramic Whisk Holder (Chasen-Naoshi)', 'Glazed ceramic keeper designed to support the curved tulip silhouette of bamboo chasen tines after rinsing, promoting even air circulation and prolonging whisk lifespan.', 140.00, 35, 'celadon-whisk-holder.jpg', 'active'),
+(34, 2, 'Pure Organic Linen Tea Cloth (Chakin)', 'Unbleached, quick-drying 100% natural organic flax linen ritual wiping cloth for warming and drying chawan bowls without synthetic lint or chemical finishes.', 95.00, 40, 'organic-linen-tea-cloth.jpg', 'active'),
+(35, 2, 'Hand-Carved Golden Bamboo Tea Scoop (Chashaku)', 'Slender natural golden bamboo scoop gently steam-curved at the tip to measure precisely one gram of matcha powder, crafted without varnishes or synthetic coatings.', 85.00, 40, 'bamboo-tea-scoop-chashaku.jpg', 'active');
 
 -- 5. Sample Order (Demonstrates customers -> orders relationship)
 INSERT INTO `orders` (
@@ -223,3 +272,7 @@ INSERT INTO `order_items` (
 -- 7. Sample Contact Message
 INSERT INTO `contact_messages` (`message_id`, `name`, `email`, `subject`, `message`) VALUES
 (1, 'Lerato Ndlovu', 'lerato@example.test', 'Prototype Product Question', 'Hello, this is a sample contact message used to test the contact_messages table.');
+
+-- 8. Sample Newsletter Subscriber
+INSERT INTO `newsletter_subscribers` (`subscriber_id`, `email`, `status`, `ip_address`) VALUES
+(1, 'thabo@example.test', 'subscribed', '127.0.0.1');

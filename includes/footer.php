@@ -9,26 +9,32 @@
     <footer class="site-footer">
         <div class="container">
             <div class="footer-grid">
-                <!-- Newsletter / Subscribe Column (Prototype Left Column) -->
+                <!-- Newsletter / Subscribe Column -->
                 <div class="footer-brand">
                     <h2 class="footer-subscribe-title">Subscribe to the Ritual</h2>
                     <p class="footer-statement">
                         Seasonal harvest notes, preparation guides, and studio updates from Uji to Cape Town.
                     </p>
-                    <div class="footer-newsletter-form" role="group" aria-label="Newsletter sign-up prototype preview">
-                        <label for="footer-newsletter-email" class="visually-hidden">Email address (prototype preview)</label>
-                        <input
-                            type="email"
-                            id="footer-newsletter-email"
-                            class="footer-newsletter-input"
-                            placeholder="Newsletter (prototype preview)"
-                            disabled
-                            aria-disabled="true"
-                        >
-                        <button type="button" class="btn btn-primary footer-newsletter-btn" disabled aria-disabled="true">
-                            Preview
-                        </button>
-                    </div>
+                    <form action="<?php echo e(site_url('customer/subscribe.php')); ?>" method="post" class="footer-newsletter-form">
+                        <input type="hidden" name="csrf_token" value="<?php echo e(csrf_token()); ?>">
+                        <input type="hidden" name="return_url" value="<?php echo e($_SERVER['REQUEST_URI'] ?? site_url('index.php')); ?>">
+                        <div class="footer-newsletter-group">
+                            <label for="footer-newsletter-email" class="footer-newsletter-label">Email address</label>
+                            <div class="footer-newsletter-controls" role="group" aria-label="Newsletter sign-up">
+                                <input
+                                    type="email"
+                                    id="footer-newsletter-email"
+                                    name="email"
+                                    class="footer-newsletter-input"
+                                    placeholder="Enter your email"
+                                    required
+                                >
+                                <button type="submit" class="btn btn-primary footer-newsletter-btn">
+                                    Subscribe
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                     <p class="footer-newsletter-note">
                         Questions or wholesale enquiries? <a href="<?php echo e(site_url('customer/contact.php')); ?>">Contact our tea studio &rarr;</a>
                     </p>
@@ -39,6 +45,8 @@
                     <h2 class="footer-heading">Navigation</h2>
                     <ul class="footer-links">
                         <li><a href="<?php echo e(site_url('index.php')); ?>">Home</a></li>
+                        <li><a href="<?php echo e(site_url('customer/tea.php')); ?>">Tea Collection</a></li>
+                        <li><a href="<?php echo e(site_url('customer/drinks.php')); ?>">Drinks Menu</a></li>
                         <li><a href="<?php echo e(site_url('customer/products.php')); ?>">Shop</a></li>
                         <li><a href="<?php echo e(site_url('customer/about.php')); ?>">About</a></li>
                         <li><a href="<?php echo e(site_url('customer/contact.php')); ?>">Contact</a></li>
@@ -65,7 +73,7 @@
                 <!-- Social & Studio Contact -->
                 <div class="footer-col">
                     <h2 class="footer-heading">Social</h2>
-                    <div class="footer-social-icons" aria-label="Social media channels (prototype icons)">
+                    <div class="footer-social-icons" aria-label="Social media channels">
                         <span class="social-icon-badge" role="img" aria-label="Facebook">
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
@@ -86,8 +94,10 @@
                         </span>
                     </div>
                     <address class="footer-contact">
-                        <p>18 Botanical Lane, Cape Town</p>
-                        <p><a href="mailto:hello@zazenmatcha.test">hello@zazenmatcha.test</a></p>
+                        <p>Cape Town, South Africa</p>
+                        <p class="footer-contact-item">
+                            <a href="mailto:hello@zazenmatcha.co.za">hello@zazenmatcha.co.za</a>
+                        </p>
                     </address>
                 </div>
             </div>
@@ -97,12 +107,13 @@
                     &copy; <?php echo date('Y'); ?> Zazen Matcha &amp; Tea Co. All rights reserved.
                 </p>
                 <p class="footer-note">
-                    University e-Commerce Project Prototype
+                    Artisanal Japanese matcha &amp; ceremonial tea studio.
                 </p>
             </div>
         </div>
     </footer>
 
     <script src="<?php echo e(site_url('js/script.js')); ?>" defer></script>
+    <script src="<?php echo e(site_url('js/chawan-sequence.js')); ?>" defer></script>
 </body>
 </html>

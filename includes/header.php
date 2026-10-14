@@ -73,6 +73,20 @@ $flashMessage = get_flash_message();
                             </a>
                         </li>
                         <li>
+                            <a href="<?php echo e(site_url('customer/tea.php')); ?>"
+                               class="nav-link <?php echo $currentPage === 'tea.php' ? 'is-active' : ''; ?>"
+                               <?php echo $currentPage === 'tea.php' ? 'aria-current="page"' : ''; ?>>
+                                Tea
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo e(site_url('customer/drinks.php')); ?>"
+                               class="nav-link <?php echo $currentPage === 'drinks.php' ? 'is-active' : ''; ?>"
+                               <?php echo $currentPage === 'drinks.php' ? 'aria-current="page"' : ''; ?>>
+                                Drinks
+                            </a>
+                        </li>
+                        <li>
                             <a href="<?php echo e(site_url('customer/products.php')); ?>"
                                class="nav-link <?php echo in_array($currentPage, ['products.php', 'product.php'], true) ? 'is-active' : ''; ?>"
                                <?php echo in_array($currentPage, ['products.php', 'product.php'], true) ? 'aria-current="page"' : ''; ?>>

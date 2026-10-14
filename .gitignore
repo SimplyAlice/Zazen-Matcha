@@ -18,3 +18,21 @@ desktop.ini
 # Temporary files
 *.tmp
 *.temp
+
+# Temporary scratch directory and test scripts
+scratch/
+
+# Database development dumps and temporary migration scripts
+database/backup_pre_phase9.sql
+database/add_expanded_catalogue.php
+
+# Confirmed temporary capture scripts
+capture_pre_stage_a_backup.ps1
+
+# Deliverable 2 submission archive, compiled PDF, and local pre-finalization backups
+docs/deliverable-2/Zazen_Matcha_Deliverable_2_Source.zip
+docs/deliverable-2/ITECA3-34_Deliverable_2_Report.pdf
+docs/deliverable-2/backup_pre_finalization/
+
+# Automated test telemetry
+docs/product_gallery_visual_audit_report.json

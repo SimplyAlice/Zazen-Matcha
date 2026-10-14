@@ -18,7 +18,7 @@
                 </p>
                 <p class="footer-note">
                     <a href="<?php echo e(site_url('index.php')); ?>">View Customer Storefront</a>
-                    &middot; University e-Commerce Project Prototype
+                    &middot; Cape Town Tea Studio &mdash; Internal Management
                 </p>
             </div>
         </div>
